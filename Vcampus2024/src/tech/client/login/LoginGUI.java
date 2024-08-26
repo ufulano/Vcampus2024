@@ -1,29 +1,43 @@
 package tech.client.login;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.SpringLayout;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+import java.awt.SystemColor;
+import javax.swing.JInternalFrame;
+import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 /**
  * 登陆界面GUI
- * 施工中
- *
+ * 基本完成
+ * 
  * 
  */
 public class LoginGUI extends JFrame {
@@ -43,9 +57,12 @@ public class LoginGUI extends JFrame {
 				try {
 					LoginGUI frame = new LoginGUI();
 					frame.setVisible(true);//显示窗口/隐藏窗口
-					frame.setSize(465,300);//设置窗口大小 
+					frame.setSize(800, 600);//设置窗口大小 
+					frame.setTitle("Vcampus ");//设置标题
 					frame.setResizable(false);
-					frame.setTitle("Login");//设置标题
+					frame.setLocationRelativeTo(null);
+					frame.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,100 +77,109 @@ public class LoginGUI extends JFrame {
 	 */
 	
 	public LoginGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 465, 301);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
-		JLabel lblUsername = new JLabel("用户名：");
-		lblUsername.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblUsername, 63, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblUsername, 68, SpringLayout.WEST, contentPane);
-		contentPane.add(lblUsername);//第二种构造
+		setForeground(new Color(240, 240, 240));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\learngit\\Vcampus2024\\Vcampus2024\\Vcampus2024\\src\\resources\\icon\\icon1\\school.png"));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 804, 602);
+		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.menu);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
 		
-		JButton btnLogin = new JButton("登录");
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnLogin, 151, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnLogin, -210, SpringLayout.EAST, contentPane);
+		JPanel panelType = new JPanel();
+		panelType.setBounds(311, 331, 203, 29);
+		contentPane.add(panelType);
+		panelType.setOpaque(false);
+		panelType.setBackground(null);
+
+		JLabel lblIcon = new JLabel();
+		lblIcon.setIcon(new ImageIcon(LoginGUI.class.getResource("/resources/icon/icon1/schoolSmall.png")));
+		lblIcon.setBounds(299, 209, 60, 51);
+		contentPane.add(lblIcon);
+		JLabel lblTitle = new JLabel("虚拟校园系统");
+		lblTitle.setFont(new Font("幼圆", Font.PLAIN, 24));
+		lblTitle.setBounds(369, 224, 163, 44);
+		contentPane.add(lblTitle);
+		setContentPane(contentPane);
+		
+		//登录按钮
+		JButton btnLogin = new JButton();
+		btnLogin.setBounds(377, 377, 73, 44);
+		Image loginIcon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icon/icon1/loginsmall.png"));
+		btnLogin.setIcon(new ImageIcon(loginIcon));
+		btnLogin.setForeground(SystemColor.activeCaption);
 		btnLogin.setFont(new Font("幼圆", Font.PLAIN, 16));
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnLogin, -34, SpringLayout.SOUTH, contentPane);
+		btnLogin.setContentAreaFilled(false);
+		btnLogin.setBorderPainted(false);
+		btnLogin.setBorder(null);
+		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		contentPane.add(btnLogin);
 		
-		JLabel lblPassword = new JLabel("密码：");
-		lblPassword.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		contentPane.add(lblPassword);
-		
-		txtUsername = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, txtUsername, 8, SpringLayout.NORTH, lblUsername);
-		sl_contentPane.putConstraint(SpringLayout.WEST, txtUsername, 3, SpringLayout.EAST, lblUsername);
-		contentPane.add(txtUsername);
-		txtUsername.setColumns(10);
-		
-		txtPassword = new JTextField();
-		sl_contentPane.putConstraint(SpringLayout.NORTH, txtPassword, 32, SpringLayout.SOUTH, txtUsername);
-		sl_contentPane.putConstraint(SpringLayout.EAST, txtUsername, 0, SpringLayout.EAST, txtPassword);
-		sl_contentPane.putConstraint(SpringLayout.WEST, txtPassword, 151, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblPassword, -8, SpringLayout.NORTH, txtPassword);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblPassword, -3, SpringLayout.WEST, txtPassword);
-		contentPane.add(txtPassword);
-		txtPassword.setColumns(10);
-		
-		JButton btnSignin = new JButton("注册");
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnSignin, 237, SpringLayout.WEST, contentPane);
-		btnSignin.setFont(new Font("幼圆", Font.PLAIN, 16));
-		btnSignin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnSignin, 0, SpringLayout.NORTH, btnLogin);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnSignin, 0, SpringLayout.SOUTH, btnLogin);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnSignin, 86, SpringLayout.EAST, btnLogin);
-		contentPane.add(btnSignin);
-		
-		Component verticalGlue = Box.createVerticalGlue();
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, verticalGlue, -10, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, verticalGlue, 0, SpringLayout.EAST, btnLogin);
-		contentPane.add(verticalGlue);
-		
-		Component verticalGlue_1 = Box.createVerticalGlue();
-		sl_contentPane.putConstraint(SpringLayout.WEST, verticalGlue_1, 0, SpringLayout.WEST, btnSignin);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, verticalGlue_1, 0, SpringLayout.SOUTH, verticalGlue);
-		contentPane.add(verticalGlue_1);
-		
-		Component horizontalGlue = Box.createHorizontalGlue();
-		sl_contentPane.putConstraint(SpringLayout.EAST, txtPassword, -108, SpringLayout.WEST, horizontalGlue);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, horizontalGlue, -122, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, horizontalGlue, -10, SpringLayout.EAST, contentPane);
-		contentPane.add(horizontalGlue);
-		
-		ButtonGroup group = new ButtonGroup();
-		JRadioButton rdbtnStudent = new JRadioButton("学生");
-		rdbtnStudent.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, rdbtnStudent, 6, SpringLayout.SOUTH, txtPassword);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnLogin, 6, SpringLayout.SOUTH, rdbtnStudent);
-		sl_contentPane.putConstraint(SpringLayout.WEST, rdbtnStudent, 0, SpringLayout.WEST, btnLogin);
-		contentPane.add(rdbtnStudent);
-		group.add(rdbtnStudent);
+        // 创建用户名文本框并设置圆角灰色边框
+        txtUsername = new JTextField();
+        txtUsername.setBounds(312, 271, 202, 29);
+        txtUsername.setText("  一卡通号/唯一ID");
+        txtUsername.setBorder(new LineBorder(SystemColor.controlHighlight, 1, true)); 
+        txtUsername.setColumns(10);
+        contentPane.add(txtUsername);
 
+        // 创建密码文本框并设置圆角灰色边框
+        txtPassword = new JPasswordField();
+        txtPassword.setBounds(312, 310, 203, 23);
+        txtPassword.setToolTipText("请输入密码");
+        txtPassword.setBorder(new LineBorder(SystemColor.controlHighlight, 1, true)); 
+        txtPassword.setColumns(10);
+        contentPane.add(txtPassword);
 		
-		JRadioButton rdbtnManager = new JRadioButton("管理员");
+        
+        //用户类型按钮组
+		ButtonGroup group = new ButtonGroup();
+		
+		Image studentImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icon/icon1/ic_student.png"));
+		Image smallStudentImage = studentImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // 正确使用SCALE_SMOOTH常量
+		ImageIcon studentIcon = new ImageIcon(smallStudentImage);
+		JRadioButton rdbtnStudent = new JRadioButton("学生", studentIcon);
+		rdbtnStudent.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
+		rdbtnStudent.setOpaque(false);
+		rdbtnStudent.setBackground(null);
+		panelType.add(rdbtnStudent);
+		group.add(rdbtnStudent);
+		
+		Image teacherImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icon/icon1/jteacher.png"));
+		Image smallTeacherImage = teacherImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // 正确使用SCALE_SMOOTH常量
+		ImageIcon teacherIcon = new ImageIcon(smallTeacherImage);
+		JRadioButton rdbtnTeacher = new JRadioButton("老师", teacherIcon);
+		rdbtnTeacher.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
+		rdbtnTeacher.setOpaque(false);
+		rdbtnTeacher.setBackground(null);
+		panelType.add(rdbtnTeacher);
+		group.add(rdbtnTeacher);
+
+
+		Image managerImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icon/icon1/manager.png"));
+		Image smallManagerImage = managerImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // 正确使用SCALE_SMOOTH常量
+		ImageIcon managerIcon = new ImageIcon(smallManagerImage);
+		JRadioButton rdbtnManager = new JRadioButton("管理员", managerIcon);
 		rdbtnManager.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, rdbtnManager, -6, SpringLayout.NORTH, btnLogin);
-		contentPane.add(rdbtnManager);
+		rdbtnManager.setOpaque(false);
+		rdbtnManager.setBackground(null);
+		panelType.add(rdbtnManager);
 		group.add(rdbtnManager);
 		
-		JRadioButton rdbtnTeacher = new JRadioButton("老师");
-		rdbtnTeacher.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, rdbtnTeacher, 6, SpringLayout.SOUTH, txtPassword);
-		sl_contentPane.putConstraint(SpringLayout.EAST, rdbtnTeacher, -195, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, rdbtnManager, 6, SpringLayout.EAST, rdbtnTeacher);
-		contentPane.add(rdbtnTeacher);
-		group.add(rdbtnTeacher);
+		
+		JLabel backgroundLabel = new JLabel(new ImageIcon(LoginGUI.class.getResource("/resources/picture/loginBackground1.jpg")));
+		backgroundLabel.setBounds(10, 10, 784, 563);
+		contentPane.add(backgroundLabel);
+		
+
+
+
+		
+
 	}
 }
