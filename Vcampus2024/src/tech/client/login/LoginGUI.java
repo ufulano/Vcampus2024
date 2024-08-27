@@ -1,4 +1,5 @@
 package tech.client.login;
+import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -19,6 +20,9 @@ import javax.swing.JTextField;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JRadioButton;
+import java.awt.Color;
+
+import tech.entity.UserType;
 
 /**
  * 登陆界面GUI
@@ -31,7 +35,13 @@ public class LoginGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUsername;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;//密码
+	
+	private JLabel errorLabel = new JLabel();//错误信息
+	
+	private JRadioButton rdbtnManager;
+	private JRadioButton rdbtnStudent;
+	private JRadioButton rdbtnTeacher;
 
 	/**
 	 * Launch the application.
@@ -89,13 +99,15 @@ public class LoginGUI extends JFrame {
 		lblPassword.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		contentPane.add(lblPassword);
 		
+		//创建用户名字段
 		txtUsername = new JTextField();
 		sl_contentPane.putConstraint(SpringLayout.NORTH, txtUsername, 8, SpringLayout.NORTH, lblUsername);
 		sl_contentPane.putConstraint(SpringLayout.WEST, txtUsername, 3, SpringLayout.EAST, lblUsername);
 		contentPane.add(txtUsername);
 		txtUsername.setColumns(10);
 		
-		txtPassword = new JTextField();
+		//创建密码字段
+		txtPassword = new JPasswordField();
 		sl_contentPane.putConstraint(SpringLayout.NORTH, txtPassword, 32, SpringLayout.SOUTH, txtUsername);
 		sl_contentPane.putConstraint(SpringLayout.EAST, txtUsername, 0, SpringLayout.EAST, txtPassword);
 		sl_contentPane.putConstraint(SpringLayout.WEST, txtPassword, 151, SpringLayout.WEST, contentPane);
@@ -133,7 +145,7 @@ public class LoginGUI extends JFrame {
 		contentPane.add(horizontalGlue);
 		
 		ButtonGroup group = new ButtonGroup();
-		JRadioButton rdbtnStudent = new JRadioButton("学生");
+		rdbtnStudent = new JRadioButton("学生");
 		rdbtnStudent.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
 		sl_contentPane.putConstraint(SpringLayout.NORTH, rdbtnStudent, 6, SpringLayout.SOUTH, txtPassword);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, btnLogin, 6, SpringLayout.SOUTH, rdbtnStudent);
@@ -142,18 +154,111 @@ public class LoginGUI extends JFrame {
 		group.add(rdbtnStudent);
 
 		
-		JRadioButton rdbtnManager = new JRadioButton("管理员");
+		rdbtnManager = new JRadioButton("管理员");
 		rdbtnManager.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
 		sl_contentPane.putConstraint(SpringLayout.SOUTH, rdbtnManager, -6, SpringLayout.NORTH, btnLogin);
 		contentPane.add(rdbtnManager);
 		group.add(rdbtnManager);
 		
-		JRadioButton rdbtnTeacher = new JRadioButton("老师");
+		rdbtnTeacher = new JRadioButton("老师");
 		rdbtnTeacher.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
 		sl_contentPane.putConstraint(SpringLayout.NORTH, rdbtnTeacher, 6, SpringLayout.SOUTH, txtPassword);
 		sl_contentPane.putConstraint(SpringLayout.EAST, rdbtnTeacher, -195, SpringLayout.EAST, contentPane);
 		sl_contentPane.putConstraint(SpringLayout.WEST, rdbtnManager, 6, SpringLayout.EAST, rdbtnTeacher);
 		contentPane.add(rdbtnTeacher);
 		group.add(rdbtnTeacher);
+		
+		//登录按钮的点击事件监听
+		btnLogin.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                // 点击按钮时执行的代码
+	                System.out.println("Button was clicked!");
+	                login();
+	            }
+	        });
+	
+		
 	}
+	
+	//登录操作的用户界面响应
+	public void login()
+	{
+		errorLabel.setText("");//初始化
+		/*判断用户名和密码是否为空
+		*getText()无法用于获取JPasswordField类的文本
+		*.getPassword()将返回char数组
+		*/
+	    if (txtUsername.getText().trim().equals("") || new String(txtPassword.getPassword()).trim().equals("")) {
+	    	
+	    	errorLabel.setForeground(Color.RED);
+	    	contentPane.add(errorLabel);
+	    	errorLabel.setText("有字段为空！");
+	        return;
+	    }
+	    
+	    //向服务器发送连接
+	    LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
+	    //初始化用户类型
+	    UserType type = null;
+	    //判断用户类型
+	    if (rdbtnStudent.isSelected()) {
+			type = UserType.STUDENT;
+			System.out.println("Student");
+			//身份验证
+			/*Student res = AuthHelper.verifyStudent(txtUsername.getText(), txtPassword.getPassword());
+			if (res != null) {
+				SwingUtils.showMessage(null, "学生登录成功！", "信息");
+				// 填充App.session
+				App.hasLogon = true;
+				App.session = new Session(res);
+				setVisible(false);
+				// 要求界面路由
+				App.requireRouting();
+			} else {*/
+				errorLabel.setForeground(Color.RED);
+				contentPane.add(errorLabel);
+				errorLabel.setText("密码错误，登录失败！");
+				txtPassword.setText("");
+			//}
+			// -------------
+		} else if (rdbtnTeacher.isSelected()) {
+			type = UserType.TEACHER;
+			System.out.println("Teacher");
+			/*Teacher res = AuthHelper.verifyTeacher(txtUsername.getText(), txtPassword.getText());
+			if (res != null) {
+				SwingUtils.showMessage(null, "欢迎您，" + res.getName() + " 教师！", "信息");
+				App.hasLogon = true;
+				App.session = new Session(res);
+				setVisible(false);
+				App.requireRouting();
+			} else {*/
+				errorLabel.setForeground(Color.RED);
+				contentPane.add(errorLabel);
+				errorLabel.setText("密码错误，登录失败！");
+				txtPassword.setText("");
+			//}
+			// -------------*/
+		} else if (rdbtnManager.isSelected()) {
+			type = UserType.MANAGER;
+			System.out.println("Manager");
+			/*Manager res = AuthHelper.verifyManager(txtUsername.getText(), txtPassword.getText());
+			if (res != null) {
+				SwingUtils.showMessage(null, res.getManagerType().toString() + " 管理员登陆成功！", "信息");
+				App.hasLogon = true;
+				App.session = new Session(res);
+				setVisible(false);
+				App.requireRouting();
+			} else {*/
+				errorLabel.setForeground(Color.RED);
+				contentPane.add(errorLabel);
+				errorLabel.setText("密码错误，登录失败！");
+				txtPassword.setText("");
+			//}*/
+		}
+
+	}
+	
+	
+
 }
