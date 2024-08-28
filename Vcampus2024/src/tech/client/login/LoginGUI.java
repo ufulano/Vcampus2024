@@ -22,7 +22,7 @@ import javax.swing.Box;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 
-import tech.entity.UserType;
+import type.UserType;
 
 /**
  * 登陆界面GUI
