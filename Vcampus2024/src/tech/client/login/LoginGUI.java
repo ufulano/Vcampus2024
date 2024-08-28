@@ -1,6 +1,5 @@
 package tech.client.login;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -15,26 +14,15 @@ import type.UserType;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.SpringLayout;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.Box;
 import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
 import java.awt.SystemColor;
-import javax.swing.JInternalFrame;
-import javax.swing.JScrollPane;
 import java.awt.Toolkit;
 
 /**
@@ -88,7 +76,7 @@ public class LoginGUI extends JFrame {
 		
 
 		setForeground(new Color(240, 240, 240));
-		setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\learngit\\Vcampus2024\\Vcampus2024\\Vcampus2024\\src\\resources\\icon\\icon1\\school.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("/resources/icon/icon1/school.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 804, 602);
 		contentPane = new JPanel();
