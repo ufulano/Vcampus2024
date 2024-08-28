@@ -13,6 +13,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * 用户主页，学生
@@ -70,24 +72,58 @@ public class MainStudent extends JFrame {
 		
 		JButton btnStudentStatus = new JButton("");
 		btnStudentStatus.setIcon(new ImageIcon(MainStudent.class.getResource("/resources/icon/icon1/statussmall.png")));
-		btnStudentStatus.setBounds(84, 90, 113, 130);
+		btnStudentStatus.setContentAreaFilled(false);
+		btnStudentStatus.setBorderPainted(false);
+		btnStudentStatus.setBorder(null);
+		btnStudentStatus.setBounds(68, 100, 133, 159);
 
 		
-		JButton btnNewButton_1_1 = new JButton("New button");
-		btnNewButton_1_1.setIcon(new ImageIcon(MainStudent.class.getResource("/resources/icon/icon1/zizhuxuankesmall.png")));
-		btnNewButton_1_1.setBounds(235, 90, 113, 130);
+		JButton btnClass = new JButton("");
+		btnClass.setIcon(new ImageIcon(MainStudent.class.getResource("/resources/icon/icon1/zizhuxuankesmall.png")));
+		btnClass.setContentAreaFilled(false);
+		btnClass.setBorderPainted(false);
+		btnClass.setBorder(null);
+		btnClass.setBounds(225, 90, 133, 159);
 
 		
-		JButton btnNewButton_1_2 = new JButton("New button");
-		btnNewButton_1_2.setBounds(391, 90, 113, 130);
+		JButton btnLibrary = new JButton("");
+		btnLibrary.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnLibrary.setIcon(new ImageIcon(MainStudent.class.getResource("/resources/icon/icon1/librarysmall.png")));
+		btnLibrary.setContentAreaFilled(false);
+		btnLibrary.setBorderPainted(false);
+		btnLibrary.setBorder(null);
+		btnLibrary.setBounds(391, 90, 113, 159);
 
 		
-		JButton btnNewButton_1_3 = new JButton("New button");
-		btnNewButton_1_3.setBounds(84, 320, 113, 130);
+		JButton btnShop = new JButton("");
+		btnShop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnShop.setIcon(new ImageIcon(MainStudent.class.getResource("/resources/icon/icon1/shoppingsmall.png")));
+		btnShop.setContentAreaFilled(false);
+		btnShop.setBorderPainted(false);
+		btnShop.setBorder(null);
+		btnShop.setBounds(68, 299, 133, 166);
+		
+		JLabel lblShop = new JLabel("网上商城");
+		lblShop.setForeground(new Color(0, 0, 153));
+		lblShop.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		lblShop.setBounds(105, 439, 64, 26);
+		panel.add(lblShop);
+		
+		JLabel lblStudentStatus_1_1 = new JLabel("图书馆");
+		lblStudentStatus_1_1.setForeground(new Color(0, 0, 153));
+		lblStudentStatus_1_1.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		lblStudentStatus_1_1.setBounds(418, 223, 64, 26);
+		panel.add(lblStudentStatus_1_1);
 
 		
 		JButton btnNewButton_1_4 = new JButton("New button");
-		btnNewButton_1_4.setBounds(235, 320, 113, 130);
+		btnNewButton_1_4.setBounds(245, 320, 113, 130);
 		panel.add(btnNewButton_1_4);
 		
 		JButton btnNewButton_1_5 = new JButton("New button");
@@ -103,30 +139,35 @@ public class MainStudent extends JFrame {
 		lblNewLabel.setBounds(103, 77, 152, 159);
 		panel_1.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(1049, 21, 111, 36);
-		contentPane.add(btnNewButton);
+		JButton btnOut = new JButton("登出");
+		btnOut.setFont(new Font("幼圆", Font.BOLD, 12));
+		btnOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnOut.setBounds(1049, 21, 111, 36);
+		contentPane.add(btnOut);
 		
-		JLabel lblStudentStatus_1 = new JLabel("学籍信息");
+		JLabel lblStudentStatus_1 = new JLabel("自主选课");
 		lblStudentStatus_1.setForeground(new Color(0, 0, 153));
 		lblStudentStatus_1.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		lblStudentStatus_1.setBounds(262, 188, 64, 26);
+		lblStudentStatus_1.setBounds(261, 223, 64, 26);
 		panel.add(lblStudentStatus_1);
 		
 		JLabel lblStudentStatus = new JLabel("学籍信息");
 		lblStudentStatus.setForeground(new Color(0, 0, 153));
 		lblStudentStatus.setFont(new Font("微软雅黑", Font.BOLD, 16));
 		lblStudentStatus.setLabelFor(btnStudentStatus);
-		lblStudentStatus.setBounds(110, 188, 64, 26);
+		lblStudentStatus.setBounds(105, 223, 64, 26);
 		panel.add(lblStudentStatus);
 		
 		
 		
 		
 		panel.add(btnStudentStatus);
-		panel.add(btnNewButton_1_1);
-		panel.add(btnNewButton_1_2);
-		panel.add(btnNewButton_1_3);
+		panel.add(btnClass);
+		panel.add(btnLibrary);
+		panel.add(btnShop);
 		panel.add(btnNewButton_1_5);
 	}
 }
