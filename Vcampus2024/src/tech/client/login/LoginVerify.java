@@ -8,16 +8,21 @@ import tech.connection.*;
  */
 public class LoginVerify {
 
-	public static void verify(String cardNumber, String password) {
+	public static Boolean verify(String cardNumber, String password) {
 		
 		
 		System.out.println("Verifing...");
 		//用于建立连接和消息
-		Message message= new Message(cardNumber,password,"192.168.101.210", 8323);
+		Message message= new Message(cardNumber,password,"192.168.101.210", 8323,Message.MessageType.LOGIN);
 		System.out.println(message);
+		//发送消息
 		SocketClientWorker connection=new SocketClientWorker(message);
 		connection.SendMessage();
-		return;
+		message=connection.ReceiveMessage();
+		System.out.println(message);
+		if(message.getresponse()=="FAIL"||message.toString()=="ERROR")
+			return false;
+		return true;
 	}
 	/*public static Student verifyStudent(String cardNumber, String password) {
 		return ResponseUtils
