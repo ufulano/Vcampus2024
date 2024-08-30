@@ -196,12 +196,15 @@ public void login()
         return;
     }
     
-    //向服务器发送连接
-    LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
-    //初始化用户类型
+    //向服务器发送连接  //初始化用户类型
     UserType type = null;
+    Boolean flag=LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
+if(!flag) {
+	System.out.println("登陆失败");
+	return;
+}
     //判断用户类型
-    if (rdbtnStudent.isSelected()) {
+   if (rdbtnStudent.isSelected()) {
 		type = UserType.STUDENT;
 		System.out.println("Student");
 		//身份验证
