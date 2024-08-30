@@ -21,49 +21,85 @@ import Entity.UserEntity;
 
 public class StudentTablePanel extends JPanel {
 
-	private JTable infoTable;
-	private JTextField textGrade;
-	List<UserEntity> result = null;
-	String[][] rowData = null;
-	DefaultTableModel model = new DefaultTableModel() {
-		@Override
-		public boolean isCellEditable(int a, int b) {
-			return false;
-		}
-	};
+    private JTable infoTable;
+    private JTextField textGrade;
+    private List<UserEntity> result;
+    private DefaultTableModel model;
 
-	/**
-	 * Create the panel.
-	 */
+    /**
+     * Create the panel.
+     */
+    @SuppressWarnings("serial")
 	public StudentTablePanel() {
-		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		this.setLayout(null);
-		infoTable = new JTable();
-		infoTable.setBounds(0, 67, 774, 477);
-		String[] head = { "一卡通号", "学号", "专业", "姓名" };
-		JScrollPane jsp = new JScrollPane(infoTable);
-		jsp.setBounds(160, 98, 882, 604);
-		model.setDataVector(rowData, head);
-		infoTable.setModel(model);
-		this.add(jsp);
-		JComboBox comboAcademy = new JComboBox();
-		comboAcademy.setBounds(90, 60, 243, 35);
-		this.add(comboAcademy);
+        setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        setLayout(null); 
+        // 初始化表格模型
+        model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int a, int b) {
+                return false;
+            }
+        };
 
-		JLabel lblAcademy = new JLabel("院系");
-		lblAcademy.setBounds(46, 68, 30, 18);
-		this.add(lblAcademy);
+        // 初始化表格
+        String[] columnNames = {"一卡通号", "学号", "专业", "姓名"};
+        infoTable = new JTable(model);
+        JScrollPane jsp = new JScrollPane(infoTable);
+        jsp.setBounds(50, 100, 619, 464); // 调整大小和位置以适应面板
 
-		JLabel lblGrade = new JLabel("年级");
-		lblGrade.setBounds(347, 68, 30, 18);
-		this.add(lblGrade);
+        // 初始化文本框和下拉框
+        textGrade = new JTextField();
+        textGrade.setBounds(287, 50, 113, 30); // 调整位置和大小
+        textGrade.setColumns(10);
 
-		textGrade = new JTextField();
-		textGrade.setBounds(391, 60, 121, 35);
-		this.add(textGrade);
-		textGrade.setColumns(10);
-		
-		JButton buttonSearch = new JButton("查询");
+        JComboBox<String> comboMajor = new JComboBox<>(new String[] {"计算机科学", "电子工程", "机械工程"}); // 示例数据
+        comboMajor.setBounds(89, 49, 151, 30); // 调整位置和大小
 
+        // 初始化标签
+        JLabel lblMajor = new JLabel("专业");
+        lblMajor.setBounds(50, 55, 100, 20); // 调整位置
 
-	}}
+        JLabel lblGrade = new JLabel("年级");
+        lblGrade.setBounds(250, 55, 100, 20); // 调整位置
+
+        // 初始化查询按钮
+        JButton btnSearch = new JButton("查询");
+        btnSearch.setBounds(428, 49, 80, 30); // 调整位置和大小
+        btnSearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // 查询逻辑
+            }
+        });
+
+        // 添加组件到面板
+        add(jsp);
+        add(textGrade);
+        add(comboMajor);
+        add(lblMajor);
+        add(lblGrade);
+        add(btnSearch);
+
+        // 设置面板大小
+        this.setSize(900, 600);
+        this.setOpaque(false);
+        
+        JButton btnStudentin = new JButton("办理入学");
+        btnStudentin.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnStudentin.setBounds(709, 152, 97, 23);
+        add(btnStudentin);
+        
+        JButton btnStudentOut = new JButton("办理退学");
+        btnStudentOut.setBounds(709, 119, 97, 23);
+        add(btnStudentOut);
+        
+        JButton btnDetail = new JButton("详细信息");
+        btnDetail.setBounds(709, 186, 97, 23);
+        add(btnDetail);
+
+        // 由于使用绝对布局，需要调用 validate() 来应用布局
+        this.validate();
+    }
+}
