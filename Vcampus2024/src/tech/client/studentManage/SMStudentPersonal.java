@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JButton;
 
-public class SMStudentSide extends JFrame {
+public class SMStudentPersonal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -37,7 +37,7 @@ public class SMStudentSide extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SMStudentSide frame = new SMStudentSide();
+					SMStudentPersonal frame = new SMStudentPersonal();
 					frame.setVisible(true);
 					frame.setSize(900, 600);
 					frame.setTitle("Vcampus·学籍信息");
@@ -55,8 +55,8 @@ public class SMStudentSide extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SMStudentSide() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(SMStudentSide.class.getResource("/resources/icon/icon1/ic_student.png")));
+	public SMStudentPersonal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SMStudentPersonal.class.getResource("/resources/icon/icon1/ic_student.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 911, 636);
 		contentPane = new JPanel();
