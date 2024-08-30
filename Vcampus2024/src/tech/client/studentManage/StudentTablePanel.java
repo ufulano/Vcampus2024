@@ -42,28 +42,37 @@ public class StudentTablePanel extends JPanel {
 		infoTable.setBounds(0, 67, 774, 477);
 		String[] head = { "一卡通号", "学号", "专业", "姓名" };
 		JScrollPane jsp = new JScrollPane(infoTable);
-		jsp.setBounds(160, 98, 882, 604);
+		jsp.setBounds(112, 103, 882, 604);
 		model.setDataVector(rowData, head);
 		infoTable.setModel(model);
 		this.add(jsp);
 		JComboBox comboAcademy = new JComboBox();
-		comboAcademy.setBounds(90, 60, 243, 35);
+		comboAcademy.setBounds(165, 58, 243, 35);
 		this.add(comboAcademy);
 
-		JLabel lblAcademy = new JLabel("院系");
-		lblAcademy.setBounds(46, 68, 30, 18);
-		this.add(lblAcademy);
+		JLabel lblMajor = new JLabel("专业");
+		lblMajor.setBounds(112, 66, 30, 18);
+		this.add(lblMajor);
 
 		JLabel lblGrade = new JLabel("年级");
-		lblGrade.setBounds(347, 68, 30, 18);
+		lblGrade.setBounds(422, 66, 30, 18);
 		this.add(lblGrade);
 
 		textGrade = new JTextField();
-		textGrade.setBounds(391, 60, 121, 35);
+		textGrade.setBounds(466, 58, 121, 35);
 		this.add(textGrade);
 		textGrade.setColumns(10);
+		
+		JButton btnNewButton = new JButton("查询");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(632, 58, 121, 35);
+		add(btnNewButton);
 		
 		JButton buttonSearch = new JButton("查询");
 
 
-	}}
+	}	
+}

@@ -4,6 +4,7 @@ package tech.client.studentManage;
  */
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +15,8 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JButton;
 
 public class SMStudentSide extends JFrame {
 
@@ -36,7 +39,7 @@ public class SMStudentSide extends JFrame {
 				try {
 					SMStudentSide frame = new SMStudentSide();
 					frame.setVisible(true);
-					frame.setSize(1200,800);
+					frame.setSize(900, 600);
 					frame.setTitle("Vcampus·学籍信息");
 					frame.setResizable(false);
 					frame.setLocationRelativeTo(null);
@@ -55,23 +58,25 @@ public class SMStudentSide extends JFrame {
 	public SMStudentSide() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SMStudentSide.class.getResource("/resources/icon/icon1/ic_student.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1194, 868);
+		setBounds(100, 100, 911, 636);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(164, 91, 851, 648);
+		panel.setBounds(318, 37, 468, 648);
 		contentPane.add(panel);
+		panel.setOpaque(false); // 设置面板不透明，允许背景显示
 		panel.setLayout(null);
 		
 		JLabel lblID = new JLabel("一卡通号：");
 		lblID.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblID.setBounds(445, 117, 208, 45);
+		lblID.setBounds(116, 343, 208, 37);
 		panel.add(lblID);
 		
 		JLabel lblName = new JLabel("姓名：");
@@ -91,7 +96,7 @@ public class SMStudentSide extends JFrame {
 		
 		JLabel lblMajor = new JLabel("专业：");
 		lblMajor.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblMajor.setBounds(445, 160, 208, 45);
+		lblMajor.setBounds(116, 378, 208, 45);
 		panel.add(lblMajor);
 		
 		JLabel lblBirthday = new JLabel("出生日期：");
@@ -101,7 +106,7 @@ public class SMStudentSide extends JFrame {
 		
 		JLabel lblBirthplace = new JLabel("出生地：");
 		lblBirthplace.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblBirthplace.setBounds(116, 288, 208, 45);
+		lblBirthplace.setBounds(116, 296, 208, 37);
 		panel.add(lblBirthplace);
 		
 		textFieldName = new JTextField();
@@ -137,13 +142,29 @@ public class SMStudentSide extends JFrame {
 		textFieldID = new JTextField();
 		textFieldID.setEditable(false);
 		textFieldID.setColumns(10);
-		textFieldID.setBounds(549, 125, 189, 37);
+		textFieldID.setBounds(209, 343, 189, 37);
 		panel.add(textFieldID);
 		
 		textFieldMajor = new JTextField();
 		textFieldMajor.setEditable(false);
 		textFieldMajor.setColumns(10);
-		textFieldMajor.setBounds(549, 168, 189, 37);
+		textFieldMajor.setBounds(209, 386, 189, 37);
 		panel.add(textFieldMajor);
+		
+		JList list = new JList();
+		list.setBounds(209, 65, 1, 1);
+		panel.add(list);
+		
+		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/左喷泉背景.png")));
+		backgroundLabel.setBounds(0, 0, 900, 600);
+		contentPane.add(backgroundLabel);
+		
+		JButton button = new JButton("New button");
+		button.setBounds(768, 549, 97, 23);
+		contentPane.add(button);
+		
+		JButton button_1 = new JButton("New button");
+		button_1.setBounds(790, 549, 97, 23);
+		contentPane.add(button_1);
 	}
 }

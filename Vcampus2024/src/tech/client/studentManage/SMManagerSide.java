@@ -49,6 +49,7 @@ public class SMManagerSide extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 	}
 
 }

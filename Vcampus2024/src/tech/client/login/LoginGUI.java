@@ -166,7 +166,7 @@ public class LoginGUI extends JFrame {
 		
 		
 		JLabel backgroundLabel = new JLabel(new ImageIcon(LoginGUI.class.getResource("/resources/picture/loginBackground1.jpg")));
-		backgroundLabel.setBounds(10, 10, 784, 563);
+		backgroundLabel.setBounds(0, 0, 800, 600);
 		contentPane.add(backgroundLabel);
 
 		
