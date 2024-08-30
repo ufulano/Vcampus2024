@@ -191,23 +191,7 @@ public class MainStudent extends JFrame {
 		});
 		btnOut.setBounds(1049, 21, 111, 36);
 		contentPane.add(btnOut);
-		
-		JLabel lblStudentStatus_1 = new JLabel("自主选课");
-		lblStudentStatus_1.setForeground(new Color(0, 0, 153));
-		lblStudentStatus_1.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		lblStudentStatus_1.setBounds(261, 223, 64, 26);
-		panel.add(lblStudentStatus_1);
-		
-		JLabel lblStudentStatus = new JLabel("学籍信息");
-		lblStudentStatus.setForeground(new Color(0, 0, 153));
-		lblStudentStatus.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		lblStudentStatus.setLabelFor(btnStudentStatus);
-		lblStudentStatus.setBounds(105, 223, 64, 26);
-		panel.add(lblStudentStatus);
-		
-		
-		
-		
+
 		panel.add(btnStudentStatus);
 		panel.add(btnClass);
 		panel.add(btnLibrary);
