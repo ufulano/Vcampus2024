@@ -201,6 +201,9 @@ public void login()
     Boolean flag=LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
 if(!flag) {
 	System.out.println("登陆失败");
+  	errorLabel.setForeground(Color.RED);
+	contentPane.add(errorLabel);
+	errorLabel.setText("登陆失败！");
 	return;
 }
     //判断用户类型
