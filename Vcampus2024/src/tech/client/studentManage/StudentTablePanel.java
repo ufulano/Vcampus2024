@@ -45,7 +45,7 @@ public class StudentTablePanel extends JPanel {
         String[] columnNames = {"一卡通号", "学号", "专业", "姓名"};
         infoTable = new JTable(model);
         JScrollPane jsp = new JScrollPane(infoTable);
-        jsp.setBounds(50, 100, 619, 464); // 调整大小和位置以适应面板
+        jsp.setBounds(42, 100, 619, 464); // 调整大小和位置以适应面板
 
         // 初始化文本框和下拉框
         textGrade = new JTextField();
@@ -82,22 +82,6 @@ public class StudentTablePanel extends JPanel {
         // 设置面板大小
         this.setSize(900, 600);
         this.setOpaque(false);
-        
-        JButton btnStudentin = new JButton("办理入学");
-        btnStudentin.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
-        btnStudentin.setBounds(709, 152, 97, 23);
-        add(btnStudentin);
-        
-        JButton btnStudentOut = new JButton("办理退学");
-        btnStudentOut.setBounds(709, 119, 97, 23);
-        add(btnStudentOut);
-        
-        JButton btnDetail = new JButton("详细信息");
-        btnDetail.setBounds(709, 186, 97, 23);
-        add(btnDetail);
 
         // 由于使用绝对布局，需要调用 validate() 来应用布局
         this.validate();
