@@ -15,7 +15,9 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
+import tech.client.login.*;
 /**
  * 用户主页，学生
  */
@@ -169,5 +171,69 @@ public class MainStudent extends JFrame {
 		panel.add(btnLibrary);
 		panel.add(btnShop);
 		panel.add(btnNewButton_1_5);
+		
+		//功能模块的点击事件监听
+		//学籍信息
+		btnStudentStatus.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                // 点击按钮时执行的代码
+	                System.out.println("Student was clicked!");
+	                //login();
+	            }
+	        });
+		//课表
+		btnClass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 点击按钮时执行的代码
+                System.out.println("Class was clicked!");
+                //login();
+            }
+        });
+		//图书
+		btnLibrary.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 点击按钮时执行的代码
+                System.out.println("Library was clicked!");
+                //login();
+            }
+        });
+		//商城
+		btnShop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 点击按钮时执行的代码
+                System.out.println("Shop was clicked!");
+                //login();
+            }
+        });
+		//登出按钮的点击事件监听
+		btnOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 弹出确认对话框
+                int option = JOptionPane.showConfirmDialog(
+                        null,                           // 父组件 (null 使对话框在屏幕中央)
+                        "确定要登出吗？",                 // 提示消息
+                        "确认登出",                     // 对话框标题
+                        JOptionPane.YES_NO_OPTION        // 按钮类型 (YES 和 NO)
+                );
+
+                // 根据用户选择执行操作
+                if (option == JOptionPane.YES_OPTION) {
+                    System.out.println("退出登录");
+                    // 执行登出操作
+                    LoginGUI loginGUI = new LoginGUI();
+                    MainStudent.this.dispose();
+                    loginGUI.setVisible(true);
+                } else {
+                    System.out.println("取消操作");
+                    // 可以在这里执行用户取消登出的操作
+                }
+  
+            }
+        });
 	}
 }
