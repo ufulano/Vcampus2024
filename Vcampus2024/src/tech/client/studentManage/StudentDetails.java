@@ -1,21 +1,27 @@
 package tech.client.studentManage;
 
-import java.awt.EventQueue;
-import java.awt.Toolkit;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import tech.client.main.MainStudent;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.JTextField;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+import Entity.BookEntity;
+import tech.client.main.MainStudent;
 /**
- * 学生查看自己的学籍信息，不可更改
+ * 管理员查看单个学生的学籍信息，根据功能不同有不同的初始化方式
  */
-public class SMStudentPersonal extends JFrame {
+public class StudentDetails extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -26,60 +32,64 @@ public class SMStudentPersonal extends JFrame {
     private JTextField textFieldBirthday;
     private JTextField textFieldID;
     private JTextField textFieldMajor;
+    private JTextField textField;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    SMStudentPersonal frame = new SMStudentPersonal();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public SMStudentPersonal() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(SMStudentPersonal.class.getResource("/resources/icon/icon1/ic_student.png")));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Vcampus·学籍信息");
+    public StudentDetails() {
+        setTitle("Vcampus·学生信息");
         setResizable(false);
-        setLocationRelativeTo(null);
         setSize(900, 600);
-        getContentPane().setBackground(new Color(135, 206, 250));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 882, 689);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JPanel panel = new JPanel();
-        panel.setBounds(345, 0, 404, 431);
+        panel.setBounds(348, 0, 404, 464);
+        panel.setBackground(new Color(255, 255, 255));
         contentPane.add(panel);
-        panel.setOpaque(false); // 设置为不透明，这样它会显示其父容器的背景
+        panel.setOpaque(false);
         panel.setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("学籍信息");
-        lblNewLabel.setBounds(115, 64, 133, 43);
-        panel.add(lblNewLabel);
-        lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 
-        JButton button = new JButton("返回");
+        JButton button = new JButton("确认");
+        button.setBounds(613, 474, 132, 48);
         button.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        button.setBounds(617, 441, 132, 48);
         button.setBackground(Color.white);
         contentPane.add(button);
-        button.addActionListener(e -> this.dispose()); // 添加事件监听器
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // 关闭当前窗口
+            }
+        });
 
         initializeLabelsAndTextFields(panel);
-
-        JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/左喷泉背景.png")));
-        backgroundLabel.setBounds(0, 0, 900, 600);
-        contentPane.add(backgroundLabel);
+        
+        JLabel lblPassword = new JLabel("密码：");
+        lblPassword.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        lblPassword.setBounds(115, 419, 208, 45);
+        panel.add(lblPassword);
+        
+        textField = new JTextField();
+        textField.setEnabled(false);
+        textField.setEditable(false);
+        textField.setColumns(10);
+        textField.setBounds(208, 427, 189, 37);
+        panel.add(textField);
+        initializeBackground();
+        setSize(900,600);
     }
 
     private void initializeLabelsAndTextFields(JPanel panel) {
         // 初始化标签和文本字段
+
+        JLabel lblNewLabel = new JLabel("<dynamic>");
+        lblNewLabel.setBounds(115, 64, 283, 43);
+        panel.add(lblNewLabel);
+        lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+    	
         JLabel lblID = new JLabel("一卡通号：");
         lblID.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         lblID.setBounds(116, 343, 208, 37);
@@ -125,43 +135,50 @@ public class SMStudentPersonal extends JFrame {
         textFieldGender = new JTextField();
         textFieldGender.setEnabled(false);
         textFieldGender.setEditable(false);
+        textFieldGender.setColumns(10);
         textFieldGender.setBounds(209, 168, 189, 37);
         panel.add(textFieldGender);
-        textFieldGender.setColumns(10);
 
         textFieldAge = new JTextField();
         textFieldAge.setEnabled(false);
         textFieldAge.setEditable(false);
+        textFieldAge.setColumns(10);
         textFieldAge.setBounds(209, 212, 189, 37);
         panel.add(textFieldAge);
-        textFieldAge.setColumns(10);
 
         textFieldBirthplace = new JTextField();
         textFieldBirthplace.setEnabled(false);
         textFieldBirthplace.setEditable(false);
+        textFieldBirthplace.setColumns(10);
         textFieldBirthplace.setBounds(209, 296, 189, 37);
         panel.add(textFieldBirthplace);
-        textFieldBirthplace.setColumns(10);
 
         textFieldBirthday = new JTextField();
         textFieldBirthday.setEnabled(false);
         textFieldBirthday.setEditable(false);
+        textFieldBirthday.setColumns(10);
         textFieldBirthday.setBounds(209, 254, 189, 37);
         panel.add(textFieldBirthday);
-        textFieldBirthday.setColumns(10);
 
         textFieldID = new JTextField();
         textFieldID.setEnabled(false);
         textFieldID.setEditable(false);
+        textFieldID.setColumns(10);
         textFieldID.setBounds(209, 343, 189, 37);
         panel.add(textFieldID);
-        textFieldID.setColumns(10);
 
         textFieldMajor = new JTextField();
         textFieldMajor.setEnabled(false);
         textFieldMajor.setEditable(false);
+        textFieldMajor.setColumns(10);
         textFieldMajor.setBounds(209, 386, 189, 37);
         panel.add(textFieldMajor);
-        textFieldMajor.setColumns(10);
+    }
+
+    private void initializeBackground() {
+        JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/左喷泉背景.png")));
+        backgroundLabel.setBounds(0, 0, 900, 600);
+        contentPane.add(backgroundLabel);
+        backgroundLabel.setLayout(null);
     }
 }

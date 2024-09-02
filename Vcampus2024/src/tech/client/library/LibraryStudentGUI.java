@@ -19,12 +19,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import Entity.BookEntity;
 import tech.client.main.MainStudent;
-
+/**
+ * 图书馆界面GUI，学生端和老师端
+ */
 public class LibraryStudentGUI extends JFrame {
 
-	/**
-	 * 图书馆界面GUI
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Boolean click = true;

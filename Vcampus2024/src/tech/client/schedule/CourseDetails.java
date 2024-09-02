@@ -28,12 +28,12 @@ import tech.client.library.LibraryStudentGUI;
 import tech.client.main.MainStudent;
 import tech.client.studentManage.SMStudentPersonal;
 
-
+/**
+ * 单个课程详情界面
+ */
 public class CourseDetails extends JDialog {
 
-	/**
-	 * 单个课程详情界面
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane = new JPanel();
 	private JTextField textFieldCapacity;

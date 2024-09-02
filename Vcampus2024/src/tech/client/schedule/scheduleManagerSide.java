@@ -20,7 +20,9 @@ import tech.client.main.MainStudent;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import java.awt.Color;
-
+/**
+ * 管理员的课程管理主页
+ */
 public class scheduleManagerSide extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -79,7 +81,7 @@ public class scheduleManagerSide extends JFrame {
 		contentPane.add(btnBack);
 
 		// 左侧按钮
-		JButton btnManage = new JButton("课程信息");  // 选中查看所有课程，点击查看课程详情，【增加】【删改】跳转至课程详情页面
+		JButton btnManage = new JButton("课程总览");  // 选中查看所有课程，点击查看课程详情，【增加】【删改】跳转至课程详情页面
 		btnManage.setBounds(1, 77, 171, 84);
 		btnManage.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		contentPane.add(btnManage);

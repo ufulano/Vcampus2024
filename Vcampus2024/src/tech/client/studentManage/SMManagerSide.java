@@ -25,7 +25,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
+/**
+ * 管理员的学籍管理主页
+ */
 public class SMManagerSide extends JFrame {
 
     private static final long serialVersionUID = 1L;

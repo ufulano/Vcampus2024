@@ -21,8 +21,8 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 
 /**
- * 老师课表，可查看选课名单
- * UI基本设计完成
+ *  老师课表，可查看选课名单
+ *  UI基本设计完成
  */
 public class scheduleTeacherSide extends JFrame {
 

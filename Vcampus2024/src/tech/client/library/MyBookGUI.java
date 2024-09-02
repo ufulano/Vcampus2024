@@ -27,12 +27,12 @@ import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+/**
+ * 我的借阅页面
+ */
 public class MyBookGUI extends JDialog {
 
-	/**
-	 * 我的借阅页面
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable tblBeborrowed;
