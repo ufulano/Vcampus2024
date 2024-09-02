@@ -27,17 +27,16 @@ import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+/**
+ * 我的借阅页面
+ */
 public class MyBookGUI extends JDialog {
 
-	/**
-	 * 我的借阅页面
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable tblBeborrowed;
 	private DefaultTableModel model;
-	//private List<Book> list = null;
 	private JTextField txtISBN;
 
 	/**
@@ -49,7 +48,7 @@ public class MyBookGUI extends JDialog {
 		setModal(true);
 
 		setTitle("我的借阅");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MyBookGUI.class.getResource("/resources/icon/icon2/library。png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MyBookGUI.class.getResource("/resources/icon/icon2/library.png")));
 		setResizable(false);
 		setSize(871,723);
 		setBounds(100, 100, 623, 457);
@@ -99,7 +98,7 @@ public class MyBookGUI extends JDialog {
 
 		JButton btnReturn = new JButton("还书");
 		btnReturn.setBounds(0, 86, 170, 80);
-		btnReturn.setIcon(new ImageIcon(MyBookGUI.class.getResource("/resources/assets/icon/导入.png")));
+		btnReturn.setIcon(new ImageIcon(MyBookGUI.class.getResource("/resources/icon/还书.svg")));
 		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -113,7 +112,7 @@ public class MyBookGUI extends JDialog {
 		btnRenew.setBounds(0, 176, 170, 80);
 		btnRenew.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		btnRenew.setIcon(new ImageIcon(MyBookGUI.class.getResource("/resources/assets/icon/导出.png")));
-		btnReturn.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/导出.png")));
+		btnReturn.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("/resources/assets/icon/导出.png")));
 		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		btnRenew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -136,6 +135,7 @@ public class MyBookGUI extends JDialog {
 		backgroundLabel.setBounds(0, 0, 900, 600);
 		contentPanel.add(backgroundLabel);
 		
+		setSize(900,600);
 
 		// list = ResponseUtils.getResponseByHash();
 

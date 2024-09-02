@@ -2,6 +2,7 @@ package tech.client.studentManage;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +18,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Entity.UserEntity;
+import tech.client.library.LibraryUserGUI;
+import tech.client.library.MyBookGUI;
 import tech.client.main.MainStudent;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
+/**
+ * 管理员的学籍管理主页
+ */
 public class SMManagerSide extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -47,24 +52,83 @@ public class SMManagerSide extends JFrame {
         this.setIconImage(icon.getImage());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(898, 609);
+        
 
         contentPane = new JPanel();
         contentPane.setBackground(new Color(135, 206, 250));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
         setContentPane(contentPane);
-
-        // 创建 StudentTablePanel 的实例并设置大小和位置
+        
+        // 创建 StudentTablePanel 
         StudentTablePanel studentPanel = new StudentTablePanel();
-        studentPanel.setBounds(177, 70, 886, 575);
+        studentPanel.setBorder(null);
+        studentPanel.setBounds(180, 70, 720, 493);
         contentPane.add(studentPanel);
         
+        // head
+		JLabel lblNewLabel = new JLabel("学生管理");
+		lblNewLabel.setBounds(21, 10, 133, 43);
+		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		contentPane.add(lblNewLabel);
+		
+		JButton btnBack = new JButton("返回");
+		btnBack.setBounds(784, 10, 99, 46);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		btnBack.setContentAreaFilled(false);
+		contentPane.add(btnBack);
+		
+        // 左侧功能栏
+        JButton btnReMajor = new JButton("转专业");
+        btnReMajor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnReMajor.setBounds(0, 356, 170, 80);
+        btnReMajor.setBackground(Color.white);
+        contentPane.add(btnReMajor);
+        
+        JButton btnRePassword = new JButton("修改密码");
+        btnRePassword.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnRePassword.setBounds(0, 266, 170, 80);
+        btnRePassword.setBackground(Color.white);
+        contentPane.add(btnRePassword);
+
+        
+		JButton btnAdd = new JButton("办理入学");
+		btnAdd.setBounds(0, 86, 170, 80);
+		btnAdd.setIcon(new ImageIcon(MyBookGUI.class.getResource("")));
+		btnAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		btnAdd.setBackground(Color.white);
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// 这里要添加错误提示
+
+			}
+		});
+		contentPane.add(btnAdd);
+
+		JButton btnDelete = new JButton("办理退学");
+		btnDelete.setBounds(0, 176, 170, 80);
+		btnDelete.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		btnDelete.setIcon(new ImageIcon(MyBookGUI.class.getResource("")));
+		btnDelete.setBackground(Color.white);
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
+		contentPane.add(btnDelete);
+		
         JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/老师课表背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
         backgroundLabel.setOpaque(false); 
         contentPane.add(backgroundLabel);
+        
+        setSize(900,600);
     }
+    
 }
 
 
@@ -78,6 +142,7 @@ class StudentTablePanel extends JPanel {
 	public StudentTablePanel() {
         setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         setLayout(null); 
+        setSize(900,600);
         // 初始化表格模型
         model = new DefaultTableModel() {
             @Override
@@ -108,6 +173,7 @@ class StudentTablePanel extends JPanel {
         // 初始化查询按钮
         JButton btnSearch = new JButton("查询");
         btnSearch.setBounds(428, 49, 80, 30);
+        btnSearch.setBackground(Color.white);
         btnSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 查询逻辑
@@ -123,10 +189,7 @@ class StudentTablePanel extends JPanel {
         add(btnSearch);
 
         // 设置面板大小
-        this.setSize(900, 600);
         this.setOpaque(false);
-
-        // 由于使用绝对布局，需要调用 validate() 来应用布局
         this.validate();
     }
 }

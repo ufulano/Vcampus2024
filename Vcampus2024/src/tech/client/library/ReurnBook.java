@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 public class ReurnBook extends JDialog {
 
 	/**
-	 * 归还图书，弹窗
+	 * 归还图书，仅弹窗信息
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
