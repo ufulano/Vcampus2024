@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JButton;
 
+import java.text.SimpleDateFormat;
+
 public class SMStudentPersonal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -113,12 +115,13 @@ public class SMStudentPersonal extends JFrame {
 		panel.add(lblBirthplace);
 		
 		UserEntity user = UserSession.getInstance().getUser();
-		/*if(!"Student".equals(user.getuRole())){
+		//判断是否是学生
+		if(user.getuRole()!="1"){
 			return;
-		}*/
+		}
 		
 		textFieldName = new JTextField();
-		//textFieldName.setText(user.getuName());
+		textFieldName.setText(user.getuName());
 		textFieldName.setEnabled(false);
 		textFieldName.setEditable(false);
 		textFieldName.setBounds(209, 125, 189, 37);
@@ -126,6 +129,7 @@ public class SMStudentPersonal extends JFrame {
 		textFieldName.setColumns(10);
 		
 		textFieldGender = new JTextField();
+		textFieldGender.setText(user.getuGender());
 		textFieldGender.setEnabled(false);
 		textFieldGender.setEditable(false);
 		textFieldGender.setColumns(10);
@@ -133,6 +137,7 @@ public class SMStudentPersonal extends JFrame {
 		panel.add(textFieldGender);
 		
 		textFieldAge = new JTextField();
+		textFieldAge.setText(Integer.toString(user.getuAge()));
 		textFieldAge.setEnabled(false);
 		textFieldAge.setEditable(false);
 		textFieldAge.setColumns(10);
@@ -140,6 +145,7 @@ public class SMStudentPersonal extends JFrame {
 		panel.add(textFieldAge);
 		
 		textFieldBirthplace = new JTextField();
+		textFieldBirthplace.setText(user.getuBirthplace());
 		textFieldBirthplace.setEnabled(false);
 		textFieldBirthplace.setEditable(false);
 		textFieldBirthplace.setColumns(10);
@@ -147,6 +153,8 @@ public class SMStudentPersonal extends JFrame {
 		panel.add(textFieldBirthplace);
 		
 		textFieldBirthday = new JTextField();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");  // 选择你需要的日期格式
+		textFieldBirthday.setText(formatter.format(user.getuBirthday()));  // 格式化 Date 为 String
 		textFieldBirthday.setEnabled(false);
 		textFieldBirthday.setEditable(false);
 		textFieldBirthday.setColumns(10);
@@ -154,6 +162,7 @@ public class SMStudentPersonal extends JFrame {
 		panel.add(textFieldBirthday);
 		
 		textFieldID = new JTextField();
+		textFieldID.setText(user.getuID());
 		textFieldID.setEnabled(false);
 		textFieldID.setEditable(false);
 		textFieldID.setColumns(10);
@@ -161,6 +170,7 @@ public class SMStudentPersonal extends JFrame {
 		panel.add(textFieldID);
 		
 		textFieldMajor = new JTextField();
+		textFieldMajor.setText(Integer.toString(user.getuMajor()));
 		textFieldMajor.setEnabled(false);
 		textFieldMajor.setEditable(false);
 		textFieldMajor.setColumns(10);

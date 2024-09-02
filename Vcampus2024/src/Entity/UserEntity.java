@@ -49,10 +49,13 @@ public class UserEntity implements Serializable {
         this.uMajor = uMajor;
         this.uBirthplace = uBirthplace;
         this.uBirthday = uBirthday;
-        this.uAge = calculateAge(uBirthday);
+        updateAge();
     }
 
-
+    public void updateAge() {
+        LocalDate birthDate = this.uBirthday.toLocalDate();
+        setuAge(Period.between(birthDate, LocalDate.now()).getYears());
+    }
 
     public String getuID() {
         return this.uID;
@@ -61,7 +64,6 @@ public class UserEntity implements Serializable {
     public void setuID(String uID) {
         this.uID = uID;
     }
-
 
     public String getuPwd() {
         return this.uPwd;
@@ -157,11 +159,6 @@ public class UserEntity implements Serializable {
 
     public void setuBirthplace(String uBirthplace) {
         this.uBirthplace = uBirthplace;
-    }
-
-    private int calculateAge(Date birthday) {
-        LocalDate birthDate = birthday.toLocalDate();
-        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     @Override

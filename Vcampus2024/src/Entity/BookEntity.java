@@ -1,7 +1,11 @@
 package Entity;
 
-public class BookEntity {
-    private int bBookId; // 0bBookID: int unsigned
+import java.io.Serializable;
+
+public class BookEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private int bBookID; // 0bBookID: int unsigned
     private String bBookName; // A-Z bBookName: varchar(255)
     private String bAuthor; // A-Z bAuthor: varchar(255)
     private String bPublisher; // A-Z bPublisher: varchar(255)
@@ -13,9 +17,9 @@ public class BookEntity {
     public BookEntity() {
     }
 
-    public BookEntity(int bBookId, String bBookName, String bAuthor, String bPublisher, String bISBN, int bTotal,
+    public BookEntity(int bBookID, String bBookName, String bAuthor, String bPublisher, String bISBN, int bTotal,
             int bAvailable, String img_url) {
-        this.bBookId = bBookId;
+        this.bBookID = bBookID;
         this.bBookName = bBookName;
         this.bAuthor = bAuthor;
         this.bPublisher = bPublisher;
@@ -25,8 +29,8 @@ public class BookEntity {
         this.img_url = img_url;
     }
 
-    public int getbBookId() {
-        return this.bBookId;
+    public int getbBookID() {
+        return this.bBookID;
     }
 
     public String getbBookName() {
@@ -53,12 +57,12 @@ public class BookEntity {
         return this.bAvailable;
     }
 
-    public String getImg_url() {
+    public String getimg_url() {
         return this.img_url;
     }
 
-    public void setbBookId(int bBookId) {
-        this.bBookId = bBookId;
+    public void setbBookID(int bBookID) {
+        this.bBookID = bBookID;
     }
 
     public void setbBookName(String bBookName) {
@@ -85,7 +89,14 @@ public class BookEntity {
         this.bAvailable = bAvailable;
     }
 
-    public void setImg_url(String img_url) {
+    public void setimg_url(String img_url) {
         this.img_url = img_url;
+    }
+
+    @Override
+    public String toString() {
+        return "BookEntity{" + "bBookID=" + bBookID + ", bBookName='" + bBookName + '\'' + ", bAuthor='" + bAuthor
+                + '\'' + ", bPublisher='" + bPublisher + '\'' + ", bISBN='" + bISBN + '\'' + ", bTotal=" + bTotal
+                + ", bAvailable=" + bAvailable + ", img_url='" + img_url + '\'' + '}';
     }
 }

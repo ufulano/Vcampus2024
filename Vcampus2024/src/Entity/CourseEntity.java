@@ -1,11 +1,16 @@
 package Entity;
 
-public class CourseEntity {
+import java.io.Serializable;
+
+public class CourseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     // 列名映射为Java类成员变量，数据类型根据SQL表定义
-    private int cCourseID; // 数据类型为int，非空，自增，主键
+    private String cCourseID; // 数据类型为int，非空，自增，主键
+    private int cYear; // 数据类型为int，默认值为24
     private String cCourseName; // 数据类型为varchar(10)，非空
     private int cCredits; // 数据类型为int，默认值为2
-    private int cProfession; // 数据类型为int
+    private int uMajor; // 数据类型为int
     private int cGrade; // 数据类型为int，默认值为1
     private int cCapacity; // 数据类型为int，默认值为10
     private int cAvailable; // 数据类型为int，默认值为10
@@ -16,12 +21,14 @@ public class CourseEntity {
     public CourseEntity() {
     }
 
-    public CourseEntity(int cCourseID, String cCourseName, int cCredits, int cProfession, int cGrade, int cCapacity,
+    public CourseEntity(String cCourseID, int cYear, String cCourseName, int cCredits, int uMajor, int cGrade,
+            int cCapacity,
             int cAvailable, Boolean cEnd, String uName, String uNumber) {
         this.cCourseID = cCourseID;
+        this.cYear = cYear;
         this.cCourseName = cCourseName;
         this.cCredits = cCredits;
-        this.cProfession = cProfession;
+        this.uMajor = uMajor;
         this.cGrade = cGrade;
         this.cCapacity = cCapacity;
         this.cAvailable = cAvailable;
@@ -30,48 +37,108 @@ public class CourseEntity {
         this.uNumber = uNumber;
     }
 
-    public int getcCourseID() {
+    public String getcCourseID() {
         return this.cCourseID;
+    }
+
+    public void setcCourseID(String cCourseID) {
+        this.cCourseID = cCourseID;
+    }
+
+    public int getcYear() {
+        return this.cYear;
+    }
+
+    public void setcYear(int cYear) {
+        this.cYear = cYear;
     }
 
     public String getcCourseName() {
         return this.cCourseName;
     }
 
+    public void setcCourseName(String cCourseName) {
+        this.cCourseName = cCourseName;
+    }
+
     public int getcCredits() {
         return this.cCredits;
     }
 
-    public int getcProfession() {
-        return this.cProfession;
+    public void setcCredits(int cCredits) {
+        this.cCredits = cCredits;
+    }
+
+    public int getuMajor() {
+        return this.uMajor;
+    }
+
+    public void setuMajor(int uMajor) {
+        this.uMajor = uMajor;
     }
 
     public int getcGrade() {
         return this.cGrade;
     }
 
+    public void setcGrade(int cGrade) {
+        this.cGrade = cGrade;
+    }
+
     public int getcCapacity() {
         return this.cCapacity;
+    }
+
+    public void setcCapacity(int cCapacity) {
+        this.cCapacity = cCapacity;
     }
 
     public int getcAvailable() {
         return this.cAvailable;
     }
 
+    public void setcAvailable(int cAvailable) {
+        this.cAvailable = cAvailable;
+    }
+
     public Boolean getcEnd() {
         return this.cEnd;
-    }
-
-    public String getuName() {
-        return this.uName;
-    }
-
-    public String getuNumber() {
-        return this.uNumber;
     }
 
     public void setcEnd(Boolean cEnd) {
         this.cEnd = cEnd;
     }
 
+    public String getuName() {
+        return this.uName;
+    }
+
+    public void setuName(String uName) {
+        this.uName = uName;
+    }
+
+    public String getuNumber() {
+        return this.uNumber;
+    }
+
+    public void setuNumber(String uNumber) {
+        this.uNumber = uNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseEntity{" +
+                "cCourseID='" + cCourseID + '\'' +
+                ", cYear=" + cYear +
+                ", cCourseName='" + cCourseName + '\'' +
+                ", cCredits=" + cCredits +
+                ", uMajor='" + uMajor + '\'' +
+                ", cGrade=" + cGrade +
+                ", cCapacity=" + cCapacity +
+                ", cAvailable=" + cAvailable +
+                ", cEnd=" + cEnd +
+                ", uName='" + uName + '\'' +
+                ", uNumber='" + uNumber + '\'' +
+                '}';
+    }
 }
