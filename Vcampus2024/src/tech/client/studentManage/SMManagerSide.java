@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Entity.UserEntity;
-import tech.client.library.LibraryStudentGUI;
+import tech.client.library.LibraryUserGUI;
 import tech.client.library.MyBookGUI;
 import tech.client.main.MainStudent;
 import javax.swing.JTable;
@@ -66,11 +66,23 @@ public class SMManagerSide extends JFrame {
         studentPanel.setBounds(180, 70, 720, 493);
         contentPane.add(studentPanel);
         
+        // head
 		JLabel lblNewLabel = new JLabel("学生管理");
 		lblNewLabel.setBounds(21, 10, 133, 43);
 		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 		contentPane.add(lblNewLabel);
-        
+		
+		JButton btnBack = new JButton("返回");
+		btnBack.setBounds(784, 10, 99, 46);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		btnBack.setContentAreaFilled(false);
+		contentPane.add(btnBack);
+		
+        // 左侧功能栏
         JButton btnReMajor = new JButton("转专业");
         btnReMajor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         btnReMajor.setBounds(0, 356, 170, 80);
@@ -177,10 +189,7 @@ class StudentTablePanel extends JPanel {
         add(btnSearch);
 
         // 设置面板大小
-        this.setSize(900, 600);
         this.setOpaque(false);
-
-        // 由于使用绝对布局，需要调用 validate() 来应用布局
         this.validate();
     }
 }

@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import tech.client.library.LibraryStudentGUI;
+import tech.client.library.LibraryUserGUI;
 import tech.client.main.MainStudent;
 import tech.client.studentManage.SMStudentPersonal;
 

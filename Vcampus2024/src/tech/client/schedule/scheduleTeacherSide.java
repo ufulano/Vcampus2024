@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import tech.client.library.LibraryStudentGUI;
+import tech.client.library.LibraryUserGUI;
 import tech.client.main.MainStudent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -84,7 +84,7 @@ public class scheduleTeacherSide extends JFrame {
 		// 左侧按钮
 		JButton btnSchedule = new JButton("排课信息");// 显示课表
 		btnSchedule.setBounds(0, 87, 172, 74);
-		btnSchedule.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
+		btnSchedule.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
 		btnSchedule.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         btnSchedule.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -94,7 +94,7 @@ public class scheduleTeacherSide extends JFrame {
         
 		JButton btnStudentList = new JButton("学生列表"); // 查看自己课程的选课名单，combox显示自己的
 		btnStudentList.setBounds(0, 171, 172, 84);
-		btnStudentList.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
+		btnStudentList.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
 		btnStudentList.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		contentPane.add(btnStudentList);
 		

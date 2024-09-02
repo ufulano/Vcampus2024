@@ -22,7 +22,7 @@ import tech.client.main.MainStudent;
 /**
  * 图书馆界面GUI，学生端和老师端
  */
-public class LibraryStudentGUI extends JFrame {
+public class LibraryUserGUI extends JFrame {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -34,10 +34,10 @@ public class LibraryStudentGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LibraryStudentGUI() {
+	public LibraryUserGUI() {
 		setTitle("Vcampus·图书馆");
 		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(LibraryStudentGUI.class.getResource("/resources/icon/icon2/library.png")));
+				Toolkit.getDefaultToolkit().getImage(LibraryUserGUI.class.getResource("/resources/icon/icon2/library.png")));
 		setResizable(false);
 		setSize(900,600);
 		setVisible(false);
@@ -68,7 +68,7 @@ public class LibraryStudentGUI extends JFrame {
 		// 左侧按钮
 		JButton btnRenew = new JButton("我的借阅");
 		btnRenew.setBounds(1, 77, 171, 84);
-		btnRenew.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
+		btnRenew.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
 		btnRenew.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		btnRenew.addActionListener(new ActionListener() {
 			@Override
@@ -80,7 +80,7 @@ public class LibraryStudentGUI extends JFrame {
 		
 		JButton btnBorrow = new JButton("借书");
 		btnBorrow.setBounds(0, 171, 172, 84);
-		btnBorrow.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
+		btnBorrow.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
 		btnBorrow.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		btnBorrow.addActionListener(new ActionListener() {
 			@Override
@@ -93,7 +93,7 @@ public class LibraryStudentGUI extends JFrame {
 
 		JButton btnReturn = new JButton("还书");
 		btnReturn.setBounds(0, 265, 172, 84);
-		btnReturn.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
+		btnReturn.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
 		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		btnReturn.addActionListener(new ActionListener() {
 			@Override
@@ -117,14 +117,14 @@ public class LibraryStudentGUI extends JFrame {
 
 		JLabel lblLibraryIcon = new JLabel("");
 		lblLibraryIcon.setBounds(21, 10, 64, 64);
-		lblLibraryIcon.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/library.png")));
+		lblLibraryIcon.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("/resources/assets/icon/library.png")));
 		contentPane.add(lblLibraryIcon);
 
 
 		JLabel lblHotBookIcon = new JLabel("热门书籍");
 		lblHotBookIcon.setBounds(213, 94, 148, 48);
 		lblHotBookIcon.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblHotBookIcon.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
+		lblHotBookIcon.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
 		contentPane.add(lblHotBookIcon);
 		
 		
@@ -135,7 +135,7 @@ public class LibraryStudentGUI extends JFrame {
 
 
 		//运行 线程
-		LibraryStudentGUI that = this;
+		LibraryUserGUI that = this;
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {

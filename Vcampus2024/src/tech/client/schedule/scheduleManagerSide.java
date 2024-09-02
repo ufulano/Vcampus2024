@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import tech.client.library.LibraryStudentGUI;
+import tech.client.library.LibraryUserGUI;
 import tech.client.main.MainStudent;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
