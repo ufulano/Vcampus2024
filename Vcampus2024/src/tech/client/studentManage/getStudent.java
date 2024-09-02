@@ -1,12 +1,14 @@
 package tech.client.studentManage;
 
 import Entity.UserEntity;
+import tech.client.main.UserSession;
 
 public class getStudent {
-	public static UserEntity getStudentManage(UserEntity  student) {
-		//先判断是否为学生
-		if(!"Student".equals(student.getuRole())){
-			return null;
+	public static void getStudentManage() {
+		//获取当前登录用户
+		UserEntity user = UserSession.getInstance().getUser();
+		if(!"Student".equals(user.getuRole())){
+			return;
 		}
 
 	}

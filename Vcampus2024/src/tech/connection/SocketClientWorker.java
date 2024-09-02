@@ -5,53 +5,69 @@ import java.io.*;
 
 public class SocketClientWorker {
 
-    // 通信socket
     private Socket clientSocket;
-    // 发送的消息内容
     private Message message;
+    private String IP;
+    private int port;
 
-    public SocketClientWorker(String host, int port, Message message) {
+    public SocketClientWorker() {
+        IP = "127.0.0.1";// 192.168.101.210
+        port = 8323;
+    }
+    public SocketClientWorker(Message m) {
+        IP = "192.168.68.210";// 192.168.101.210
+        port = 8323;
+        message = m;
+    }
+    public SocketClientWorker(String ip, int p) {
+        IP = ip;
+        port = p;
+    }
+
+    public SocketClientWorker(String ip, int p, Message m) {
+        IP = ip;
+        port = p;
+        message = m;
+    }
+
+    public void SetMessage(Message m) {
+        message = m;
+    }
+
+    public boolean Connect() {
         try {
-            this.clientSocket = new Socket(host, port);
-            this.message = message;
+            this.clientSocket = new Socket(IP, port);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
-    public SocketClientWorker(Message message) {
+    public boolean SendMessage() {
+
         try {
-            this.clientSocket = new Socket("192.168.68.210", 8323);// 192.168.101.210
-            this.message = message;
+            System.out.println("Sending...");
+            ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+            out.writeObject(this.message);
+            out.flush();
+            return true;
+            // out.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    public void SendMessage() {
-        {
-            try {
-                System.out.println("Sending...");
-                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-                out.writeObject(this.message);
-                out.flush();
-                // out.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
+        return false;
     }
 
     public Message ReceiveMessage() {
-        Message receivedMessage = new Message("", "", "", 0, Message.MessageType.ERROR);
+        Message receivedMessage = new Message();
         try {
             InputStream inputStream = clientSocket.getInputStream();
             while (true) {
                 try {
                     ObjectInputStream in = new ObjectInputStream(inputStream);
                     receivedMessage = (Message) in.readObject();
-                    System.out.println("收到的对象: " + receivedMessage);
                     break;
                 } catch (Exception e) {
                     System.out.println("断开连接");

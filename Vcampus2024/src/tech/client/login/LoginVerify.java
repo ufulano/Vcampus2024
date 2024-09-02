@@ -13,35 +13,23 @@ public class LoginVerify {
 		
 		System.out.println("Verifing...");
 		//用于建立连接和消息
-		Message message= new Message(cardNumber,password,"192.168.101.210", 8323,Message.MessageType.LOGIN);
+		Message message;
+		message = new Message(Message.MessageType.USER,"LOGIN",cardNumber, password);
 		System.out.println(message);
 		//发送消息
-		SocketClientWorker connection=new SocketClientWorker(message);
+		
+		SocketClientWorker connection = new SocketClientWorker(message);
+		if(connection.Connect()){
+		    //成功连接
 		connection.SendMessage();
 		message=connection.ReceiveMessage();
 		System.out.println(message);
 		//if(message.getresponse()=="FAIL"||message.toString()=="ERROR")
 			//return null;
 		return message;
+		}else{
+			System.out.println("连接失败");//失败
+			return null;
+			}
 	}
-	/*public static Student verifyStudent(String cardNumber, String password) {
-		return ResponseUtils
-				.getResponseByHash(new Request(App.connectionToServer, null, "tech.zxuuu.server.auth.Auth.studentLoginChecker",
-						new Object[] { new Student(cardNumber, null, OtherUtils.getMD5(password), null) }).send())
-				.getReturn(Student.class);
-	}
-
-	public static Teacher verifyTeacher(String cardNumber, String password) {
-		return ResponseUtils
-				.getResponseByHash(new Request(App.connectionToServer, null, "tech.zxuuu.server.auth.Auth.teacherLoginChecker",
-						new Object[] { new Student(cardNumber, null, OtherUtils.getMD5(password), null) }).send())
-				.getReturn(Teacher.class);
-	}
-
-	public static Manager verifyManager(String cardNumber, String password) {
-		return ResponseUtils
-				.getResponseByHash(new Request(App.connectionToServer, null, "tech.zxuuu.server.auth.Auth.managerLoginChecker",
-						new Object[] { new Student(cardNumber, null, OtherUtils.getMD5(password), null) }).send())
-				.getReturn(Manager.class);
-	}*/
 }

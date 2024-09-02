@@ -29,6 +29,7 @@ public class mainAssist {
 		}
 		target.setVisible(true);
 	}
+	//测试用
 	public static void requireRouting() {
 		JFrame target = null;
 		//根据身份跳转到对应窗口

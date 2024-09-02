@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -78,18 +79,6 @@ public class LibraryUserGUI extends JFrame {
 		});
 		contentPane.add(btnRenew);
 		
-		JButton btnBorrow = new JButton("借书");
-		btnBorrow.setBounds(0, 171, 172, 84);
-		btnBorrow.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
-		btnBorrow.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		btnBorrow.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		contentPane.setLayout(null);
-		contentPane.add(btnBorrow);
 
 		JButton btnReturn = new JButton("还书");
 		btnReturn.setBounds(0, 265, 172, 84);
@@ -98,12 +87,54 @@ public class LibraryUserGUI extends JFrame {
 		btnReturn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-			}
+	               System.out.println("Return book was clicked!");
+	                boolean windowOpen = false;
+	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+	                for (Window window : JFrame.getWindows()) {
+	                    if (window instanceof ReurnBook) {
+	                        windowOpen = true;
+	                        window.toFront(); // 将窗口带到最前面
+	                        break;
+	                    }
+	                }
+	                
+	                if (!windowOpen) {
+	                	ReurnBook window = new ReurnBook();
+	                    window.setVisible(true);
+	                } else {
+	                    System.out.println("Return book is already open.");
+	                }
+	            }
 		});
 		contentPane.add(btnReturn);
 
-
+		JButton btnBorrow = new JButton("借书");
+		btnBorrow.setBounds(0, 171, 172, 84);
+		btnBorrow.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
+		btnBorrow.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+		btnRenew.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 System.out.println("Borrow book was clicked!");
+	                boolean windowOpen = false;
+	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+	                for (Window window : JFrame.getWindows()) {
+	                    if (window instanceof MyBookGUI) {
+	                        windowOpen = true;
+	                        window.toFront(); // 将窗口带到最前面
+	                        break;
+	                    }
+	                }
+	                
+	                if (!windowOpen) {
+	                	MyBookGUI window = new MyBookGUI();
+	                    window.setVisible(true);
+	                } else {
+	                    System.out.println("Borrowing is already open.");
+	                }
+			}
+		});
+		contentPane.add(btnRenew);
 
 		//热门书籍板块
 		JPanel HotList = new JPanel();
@@ -126,8 +157,7 @@ public class LibraryUserGUI extends JFrame {
 		lblHotBookIcon.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		lblHotBookIcon.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));
 		contentPane.add(lblHotBookIcon);
-		
-		
+	
 		// 背景
 		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/老师课表背景.png")));
 		backgroundLabel.setBounds(0, 0, 900, 600);

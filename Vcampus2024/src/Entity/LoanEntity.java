@@ -2,7 +2,11 @@ package Entity;
 
 import java.util.Date;
 
-public class LoanEntity {
+import java.io.Serializable;
+
+public class LoanEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     // 列名映射为Java类成员变量，数据类型根据SQL表定义
     private int lLoadID; // 数据类型为int，自增，主键
     private int lCopyID; // 数据类型为int，默认值为1
@@ -30,55 +34,68 @@ public class LoanEntity {
         return this.lLoadID;
     }
 
+    public void setlLoadID(int lLoadID) {
+        this.lLoadID = lLoadID;
+    }
+
     public int getlCopyID() {
         return this.lCopyID;
-    }
-
-    public String getUNumber() {
-        return this.uNumber;
-    }
-
-    public int getbBookID() {
-        return this.bBookID;
-    }
-
-    public Date getlLoanDate() {
-        return this.lLoanDate;
-    }
-
-    public Date getlReturnDate() {
-        return this.lReturnDate;
-    }
-
-    public Date getlDueDate() {
-        return this.lDueDate;
-    }
-
-    public void setlReturnDate(Date lReturnDate) {
-        this.lReturnDate = lReturnDate;
-    }
-
-    public void setlDueDate(Date lDueDate) {
-        this.lDueDate = lDueDate;
     }
 
     public void setlCopyID(int lCopyID) {
         this.lCopyID = lCopyID;
     }
 
-    public void setUNumber(String uNumber) {
+    public String getuNumber() {
+        return this.uNumber;
+    }
+
+    public void setuNumber(String uNumber) {
         this.uNumber = uNumber;
+    }
+
+    public int getbBookID() {
+        return this.bBookID;
     }
 
     public void setbBookID(int bBookID) {
         this.bBookID = bBookID;
     }
 
+    public Date getlLoanDate() {
+        return this.lLoanDate;
+    }
+
     public void setlLoanDate(Date lLoanDate) {
         this.lLoanDate = lLoanDate;
     }
 
-    public void setlLoadID(int lLoadID) {
-        this.lLoadID = lLoadID;
+    public Date getlReturnDate() {
+        return this.lReturnDate;
+    }
+
+    public void setlReturnDate(Date lReturnDate) {
+        this.lReturnDate = lReturnDate;
+    }
+
+    public Date getlDueDate() {
+        return this.lDueDate;
+    }
+
+    public void setlDueDate(Date lDueDate) {
+        this.lDueDate = lDueDate;
+    }
+
+    @Override
+    public String toString() {
+        return "LoanEntity{" +
+                "lLoadID=" + lLoadID +
+                ", lCopyID=" + lCopyID +
+                ", uNumber='" + uNumber + '\'' +
+                ", bBookID=" + bBookID +
+                ", lLoanDate=" + lLoanDate +
+                ", lReturnDate=" + lReturnDate +
+                ", lDueDate=" + lDueDate +
+                '}';
     }
 }
