@@ -69,7 +69,7 @@ public class SMStudentPersonal extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(318, 37, 468, 648);
+		panel.setBounds(383, 42, 404, 431);
 		contentPane.add(panel);
 		panel.setOpaque(false); // 设置面板不透明，允许背景显示
 		panel.setLayout(null);
@@ -110,50 +110,53 @@ public class SMStudentPersonal extends JFrame {
 		panel.add(lblBirthplace);
 		
 		textFieldName = new JTextField();
+		textFieldName.setEnabled(false);
 		textFieldName.setEditable(false);
 		textFieldName.setBounds(209, 125, 189, 37);
 		panel.add(textFieldName);
 		textFieldName.setColumns(10);
 		
 		textFieldGender = new JTextField();
+		textFieldGender.setEnabled(false);
 		textFieldGender.setEditable(false);
 		textFieldGender.setColumns(10);
 		textFieldGender.setBounds(209, 168, 189, 37);
 		panel.add(textFieldGender);
 		
 		textFieldAge = new JTextField();
+		textFieldAge.setEnabled(false);
 		textFieldAge.setEditable(false);
 		textFieldAge.setColumns(10);
 		textFieldAge.setBounds(209, 212, 189, 37);
 		panel.add(textFieldAge);
 		
 		textFieldBirthplace = new JTextField();
+		textFieldBirthplace.setEnabled(false);
 		textFieldBirthplace.setEditable(false);
 		textFieldBirthplace.setColumns(10);
 		textFieldBirthplace.setBounds(209, 296, 189, 37);
 		panel.add(textFieldBirthplace);
 		
 		textFieldBirthday = new JTextField();
+		textFieldBirthday.setEnabled(false);
 		textFieldBirthday.setEditable(false);
 		textFieldBirthday.setColumns(10);
 		textFieldBirthday.setBounds(209, 254, 189, 37);
 		panel.add(textFieldBirthday);
 		
 		textFieldID = new JTextField();
+		textFieldID.setEnabled(false);
 		textFieldID.setEditable(false);
 		textFieldID.setColumns(10);
 		textFieldID.setBounds(209, 343, 189, 37);
 		panel.add(textFieldID);
 		
 		textFieldMajor = new JTextField();
+		textFieldMajor.setEnabled(false);
 		textFieldMajor.setEditable(false);
 		textFieldMajor.setColumns(10);
 		textFieldMajor.setBounds(209, 386, 189, 37);
 		panel.add(textFieldMajor);
-		
-		JList list = new JList();
-		list.setBounds(209, 65, 1, 1);
-		panel.add(list);
 		
 		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/左喷泉背景.png")));
 		backgroundLabel.setBounds(0, 0, 900, 600);

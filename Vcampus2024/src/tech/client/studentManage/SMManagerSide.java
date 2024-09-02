@@ -27,11 +27,6 @@ public class SMManagerSide extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTable infoTable;
-    private JTextField textGrade;
-    private List<UserEntity> result;
-    private DefaultTableModel model;
-
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
@@ -62,7 +57,7 @@ public class SMManagerSide extends JFrame {
 
         // 创建 StudentTablePanel 的实例并设置大小和位置
         StudentTablePanel studentPanel = new StudentTablePanel();
-        studentPanel.setBounds(0, 0, 886, 575);
+        studentPanel.setBounds(177, 70, 886, 575);
         contentPane.add(studentPanel);
         
         JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/老师课表背景.png")));
@@ -72,13 +67,15 @@ public class SMManagerSide extends JFrame {
     }
 }
 
+
 class StudentTablePanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private JTable infoTable;
     private JTextField textGrade;
     private DefaultTableModel model;
 
-    public StudentTablePanel() {
+    @SuppressWarnings("serial")
+	public StudentTablePanel() {
         setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         setLayout(null); 
         // 初始化表格模型
@@ -89,8 +86,6 @@ class StudentTablePanel extends JPanel {
             }
         };
 
-        // 初始化表格
-        String[] columnNames = {"一卡通号", "学号", "专业", "姓名"};
         infoTable = new JTable(model);
         JScrollPane jsp = new JScrollPane(infoTable);
         jsp.setBounds(42, 100, 619, 464);
