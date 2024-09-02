@@ -11,7 +11,7 @@ public class LoginVerify {
 	public static Message verify(String cardNumber, String password) {
 		
 		
-		System.out.println("Verifing...");
+		System.out.println("Verifing");
 		//用于建立连接和消息
 		Message message;
 		message = new Message(Message.MessageType.USER,"LOGIN",cardNumber, password);
@@ -23,7 +23,7 @@ public class LoginVerify {
 		    //成功连接
 		connection.SendMessage();
 		message=connection.ReceiveMessage();
-		System.out.println(message);
+		//System.out.println(message);
 		//if(message.getresponse()=="FAIL"||message.toString()=="ERROR")
 			//return null;
 		return message;

@@ -180,7 +180,6 @@ public void login()
         return;
     }
     
-
     /*UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
             "1", "1", 1, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1", 1, "1");
     System.out.println("Main:");
@@ -191,6 +190,7 @@ public void login()
     dispose();*/
     //向服务器发送连接
     Message message=LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
+    System.out.println("1message");
     if(message==null||message.getdata()==null) {
     	System.out.println("登陆失败");
     	errorLabel.setForeground(Color.RED);
@@ -206,9 +206,9 @@ public void login()
     	errorLabel.setText("登陆失败！");
     	return;
     }
-    String uID=message.getdata()[1];
-    String uPwd=message.getdata()[2];
+    System.out.println("1");
     UserEntity user = message.getuserentity();
+    System.out.println("2");
     System.out.println(user);
     
     if(message.getdata()[0]=="SUCCESS") {
