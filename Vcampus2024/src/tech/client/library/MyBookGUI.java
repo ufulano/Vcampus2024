@@ -99,7 +99,7 @@ public class MyBookGUI extends JDialog {
 
 		JButton btnReturn = new JButton("还书");
 		btnReturn.setBounds(0, 86, 170, 80);
-		btnReturn.setIcon(new ImageIcon(MyBookGUI.class.getResource("/resources/assets/icon/导入.png")));
+		btnReturn.setIcon(new ImageIcon(MyBookGUI.class.getResource("/resources/icon/还书.svg")));
 		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

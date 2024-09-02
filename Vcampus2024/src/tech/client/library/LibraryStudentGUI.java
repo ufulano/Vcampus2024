@@ -48,6 +48,36 @@ public class LibraryStudentGUI extends JFrame {
 		setContentPane(contentPane);
 
 
+		// head
+		JLabel lblVcampus = new JLabel("图书馆");
+		lblVcampus.setBounds(21, 10, 133, 43);
+		lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		contentPane.add(lblVcampus);
+		
+		JButton btnBack = new JButton("返回");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBack.setBounds(784, 10, 99, 46);
+		btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		btnBack.setContentAreaFilled(false);
+		contentPane.add(btnBack);
+
+		// 左侧按钮
+		JButton btnRenew = new JButton("我的借阅");
+		btnRenew.setBounds(1, 77, 171, 84);
+		btnRenew.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
+		btnRenew.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+		btnRenew.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		contentPane.add(btnRenew);
+		
 		JButton btnBorrow = new JButton("借书");
 		btnBorrow.setBounds(0, 171, 172, 84);
 		btnBorrow.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
@@ -73,18 +103,9 @@ public class LibraryStudentGUI extends JFrame {
 		});
 		contentPane.add(btnReturn);
 
-		JButton btnRenew = new JButton("我的借阅");
-		btnRenew.setBounds(1, 77, 171, 84);
-		btnRenew.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
-		btnRenew.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		btnRenew.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
 
-			}
-		});
-		contentPane.add(btnRenew);
 
+		//热门书籍板块
 		JPanel HotList = new JPanel();
 
 		JScrollPane scrollPane = new JScrollPane(HotList);
@@ -99,30 +120,21 @@ public class LibraryStudentGUI extends JFrame {
 		lblLibraryIcon.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/library.png")));
 		contentPane.add(lblLibraryIcon);
 
-		JLabel lblVcampus = new JLabel("图书馆");
-		lblVcampus.setBounds(21, 10, 133, 43);
-		lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 30));
-		contentPane.add(lblVcampus);
 
 		JLabel lblHotBookIcon = new JLabel("热门书籍");
 		lblHotBookIcon.setBounds(213, 94, 148, 48);
 		lblHotBookIcon.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		lblHotBookIcon.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("")));
 		contentPane.add(lblHotBookIcon);
-
-		
-		//热门图书列表
-		List<Book> list = null;
 		
 		
-		
-		
+		// 背景
 		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/老师课表背景.png")));
 		backgroundLabel.setBounds(0, 0, 900, 600);
 		contentPane.add(backgroundLabel);
 
 
+		//运行 线程
 		LibraryStudentGUI that = this;
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -136,8 +148,7 @@ public class LibraryStudentGUI extends JFrame {
 				that.setVisible(true);
 			}
 		});
-
-		//这里是参考的多线程
+		
 		Thread thread = null;
 		thread = new Thread(new Runnable() {
 			@Override

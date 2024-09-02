@@ -16,6 +16,12 @@ import javax.swing.JButton;
 
 import tech.client.main.MainStudent;
 
+/**
+ * 学生课表
+ * 只显示排课信息
+ * UI设计基本完成
+ * 
+ */
 public class scheduleStudentSide extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -79,14 +85,13 @@ public class scheduleStudentSide extends JFrame {
         // 添加背景标签
         JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/课表背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
-        backgroundLabel.setOpaque(true); // 确保背景标签覆盖整个窗口
+        backgroundLabel.setOpaque(true); 
         contentPane.add(backgroundLabel);
 
-        // 确保 contentPane 在添加组件后重新验证和重绘
         contentPane.revalidate();
         contentPane.repaint();
 
-        setLocationRelativeTo(null); // 再次居中显示
+        setLocationRelativeTo(null); // 居中显示
     }
 }
 

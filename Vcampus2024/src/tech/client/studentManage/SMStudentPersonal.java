@@ -58,7 +58,7 @@ public class SMStudentPersonal extends JFrame {
 	public SMStudentPersonal() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(SMStudentPersonal.class.getResource("/resources/icon/icon1/ic_student.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 911, 636);
+		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,10 +69,24 @@ public class SMStudentPersonal extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(383, 42, 404, 431);
+		panel.setBounds(345, 0, 404, 431);
 		contentPane.add(panel);
-		panel.setOpaque(false); // 设置面板不透明，允许背景显示
+		panel.setOpaque(false); 
 		panel.setLayout(null);
+		
+		// head
+		JLabel lblNewLabel = new JLabel("学籍信息");
+		lblNewLabel.setBounds(115, 64, 133, 43);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		
+		JButton button = new JButton("返回");
+		button.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		button.setBounds(617, 441, 132, 48);
+		button.setBackground(Color.white);
+		contentPane.add(button);
+		
+		// 中央显示信息
 		
 		JLabel lblID = new JLabel("一卡通号：");
 		lblID.setFont(new Font("微软雅黑", Font.PLAIN, 20));
@@ -158,16 +172,10 @@ public class SMStudentPersonal extends JFrame {
 		textFieldMajor.setBounds(209, 386, 189, 37);
 		panel.add(textFieldMajor);
 		
+
+		//背景
 		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/左喷泉背景.png")));
 		backgroundLabel.setBounds(0, 0, 900, 600);
 		contentPane.add(backgroundLabel);
-		
-		JButton button = new JButton("New button");
-		button.setBounds(768, 549, 97, 23);
-		contentPane.add(button);
-		
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(790, 549, 97, 23);
-		contentPane.add(button_1);
 	}
 }
