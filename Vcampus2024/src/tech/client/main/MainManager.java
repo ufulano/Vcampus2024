@@ -10,14 +10,20 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import Entity.UserEntity;
+import tech.client.login.LoginGUI;
 
 public class MainManager extends JFrame {
 
@@ -50,6 +56,10 @@ public class MainManager extends JFrame {
 	 */
 	public MainManager() {
 
+		UserEntity user = UserSession.getInstance().getUser();
+		System.out.println("Manager:");
+		System.out.println(user);
+		
 		int width = 110; 
 		int height = 110; //icon大小
 		
@@ -74,11 +84,12 @@ public class MainManager extends JFrame {
 		backgroundLabel.setBounds(0, 0, 900, 600);
 		contentPane.add(backgroundLabel);
 		
-		JTextField textFieldWelcom = new JTextField();
-		textFieldWelcom.setText("欢迎语：【早上/下午/晚上好!,<工号><姓名>，】x今天是<日期>");
-		textFieldWelcom.setBounds(120, 80, 460, 50);
-		panel.add(textFieldWelcom);
-		textFieldWelcom.setColumns(10);
+		String name=user.getuName();
+		String number=user.getuNumber();
+		LocalDate today = LocalDate.now();
+		JLabel labelWelcome = new JLabel(greeting()+"! "+number+" "+name+" 今天是 "+today);
+		labelWelcome.setBounds(120, 80, 460, 50);
+		panel.add(labelWelcome);
 		
 		// 学籍信息按钮点击事件处理代码
 				JButton btnStudentStatus = new JButton();
@@ -182,6 +193,86 @@ public class MainManager extends JFrame {
 				});
 				btnOut.setBounds(1049, 21, 111, 36);
 				contentPane.add(btnOut);
+				
+				//功能模块的点击事件监听
+				//学籍信息
+				btnStudentStatus.addActionListener(new ActionListener() {
+			            @Override
+			            public void actionPerformed(ActionEvent e) {
+			                // 点击按钮时执行的代码
+			                System.out.println("Student was clicked!");
+			                //login();
+			            }
+			        });
+				//课表
+				btnClass.addActionListener(new ActionListener() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		                // 点击按钮时执行的代码
+		                System.out.println("Class was clicked!");
+		                //login();
+		            }
+		        });
+				//图书
+				btnLibrary.addActionListener(new ActionListener() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		                // 点击按钮时执行的代码
+		                System.out.println("Library was clicked!");
+		                //login();
+		            }
+		        });
+				//商城
+				btnShop.addActionListener(new ActionListener() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		                // 点击按钮时执行的代码
+		                System.out.println("Shop was clicked!");
+		                //login();
+		            }
+		        });
+				//登出按钮的点击事件监听
+				btnOut.addActionListener(new ActionListener() {
+		            @Override
+		            public void actionPerformed(ActionEvent e) {
+		                // 弹出确认对话框
+		                int option = JOptionPane.showConfirmDialog(
+		                        null,                           // 父组件 (null 使对话框在屏幕中央)
+		                        "确定要登出吗？",                 // 提示消息
+		                        "确认登出",                     // 对话框标题
+		                        JOptionPane.YES_NO_OPTION        // 按钮类型 (YES 和 NO)
+		                );
+
+		                // 根据用户选择执行操作
+		                if (option == JOptionPane.YES_OPTION) {
+		                    System.out.println("退出登录");
+		                    // 执行登出操作
+		                    LoginGUI loginGUI = new LoginGUI();
+		                    MainManager.this.dispose();
+		                    loginGUI.setVisible(true);
+		                } else {
+		                    System.out.println("取消操作");
+		                    // 可以在这里执行用户取消登出的操作
+		                }
+		  
+		            }
+		        });
+
+	}
+	
+	public static String greeting() {
+		LocalDateTime now = LocalDateTime.now();
+        int hour = now.getHour();
+        
+        String greeting;
+        if (hour >= 5 && hour < 12) {
+            greeting = "上午好";
+        } else if (hour >= 12 && hour < 18) {
+            greeting = "下午好";
+        } else {
+            greeting = "晚上好";
+        }
+        return greeting;
 
 	}
 

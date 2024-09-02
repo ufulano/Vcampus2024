@@ -8,7 +8,7 @@ import tech.connection.*;
  */
 public class LoginVerify {
 
-	public static Boolean verify(String cardNumber, String password) {
+	public static Message verify(String cardNumber, String password) {
 		
 		
 		System.out.println("Verifing...");
@@ -20,9 +20,9 @@ public class LoginVerify {
 		connection.SendMessage();
 		message=connection.ReceiveMessage();
 		System.out.println(message);
-		if(message.getresponse()=="FAIL"||message.toString()=="ERROR")
-			return false;
-		return true;
+		//if(message.getresponse()=="FAIL"||message.toString()=="ERROR")
+			//return null;
+		return message;
 	}
 	/*public static Student verifyStudent(String cardNumber, String password) {
 		return ResponseUtils
