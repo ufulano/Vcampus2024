@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -68,8 +69,24 @@ public class LibraryStudentGUI extends JFrame {
 		btnReturn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-			}
+	               System.out.println("Return book was clicked!");
+	                boolean windowOpen = false;
+	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+	                for (Window window : JFrame.getWindows()) {
+	                    if (window instanceof ReurnBook) {
+	                        windowOpen = true;
+	                        window.toFront(); // 将窗口带到最前面
+	                        break;
+	                    }
+	                }
+	                
+	                if (!windowOpen) {
+	                	ReurnBook window = new ReurnBook();
+	                    window.setVisible(true);
+	                } else {
+	                    System.out.println("Return book is already open.");
+	                }
+	            }
 		});
 		contentPane.add(btnReturn);
 
@@ -80,7 +97,23 @@ public class LibraryStudentGUI extends JFrame {
 		btnRenew.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				 System.out.println("Borrow book was clicked!");
+	                boolean windowOpen = false;
+	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+	                for (Window window : JFrame.getWindows()) {
+	                    if (window instanceof MyBookGUI) {
+	                        windowOpen = true;
+	                        window.toFront(); // 将窗口带到最前面
+	                        break;
+	                    }
+	                }
+	                
+	                if (!windowOpen) {
+	                	MyBookGUI window = new MyBookGUI();
+	                    window.setVisible(true);
+	                } else {
+	                    System.out.println("Borrowing is already open.");
+	                }
 			}
 		});
 		contentPane.add(btnRenew);
@@ -113,7 +146,7 @@ public class LibraryStudentGUI extends JFrame {
 
 		
 		//热门图书列表
-		List<Book> list = null;
+		//List<Book> list = null;
 		
 		
 		

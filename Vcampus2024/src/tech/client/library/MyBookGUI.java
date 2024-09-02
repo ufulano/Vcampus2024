@@ -37,7 +37,7 @@ public class MyBookGUI extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable tblBeborrowed;
 	private DefaultTableModel model;
-	private List<Book> list = null;
+	//private List<Book> list = null;
 	private JTextField txtISBN;
 
 	/**

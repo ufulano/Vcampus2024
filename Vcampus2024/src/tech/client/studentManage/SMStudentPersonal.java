@@ -9,7 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Entity.UserEntity;
 import tech.client.main.MainStudent;
+import tech.client.main.UserSession;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
@@ -109,7 +112,13 @@ public class SMStudentPersonal extends JFrame {
 		lblBirthplace.setBounds(116, 296, 208, 37);
 		panel.add(lblBirthplace);
 		
+		UserEntity user = UserSession.getInstance().getUser();
+		/*if(!"Student".equals(user.getuRole())){
+			return;
+		}*/
+		
 		textFieldName = new JTextField();
+		//textFieldName.setText(user.getuName());
 		textFieldName.setEnabled(false);
 		textFieldName.setEditable(false);
 		textFieldName.setBounds(209, 125, 189, 37);
