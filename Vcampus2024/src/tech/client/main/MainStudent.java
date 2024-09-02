@@ -30,6 +30,7 @@ import java.time.LocalDate;
 
 import tech.client.login.*;
 import Entity.UserEntity;
+import tech.client.studentManage.SMStudentPersonal;
 /**
  * 用户主页，学生
  */
@@ -212,7 +213,9 @@ public class MainStudent extends JFrame {
 	            public void actionPerformed(ActionEvent e) {
 	                // 点击按钮时执行的代码
 	                System.out.println("Student was clicked!");
-	                //login();
+	                SMStudentPersonal window= new SMStudentPersonal();
+	                window.setVisible(true);
+	                dispose();
 	            }
 	        });
 		//课表
