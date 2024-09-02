@@ -15,6 +15,9 @@ import type.UserType;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 import java.awt.Font;
@@ -24,6 +27,17 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+
+import javax.swing.ButtonModel;
+
+import tech.connection.Message;
+import Entity.UserEntity;
+import tech.client.main.mainAssist;
+import tech.client.main.UserSession;
+
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * 登陆界面GUI
@@ -39,10 +53,7 @@ public class LoginGUI extends JFrame {
 	private JPasswordField txtPassword;//密码
 	
 	private JLabel errorLabel = new JLabel();//错误信息
-	
-	private JRadioButton rdbtnManager;
-	private JRadioButton rdbtnStudent;
-	private JRadioButton rdbtnTeacher;
+
 	/**
 	 * Launch the application.
 	 */
@@ -135,34 +146,7 @@ public class LoginGUI extends JFrame {
 		
 		Image studentImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icon/icon1/ic_student.png"));
 		Image smallStudentImage = studentImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // 正确使用SCALE_SMOOTH常量
-		ImageIcon studentIcon = new ImageIcon(smallStudentImage);
-		JRadioButton rdbtnStudent = new JRadioButton("学生", studentIcon);
-		rdbtnStudent.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
-		rdbtnStudent.setOpaque(false);
-		rdbtnStudent.setBackground(null);
-		panelType.add(rdbtnStudent);
-		group.add(rdbtnStudent);
-		
-		Image teacherImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icon/icon1/jteacher.png"));
-		Image smallTeacherImage = teacherImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // 正确使用SCALE_SMOOTH常量
-		ImageIcon teacherIcon = new ImageIcon(smallTeacherImage);
-		JRadioButton rdbtnTeacher = new JRadioButton("老师", teacherIcon);
-		rdbtnTeacher.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
-		rdbtnTeacher.setOpaque(false);
-		rdbtnTeacher.setBackground(null);
-		panelType.add(rdbtnTeacher);
-		group.add(rdbtnTeacher);
 
-
-		Image managerImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/icon/icon1/manager.png"));
-		Image smallManagerImage = managerImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // 正确使用SCALE_SMOOTH常量
-		ImageIcon managerIcon = new ImageIcon(smallManagerImage);
-		JRadioButton rdbtnManager = new JRadioButton("管理员", managerIcon);
-		rdbtnManager.setFont(new Font("微软雅黑 Light", Font.PLAIN, 12));
-		rdbtnManager.setOpaque(false);
-		rdbtnManager.setBackground(null);
-		panelType.add(rdbtnManager);
-		group.add(rdbtnManager);
 		
 		
 		JLabel backgroundLabel = new JLabel(new ImageIcon(LoginGUI.class.getResource("/resources/picture/loginBackground1.jpg")));
@@ -196,71 +180,41 @@ public void login()
         return;
     }
     
-    //向服务器发送连接  //初始化用户类型
-    UserType type = null;
-    Boolean flag=LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
-if(!flag) {
-	System.out.println("登陆失败");
-  	errorLabel.setForeground(Color.RED);
-	contentPane.add(errorLabel);
-	errorLabel.setText("登陆失败！");
-	return;
-}
-    //判断用户类型
-   if (rdbtnStudent.isSelected()) {
-		type = UserType.STUDENT;
-		System.out.println("Student");
-		//身份验证
-		/*Student res = AuthHelper.verifyStudent(txtUsername.getText(), txtPassword.getPassword());
-		if (res != null) {
-			SwingUtils.showMessage(null, "学生登录成功！", "信息");
-			// 填充App.session
-			App.hasLogon = true;
-			App.session = new Session(res);
-			setVisible(false);
-			// 要求界面路由
-			App.requireRouting();
-		} else {*/
-			errorLabel.setForeground(Color.RED);
-			contentPane.add(errorLabel);
-			errorLabel.setText("密码错误，登录失败！");
-			txtPassword.setText("");
-		//}
-		// -------------
-	} else if (rdbtnTeacher.isSelected()) {
-		type = UserType.TEACHER;
-		System.out.println("Teacher");
-		/*Teacher res = AuthHelper.verifyTeacher(txtUsername.getText(), txtPassword.getText());
-		if (res != null) {
-			SwingUtils.showMessage(null, "欢迎您，" + res.getName() + " 教师！", "信息");
-			App.hasLogon = true;
-			App.session = new Session(res);
-			setVisible(false);
-			App.requireRouting();
-		} else {*/
-			errorLabel.setForeground(Color.RED);
-			contentPane.add(errorLabel);
-			errorLabel.setText("密码错误，登录失败！");
-			txtPassword.setText("");
-		//}
-		// -------------*/
-	} else if (rdbtnManager.isSelected()) {
-		type = UserType.MANAGER;
-		System.out.println("Manager");
-		/*Manager res = AuthHelper.verifyManager(txtUsername.getText(), txtPassword.getText());
-		if (res != null) {
-			SwingUtils.showMessage(null, res.getManagerType().toString() + " 管理员登陆成功！", "信息");
-			App.hasLogon = true;
-			App.session = new Session(res);
-			setVisible(false);
-			App.requireRouting();
-		} else {*/
-			errorLabel.setForeground(Color.RED);
-			contentPane.add(errorLabel);
-			errorLabel.setText("密码错误，登录失败！");
-			txtPassword.setText("");
-		//}*/
-	}
+
+    UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
+            "1", "1", 1, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1", 1, "1");
+    System.out.println("Main:");
+    System.out.println(user);
+    UserSession session = UserSession.getInstance();
+    session.setUser(user);
+    mainAssist.requireRouting();
+    dispose();
+    //向服务器发送连接
+    /*Message message=LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
+    if(message.getresponse()=="FAIL") {
+    	System.out.println("登陆失败");
+    	errorLabel.setForeground(Color.RED);
+    	contentPane.add(errorLabel);
+    	errorLabel.setText("登陆失败！");
+    	return;
+    }
+    String uID=message.getuid();
+    String uPwd=message.getpassword();
+    UserEntity user = message.getuserentity();
+    System.out.println(user);
+    
+    if(message.getresponse()=="SUCCESS") {
+    	UserSession session = UserSession.getInstance();
+    	session.setUser(user);
+    	mainAssist.requireRouting(user);
+    	}
+    /*if(message.getresponse()=="FAIL") {
+    	errorLabel.setForeground(Color.RED);
+		contentPane.add(errorLabel);
+		errorLabel.setText("密码错误，登录失败！");
+		txtPassword.setText("");
+    }*/
+		
 
 }
 

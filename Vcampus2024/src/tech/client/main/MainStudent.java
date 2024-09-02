@@ -23,9 +23,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+//时间相关
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 import tech.client.login.*;
+import Entity.UserEntity;
+import tech.client.studentManage.SMStudentPersonal;
 /**
  * 用户主页，学生
  */
@@ -40,7 +45,7 @@ public class MainStudent extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -64,6 +69,9 @@ public class MainStudent extends JFrame {
 	 */
 	public MainStudent() {
 		
+		UserEntity user = UserSession.getInstance().getUser();
+		System.out.println("Student:");
+		System.out.println(user);
 		
 		int width = 110; 
 		int height = 110; //icon大小
@@ -205,7 +213,9 @@ public class MainStudent extends JFrame {
 	            public void actionPerformed(ActionEvent e) {
 	                // 点击按钮时执行的代码
 	                System.out.println("Student was clicked!");
-	                //login();
+	                SMStudentPersonal window= new SMStudentPersonal();
+	                window.setVisible(true);
+	                dispose();
 	            }
 	        });
 		//课表
@@ -261,11 +271,33 @@ public class MainStudent extends JFrame {
   
             }
         });
-		textFieldWelcom = new JTextField();
-		textFieldWelcom.setText("欢迎语：【早上/下午/晚上好!,<学号><姓名>，】x今天是<日期>");
-		textFieldWelcom.setBounds(120, 80, 460, 50);
-		panel.add(textFieldWelcom);
-		textFieldWelcom.setColumns(10);
+		
+		String name=user.getuName();
+		String number=user.getuNumber();
+		LocalDate today = LocalDate.now();
+		JLabel labelWelcome = new JLabel(greeting()+"! "+number+" "+name+" 今天是 "+today);
+		labelWelcome.setBounds(120, 80, 460, 50);
+		panel.add(labelWelcome);
+
+
+	}
+	
+	
+	public static String greeting() {
+		LocalDateTime now = LocalDateTime.now();
+        int hour = now.getHour();
+        
+        String greeting;
+        if (hour >= 5 && hour < 12) {
+            greeting = "上午好";
+        } else if (hour >= 12 && hour < 18) {
+            greeting = "下午好";
+        } else {
+            greeting = "晚上好";
+        }
+        return greeting;
 
 	}
 }
+
+

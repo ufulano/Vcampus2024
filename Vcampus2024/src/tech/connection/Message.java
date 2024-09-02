@@ -1,6 +1,8 @@
 package tech.connection;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import Entity.*;
 
 public class Message implements Serializable {
@@ -12,9 +14,9 @@ public class Message implements Serializable {
     private int serverPort;
     private String Response;
     private UserEntity userentity;
-    // private BookEntity bookentity;
+    private BookEntity bookentity;
     // private CourseEntity courseentity;
-    // private Enrollment enrollment;
+    private Enrollment enrollment;
     // private OrderEntity orderentity;
     // private ProductEntity productentity;
     // private ShoppingcartEntity shoppingcartentity;
@@ -28,7 +30,7 @@ public class Message implements Serializable {
         return userentity;
     }    
     public enum MessageType {
-        LOGIN, LOGOUT, ENROLL, ERROR;
+        LOGIN, LOGOUT, ENROLL, ERROR,BOOK;
     }
 
     public MessageType gettype() {
@@ -97,8 +99,22 @@ public class Message implements Serializable {
         if (Type == MessageType.ERROR)
             return "ERROR";
         return "message{uid='" + Uid + "', password='" + Passwaord + "', serverip='" + serverIp + "', serverport='"
-                + serverPort + "}";
+                + serverPort + "}"+"\nresponse:"+Response;
 
+    }
+    public Object createObject(Object... params) {
+        switch (Type) {
+            case MessageType.ENROLL:
+                enrollment=new Enrollment((int) params[0], (String) params[1], (String) params[2],
+                (BigDecimal) params[3], (BigDecimal) params[4]);
+                return enrollment;
+            case MessageType.BOOK:
+                bookentity=new BookEntity((int) params[0], (String) params[1], (String) params[2], (String) params[3], (String) params[4], (int) params[5],
+                (int) params[6], (String) params[7]);
+                return bookentity;
+            default:
+                throw new IllegalArgumentException("");
+        }
     }
 
 }

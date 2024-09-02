@@ -21,7 +21,7 @@ public class SocketClientWorker {
 
     public SocketClientWorker(Message message) {
         try {
-            this.clientSocket = new Socket("192.168.101.210", 8323);// 192.168.101.210
+            this.clientSocket = new Socket("192.168.68.210", 8323);// 192.168.101.210
             this.message = message;
         } catch (Exception e) {
             e.printStackTrace();
