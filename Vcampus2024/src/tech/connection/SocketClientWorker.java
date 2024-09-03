@@ -47,7 +47,7 @@ public class SocketClientWorker {
     public boolean SendMessage() {
 
         try {
-            System.out.println("Sending...");
+            System.out.println("Sending..");
             ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
             out.writeObject(this.message);
             out.flush();
