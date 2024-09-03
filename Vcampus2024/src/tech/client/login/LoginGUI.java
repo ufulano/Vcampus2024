@@ -180,7 +180,6 @@ public void login()
         return;
     }
     
-
     /*UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
             "1", "1", 1, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1", 1, "1");
     System.out.println("Main:");
@@ -206,8 +205,6 @@ public void login()
     	errorLabel.setText("登陆失败！");
     	return;
     }
-    String uID=message.getdata()[1];
-    String uPwd=message.getdata()[2];
     UserEntity user = message.getuserentity();
     System.out.println(user);
     

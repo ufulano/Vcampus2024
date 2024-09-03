@@ -52,13 +52,14 @@ public class LibraryManagerGUI extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         // 创建 BookTablePanel
         BookTable bookPanel = new BookTable();
+        bookPanel.setBackground(new Color(255, 255, 255));
         bookPanel.setBorder(null);
-        bookPanel.setBounds(182, 73, 701, 490);
+        bookPanel.setBounds(214, 86, 644, 477);
         contentPane.add(bookPanel);
         contentPane.setLayout(null);
 
         // Head
-        JLabel lblVcampus = new JLabel("图书馆管理系统");
+        JLabel lblVcampus = new JLabel("图书管理系统");
         lblVcampus.setBounds(21, 10, 220, 43);
         lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
         lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 30));
