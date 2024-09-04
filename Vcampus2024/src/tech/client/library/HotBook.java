@@ -43,7 +43,7 @@ public class HotBook extends JPanel {
 		JTextArea txtTitle = new JTextArea();
 		txtTitle.setEditable(false);
 		txtTitle.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		txtTitle.setBounds(253, 26, 140, 55);
+		txtTitle.setBounds(253, 63, 140, 55);
 		txtTitle.setText(bBookName);
 		
 		txtTitle.setLineWrap(true);
@@ -53,7 +53,7 @@ public class HotBook extends JPanel {
 		JTextArea txtAuthor = new JTextArea();
 		txtAuthor.setEditable(false);
 		txtAuthor.setFont(new Font("微软雅黑", Font.PLAIN,20));
-		txtAuthor.setBounds(252, 114, 140, 55);
+		txtAuthor.setBounds(253, 146, 140, 55);
 		txtAuthor.setText(bAuthor);
 		
 		txtAuthor.setLineWrap(true);
