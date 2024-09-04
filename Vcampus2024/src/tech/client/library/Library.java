@@ -1,6 +1,9 @@
 package tech.client.library;
 
-import Entity.BookEntity; // 导入tech.connection包中的所有类
+
+import Entity.BookEntity;
+import Entity.LoanEntity; // 导入tech.connection包中的所有类
+
 import java.util.ArrayList; // 导入ArrayList类
 import java.util.List;
 import tech.connection.*; // 导入List接口
@@ -13,6 +16,7 @@ public class Library
     public List<BookEntity> displaylibrary()
     {
         Bookarray.clear();
+
         Message message=new Message(Message.MessageType.LIBRARY);
         message.setdata("DISPLAY");
         System.out.println(message);
@@ -38,10 +42,12 @@ public class Library
 
     }
 
-    public String[] borrowbook(int index)
+
+    public String[] borrowbook(int index,String data)//data为借阅时长
     {
         Message message=new Message(Message.MessageType.LIBRARY);
-        message.setdata("BORROW");
+        message.setdata("BORROW",data);
+
         message.setbookentity(Bookarray.get(index));
         System.out.println(message);
         SocketClientWorker connection=new SocketClientWorker(message);
@@ -50,10 +56,11 @@ public class Library
         System.out.println(message);
         return message.getdata();
     }
-    public String[] borrowbook(BookEntity bookentity)
+
+    public String[] borrowbook(BookEntity bookentity,String data)
     {
         Message message=new Message(Message.MessageType.LIBRARY);
-        message.setdata("BORROW");
+        message.setdata("BORROW",data);
         message.setbookentity(bookentity);
         System.out.println(message);
         SocketClientWorker connection=new SocketClientWorker(message);
@@ -88,17 +95,18 @@ public class Library
         Bookarray.remove(bookentity);
         return message.getdata();
     }
-    public List<BookEntity> borrowedbook()
+
+    public List<LoanEntity> borrowedbook()//查看已借书本
     {
         Bookarray.clear();    
         Message message=new Message(Message.MessageType.LIBRARY);
-        message.setdata("BORROWED");
+        message.setdata("SEARCHBORROWED");
         System.out.println(message);
         SocketClientWorker connection=new SocketClientWorker(message);
         connection.SendMessage();
         message=connection.ReceiveMessage();
-        Bookarray.addAll(message.getbooklist());
-        return  Bookarray;
+        return  message.getloanlist();
+
     }
 
 }

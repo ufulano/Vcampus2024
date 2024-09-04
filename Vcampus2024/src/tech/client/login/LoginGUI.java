@@ -34,6 +34,7 @@ import tech.connection.Message;
 import Entity.UserEntity;
 import tech.client.main.mainAssist;
 import tech.client.main.UserSession;
+import tech.connection.*;
 
 
 import java.time.LocalDateTime;
@@ -87,19 +88,14 @@ public class LoginGUI extends JFrame {
 		
 
 		setForeground(new Color(240, 240, 240));
-		setIconImage(Toolkit.getDefaultToolkit().getImage("/resources/icon/icon1/school.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginGUI.class.getResource("/resources/icon/icon1/school.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 804, 602);
+		setTitle("Vcampus·登录");
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		
-		JPanel panelType = new JPanel();
-		panelType.setBounds(311, 331, 203, 29);
-		contentPane.add(panelType);
-		panelType.setOpaque(false);
-		panelType.setBackground(null);
 
 		JLabel lblIcon = new JLabel();
 		lblIcon.setIcon(new ImageIcon(LoginGUI.class.getResource("/resources/icon/icon1/schoolSmall.png")));
@@ -125,8 +121,7 @@ public class LoginGUI extends JFrame {
 		
         // 创建用户名文本框并设置圆角灰色边框
         txtUsername = new JTextField();
-        txtUsername.setBounds(312, 271, 202, 29);
-        txtUsername.setText("  一卡通号/唯一ID");
+        txtUsername.setBounds(313, 287, 202, 29);
         txtUsername.setBorder(new LineBorder(SystemColor.controlHighlight, 1, true)); 
         txtUsername.setColumns(10);
         contentPane.add(txtUsername);
@@ -134,7 +129,7 @@ public class LoginGUI extends JFrame {
         
         // 创建密码文本框并设置圆角灰色边框
         txtPassword = new JPasswordField();
-        txtPassword.setBounds(312, 310, 203, 23);
+        txtPassword.setBounds(312, 326, 203, 23);
         txtPassword.setToolTipText("请输入密码");
         txtPassword.setBorder(new LineBorder(SystemColor.controlHighlight, 1, true)); 
         txtPassword.setColumns(10);
@@ -190,6 +185,8 @@ public void login()
     mainAssist.requireRouting();
     dispose();
     //向服务器发送连接
+    //创建连接的唯一实例
+    SocketClientWorker connection = SocketClientWorker.getInstance();
     /*Message message=LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
     if(message==null||message.getdata()==null) {
     	System.out.println("登陆失败");
@@ -199,7 +196,7 @@ public void login()
     	return;
     }
     
-    if(message.getdata()[0]=="FAIL") {
+    if("FAIL".equals(message.getdata()[0])) {
     	System.out.println("登陆失败");
     	errorLabel.setForeground(Color.RED);
     	contentPane.add(errorLabel);
@@ -208,19 +205,24 @@ public void login()
     }
     UserEntity user = message.getuserentity();
     System.out.println(user);
-    
-    if(message.getdata()[0]=="SUCCESS") {
+    System.out.println("跳转中");
+    if("SUCCESS".equals(message.getdata()[0])) {
+    	System.out.println("跳转中");
     	UserSession session = UserSession.getInstance();
     	session.setUser(user);
-    	mainAssist.requireRouting(user);
+    	//mainAssist.requireRouting(user);
+    	mainAssist.requireRouting();
     	}
-    if(message.getdata()[0]=="FAIL") {
+    else {
+    	System.out.println("跳转失败");
+    }
+    if("FAIL".equals(message.getdata()[0])) {
     	errorLabel.setForeground(Color.RED);
 		contentPane.add(errorLabel);
 		errorLabel.setText("密码错误，登录失败！");
 		txtPassword.setText("");
     }
-	*/	
+		*/
 
 }
 

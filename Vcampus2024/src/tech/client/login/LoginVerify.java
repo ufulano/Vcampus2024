@@ -18,7 +18,8 @@ public class LoginVerify {
 		System.out.println(message);
 		//发送消息
 		
-		SocketClientWorker connection = new SocketClientWorker(message);
+		SocketClientWorker connection = SocketClientWorker.getInstance();
+		connection.SetMessage(message);
 		if(connection.Connect()){
 		//成功连接
 		connection.SendMessage();

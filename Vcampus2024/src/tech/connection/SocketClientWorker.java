@@ -1,47 +1,53 @@
 package tech.connection;
 
 import java.net.Socket;
+
+import tech.client.main.UserSession;
+
 import java.io.*;
 
 public class SocketClientWorker {
 
+	private static SocketClientWorker instance;
     private Socket clientSocket;
     private Message message;
     private String IP;
     private int port;
 
-    public SocketClientWorker() {
-        IP = "127.0.0.1";// 192.168.101.210
-        port = 8323;
-    }
-    public SocketClientWorker(Message m) {
+    // 私有构造函数，防止外部实例化
+    private SocketClientWorker() {
         IP = "192.168.68.210";// 192.168.101.210
         port = 8323;
-        message = m;
     }
-    public SocketClientWorker(String ip, int p) {
-        IP = ip;
-        port = p;
+    
+    //获取该单例类
+    public static synchronized SocketClientWorker getInstance() {
+        if (instance == null) {
+            instance = new SocketClientWorker();
+        }
+        return instance;
     }
-
-    public SocketClientWorker(String ip, int p, Message m) {
-        IP = ip;
-        port = p;
-        message = m;
-    }
+    
 
     public void SetMessage(Message m) {
         message = m;
     }
 
+    public void initialize(String ip, int p) {
+        this.IP = ip;
+        this.port = p;
+    }
+    
     public boolean Connect() {
-        try {
-            this.clientSocket = new Socket(IP, port);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (clientSocket == null || clientSocket.isClosed()) {
+            try {
+                clientSocket = new Socket(IP, port);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return false;
+        return true; // 连接已存在或创建成功
     }
 
     public boolean SendMessage() {

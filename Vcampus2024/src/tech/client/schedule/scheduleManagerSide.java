@@ -100,13 +100,13 @@ public class scheduleManagerSide extends JFrame {
 		JButton btnRe = new JButton("删改");
 		btnRe.setBackground(Color.WHITE);
 		btnRe.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-		btnRe.setBounds(759, 539, 97, 23);
+		btnRe.setBounds(759, 539, 97, 25);
 		contentPane.add(btnRe);
 		
 		JButton btnNew = new JButton("增加");
 		btnNew.setBackground(Color.WHITE);
 		btnNew.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-		btnNew.setBounds(652, 539, 97, 23);
+		btnNew.setBounds(652, 539, 97, 25);
 		contentPane.add(btnNew);
                         
         // 背景                

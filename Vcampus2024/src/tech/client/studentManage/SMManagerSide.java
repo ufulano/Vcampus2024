@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -21,10 +22,14 @@ import Entity.UserEntity;
 import tech.client.library.LibraryUserGUI;
 import tech.client.library.MyBookGUI;
 import tech.client.main.MainStudent;
+import tech.client.main.UserSession;
+
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
+import Entity.UserEntity;
 /**
  * 管理员的学籍管理主页
  */
@@ -104,9 +109,25 @@ public class SMManagerSide extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// 这里要添加错误提示
-				UserEntity newStu=new UserEntity();
+				//UserEntity newStu=new UserEntity();
 				//跳转到学生细节页面
-				StudentDetails window=new StudentDetails();
+				System.out.println("打开学生细节...");
+				 boolean windowOpen = false;
+	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+	                for (Window window : JFrame.getWindows()) {
+	                    if (window instanceof StudentDetails&&window.isVisible()) {
+	                        windowOpen = true;
+	                        window.toFront(); // 将窗口带到最前面
+	                        break;
+	                    }
+	                }
+	                
+	                if (!windowOpen) {
+	                	StudentDetails window = new StudentDetails("办理入学");
+	                    window.setVisible(true);
+	                } else {
+	                    System.out.println("Manager window is already open.");
+	                }
 				//按ID查询学生是否存在
 				/*List<UserEntity> userlist =menageOpreation.getStudentManage(newStu.getuID());
 				//学生不存在
@@ -128,7 +149,25 @@ public class SMManagerSide extends JFrame {
 		btnDelete.setBackground(Color.white);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof StudentDetails && window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	StudentDetails window = new StudentDetails("办理退学");
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Manager window is already open.");
+                }
+				UserEntity user = UserSession.getInstance().getUser();
+				//menageOpreation.deleteStu(user);
+				//menageOpreation.getStudentManage("?");
 			}
 		});
 		contentPane.add(btnDelete);

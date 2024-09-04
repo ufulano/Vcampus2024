@@ -12,11 +12,12 @@ public class menageOpreation {
 		//管理员登录获取学生信息
 		System.out.println("Getting students...");
 		//用于建立连接和消息
-		Message message;
-		message = new Message(Message.MessageType.STU,"GETTING LISTS",s);
+		Message message=new Message(Message.MessageType.STU);
+		message.setdata("SHOW_STUDENT_LIST_BY_DATA",s);//...为搜索内容（姓名/ID...支持部分查找）
 		System.out.println(message);
 		//发送消息
-		SocketClientWorker connection = new SocketClientWorker(message);
+		SocketClientWorker connection = SocketClientWorker.getInstance();
+		connection.SetMessage(message);
 		if(connection.Connect()){
 		//成功连接
 		connection.SendMessage();
@@ -38,7 +39,8 @@ public class menageOpreation {
 		message.setuserentity(student);
 		System.out.println(message);
 		//发送消息
-		SocketClientWorker connection = new SocketClientWorker(message);
+		SocketClientWorker connection = SocketClientWorker.getInstance();
+		connection.SetMessage(message);
 		if(connection.Connect()){
 		//成功连接
 		connection.SendMessage();
@@ -58,7 +60,8 @@ public class menageOpreation {
 		message.setuserentity(student);
 		System.out.println(message);
 		//发送消息
-		SocketClientWorker connection = new SocketClientWorker(message);
+		SocketClientWorker connection = SocketClientWorker.getInstance();
+		connection.SetMessage(message);
 		if(connection.Connect()){
 		//成功连接
 		connection.SendMessage();

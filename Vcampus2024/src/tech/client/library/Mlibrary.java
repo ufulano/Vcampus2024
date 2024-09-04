@@ -1,6 +1,8 @@
 package tech.client.library;
 
 import Entity.BookEntity; // 导入tech.connection包中的所有类
+import Entity.LoanEntity;
+
 import java.util.ArrayList; // 导入ArrayList类
 import java.util.List;
 import tech.connection.*; // 导入List接口
@@ -94,7 +96,8 @@ public class Mlibrary
         return message.getdata();
     }
 
-    public List<BookEntity> checkuserborrowed(String Uid)
+
+    public List<LoanEntity> checkuserborrowed(String Uid)//查看用户借阅书本
     {
         Bookarray.clear();
         Message message=new Message(Message.MessageType.LIBRARY);
@@ -104,10 +107,10 @@ public class Mlibrary
         SocketClientWorker connection=new SocketClientWorker(message);
         connection.SendMessage();
         message=connection.ReceiveMessage();
-        Bookarray.addAll(message.getbooklist());
-        return  Bookarray;
+        return  message.getloanlist();
     }
 
+    //下面的是帮助用户借书还书，暂时先放着，想做的话可以做
     // public String[] helpuserborrowbook(int index,String uid)
     // {
     //     Message message=new Message(Message.MessageType.LIBRARY);

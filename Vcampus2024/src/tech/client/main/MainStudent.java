@@ -218,7 +218,7 @@ public class MainStudent extends JFrame {
 	                boolean windowOpen = false;
 	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
 	                for (Window window : JFrame.getWindows()) {
-	                    if (window instanceof SMStudentPersonal) {
+	                    if (window instanceof SMStudentPersonal &&window.isVisible()) {
 	                        windowOpen = true;
 	                        window.toFront(); // 将窗口带到最前面
 	                        break;
@@ -251,7 +251,7 @@ public class MainStudent extends JFrame {
                 boolean windowOpen = false;
                 Window[] windows = JFrame.getWindows();//获取所有打开窗口
                 for (Window window : JFrame.getWindows()) {
-                    if (window instanceof LibraryUserGUI) {
+                    if (window instanceof LibraryUserGUI &&window.isVisible()) {
                         windowOpen = true;
                         window.toFront(); // 将窗口带到最前面
                         break;

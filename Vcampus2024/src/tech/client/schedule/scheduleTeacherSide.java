@@ -105,22 +105,24 @@ public class scheduleTeacherSide extends JFrame {
 		table.setBounds(214, 142, 645, 426);
         table.setBackground(UIManager.getColor("Button.light"));
         contentPane.add(table);
-        
+		
+		JButton btnNewButton = new JButton("查询");
+		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(762, 99, 97, 33);
+		contentPane.add(btnNewButton);
+		
+		JComboBox comboBoxClass = new JComboBox();
+		comboBoxClass.setBounds(627, 99, 125, 33);
+		contentPane.add(comboBoxClass);
+		
+		
         // 表格标题
 		JLabel lblTitle = new JLabel("<dynamic>");
 		lblTitle.setBounds(214, 87, 183, 38);
 		lblTitle.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		contentPane.add(lblTitle);
-		
-		JButton btnNewButton = new JButton("查询");
-		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setBounds(762, 99, 97, 23);
-		contentPane.add(btnNewButton);
-		
-		JComboBox comboBoxClass = new JComboBox();
-		comboBoxClass.setBounds(627, 99, 125, 23);
-		contentPane.add(comboBoxClass);
+
 		
         
         // 背景设置
