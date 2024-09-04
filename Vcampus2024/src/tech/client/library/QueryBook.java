@@ -70,24 +70,24 @@ public class QueryBook extends JDialog {
         contentPanel.add(lblNewLabel);
 
         txtTitle = new JTextField();
-        txtTitle.setBounds(266, 132, 157, 30);
+        txtTitle.setBounds(254, 132, 157, 30);
         txtTitle.setColumns(10);
         contentPanel.add(txtTitle);
 
         txtAuthor = new JTextField();
-        txtAuthor.setBounds(473, 132, 157, 30);
+        txtAuthor.setBounds(461, 132, 157, 30);
         txtAuthor.setText("");
         txtAuthor.setColumns(10);
         contentPanel.add(txtAuthor);
 
         JLabel lblTitle = new JLabel("书名");
         lblTitle.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-        lblTitle.setBounds(226, 137, 30, 18);
+        lblTitle.setBounds(214, 136, 30, 18);
         contentPanel.add(lblTitle);
 
         JLabel lblAuthor = new JLabel("作者");
         lblAuthor.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-        lblAuthor.setBounds(433, 137, 30, 18);
+        lblAuthor.setBounds(421, 136, 30, 18);
         contentPanel.add(lblAuthor);
 
         String[] tableHeader = {"书目编号", "书名", "作者"};
@@ -120,7 +120,7 @@ public class QueryBook extends JDialog {
         contentPanel.add(txtISBN);
         txtISBN.setColumns(10);
 
-        JLabel lblISBN = new JLabel("需要借阅的书目编号");
+        JLabel lblISBN = new JLabel("需要借阅的书目编号:");
         lblISBN.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         lblISBN.setBounds(225, 453, 120, 18);
         contentPanel.add(lblISBN);

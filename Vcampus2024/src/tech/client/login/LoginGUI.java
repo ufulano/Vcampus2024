@@ -87,9 +87,10 @@ public class LoginGUI extends JFrame {
 		
 
 		setForeground(new Color(240, 240, 240));
-		setIconImage(Toolkit.getDefaultToolkit().getImage("/resources/icon/icon1/school.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginGUI.class.getResource("/resources/icon/icon1/school.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 804, 602);
+		setTitle("Vcampus·登录");
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
