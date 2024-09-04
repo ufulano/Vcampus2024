@@ -14,7 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
-
+/**
+ * 管理员总览图书的表格
+ */
 public class BookTable extends JPanel {
     private static final long serialVersionUID = 1L;
     private JTable infoTable;

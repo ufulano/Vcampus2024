@@ -94,12 +94,6 @@ public class LoginGUI extends JFrame {
 		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		
-		JPanel panelType = new JPanel();
-		panelType.setBounds(311, 331, 203, 29);
-		contentPane.add(panelType);
-		panelType.setOpaque(false);
-		panelType.setBackground(null);
 
 		JLabel lblIcon = new JLabel();
 		lblIcon.setIcon(new ImageIcon(LoginGUI.class.getResource("/resources/icon/icon1/schoolSmall.png")));
@@ -125,8 +119,7 @@ public class LoginGUI extends JFrame {
 		
         // 创建用户名文本框并设置圆角灰色边框
         txtUsername = new JTextField();
-        txtUsername.setBounds(312, 271, 202, 29);
-        txtUsername.setText("  一卡通号/唯一ID");
+        txtUsername.setBounds(313, 287, 202, 29);
         txtUsername.setBorder(new LineBorder(SystemColor.controlHighlight, 1, true)); 
         txtUsername.setColumns(10);
         contentPane.add(txtUsername);
@@ -134,7 +127,7 @@ public class LoginGUI extends JFrame {
         
         // 创建密码文本框并设置圆角灰色边框
         txtPassword = new JPasswordField();
-        txtPassword.setBounds(312, 310, 203, 23);
+        txtPassword.setBounds(312, 326, 203, 23);
         txtPassword.setToolTipText("请输入密码");
         txtPassword.setBorder(new LineBorder(SystemColor.controlHighlight, 1, true)); 
         txtPassword.setColumns(10);

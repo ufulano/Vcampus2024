@@ -56,20 +56,20 @@ public class CourseDetails extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(395, 10, 404, 444);
+		panel.setBounds(317, 10, 404, 444);
 		contentPane.add(panel);
 		panel.setOpaque(false); 
 		panel.setLayout(null);
 		
 		// head
 		JLabel lblNewLabel = new JLabel("课程详情");
-		lblNewLabel.setBounds(37, 64, 133, 43);
+		lblNewLabel.setBounds(116, 64, 133, 43);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 		
 		JButton button = new JButton("确认");
 		button.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		button.setBounds(667, 491, 132, 48);
+		button.setBounds(589, 464, 132, 48);
 		button.setBackground(Color.white);
 		contentPane.add(button);
 		
@@ -90,7 +90,7 @@ public class CourseDetails extends JDialog {
 		
 		JLabel lblAvailable = new JLabel("排课时间：");
 		lblAvailable.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblAvailable.setBounds(116, 378, 208, 45);
+		lblAvailable.setBounds(116, 386, 208, 37);
 		panel.add(lblAvailable);
 		
 		JLabel lblProfession = new JLabel("专业：");

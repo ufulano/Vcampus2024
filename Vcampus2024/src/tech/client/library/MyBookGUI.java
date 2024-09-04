@@ -46,7 +46,6 @@ public class MyBookGUI extends JDialog {
 	public MyBookGUI() {
 
 		setModal(true);
-
 		setTitle("我的借阅");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MyBookGUI.class.getResource("/resources/icon/icon2/library.png")));
 		setResizable(false);
@@ -98,7 +97,6 @@ public class MyBookGUI extends JDialog {
 
 		JButton btnReturn = new JButton("还书");
 		btnReturn.setBounds(0, 86, 170, 80);
-		btnReturn.setIcon(new ImageIcon(MyBookGUI.class.getResource("/resources/icon/还书.svg")));
 		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -111,8 +109,6 @@ public class MyBookGUI extends JDialog {
 		JButton btnRenew = new JButton("续借");
 		btnRenew.setBounds(0, 176, 170, 80);
 		btnRenew.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		btnRenew.setIcon(new ImageIcon(MyBookGUI.class.getResource("/resources/assets/icon/导出.png")));
-		btnReturn.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("/resources/assets/icon/导出.png")));
 		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		btnRenew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

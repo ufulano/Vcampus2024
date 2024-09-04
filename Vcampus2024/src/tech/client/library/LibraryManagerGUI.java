@@ -48,6 +48,8 @@ public class LibraryManagerGUI extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
 
+        contentPane.setLayout(null);
+        
         // 创建 BookTablePanel
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         // 创建 BookTablePanel
@@ -56,7 +58,7 @@ public class LibraryManagerGUI extends JFrame {
         bookPanel.setBorder(null);
         bookPanel.setBounds(214, 86, 644, 477);
         contentPane.add(bookPanel);
-        contentPane.setLayout(null);
+
 
         // Head
         JLabel lblVcampus = new JLabel("图书管理系统");
