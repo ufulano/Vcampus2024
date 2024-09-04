@@ -32,8 +32,9 @@ public class mainAssist {
 	//测试用
 	public static void requireRouting() {
 		JFrame target = null;
+		System.out.println("管理员");
 		//根据身份跳转到对应窗口
-		target = new MainStudent();
+		target = new MainManager();
 		target.setVisible(true);
 	}
 }

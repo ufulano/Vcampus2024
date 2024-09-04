@@ -1,11 +1,9 @@
 package tech.connection;
 
+import Entity.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-import Entity.*;
 
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -17,11 +15,12 @@ public class Message implements Serializable {
     private List<OrderEntity> orderlist = new ArrayList<>();    
     private List<ProductEntity> productlist = new ArrayList<>();
     private List<BookEntity> booklist = new ArrayList<>();
+    private List<LoanEntity> loanlist = new ArrayList<>();
 
 
     private BookEntity bookentity;
     private CourseEntity courseentity;
-    private EnrollmentEntity enrollment;
+    //private EnrollmentEntity enrollment;
     private OrderEntity orderentity;
     private ProductEntity productentity;
     private ShoppingcartEntity shoppingcartentity;
@@ -94,6 +93,9 @@ public class Message implements Serializable {
         return orderlist;
     }       
 
+    public List<LoanEntity> getloanlist(){
+        return loanlist;
+    }
     public MessageType gettype() {
         return Type;
     }
