@@ -104,7 +104,19 @@ public class SMManagerSide extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// 这里要添加错误提示
-
+				UserEntity newStu=new UserEntity();
+				//跳转到学生细节页面
+				StudentDetails window=new StudentDetails();
+				//按ID查询学生是否存在
+				/*List<UserEntity> userlist =menageOpreation.getStudentManage(newStu.getuID());
+				//学生不存在
+				if(userlist!=null) {
+					
+				}
+				else {
+					System.out.println("学生已存在！");
+					return;
+				}*/
 			}
 		});
 		contentPane.add(btnAdd);

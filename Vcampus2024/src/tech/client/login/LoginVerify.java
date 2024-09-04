@@ -20,12 +20,10 @@ public class LoginVerify {
 		
 		SocketClientWorker connection = new SocketClientWorker(message);
 		if(connection.Connect()){
-		    //成功连接
+		//成功连接
 		connection.SendMessage();
 		message=connection.ReceiveMessage();
 		System.out.println(message);
-		//if(message.getresponse()=="FAIL"||message.toString()=="ERROR")
-			//return null;
 		return message;
 		}else{
 			System.out.println("连接失败");//失败

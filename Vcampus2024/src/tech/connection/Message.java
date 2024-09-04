@@ -13,9 +13,11 @@ public class Message implements Serializable {
     private String data[];
     private UserEntity userentity;
     private List<UserEntity> userlist = new ArrayList<>();
-    List<ShoppingcartEntity> shoppingcart = new ArrayList<>();
-    List<ProductEntity> productEntity = new ArrayList<>();
-    List<BookEntity> Bookentiy = new ArrayList<>();
+    private List<ShoppingcartEntity> shoppingcartlist = new ArrayList<>();
+    private List<OrderEntity> orderlist = new ArrayList<>();    
+    private List<ProductEntity> productlist = new ArrayList<>();
+    private List<BookEntity> booklist = new ArrayList<>();
+
 
     private BookEntity bookentity;
     private CourseEntity courseentity;
@@ -61,7 +63,13 @@ public class Message implements Serializable {
     public UserEntity getuserentity() {
         return userentity;
     }
+    public void setorderentity(OrderEntity o) {
+        orderentity = o;
+    }
 
+    public OrderEntity getorderentity() {
+        return orderentity;
+    }
     public void setuserlist(List<UserEntity> u) {
         userlist = u;
     }
@@ -69,6 +77,22 @@ public class Message implements Serializable {
     public List<UserEntity> getuserlisty() {
         return userlist;
     }
+
+    public void setproductlist(List<ProductEntity> u) {
+        productlist = u;
+    }
+
+    public List<ProductEntity> getproductlist() {
+        return productlist;
+    }    
+
+    public void setorderlist(List<OrderEntity> o) {
+        orderlist = o;
+    }
+
+    public List<OrderEntity> getorderlist() {
+        return orderlist;
+    }       
 
     public MessageType gettype() {
         return Type;
@@ -89,24 +113,34 @@ public class Message implements Serializable {
         return str;
     }
 
-    public void copybookentity(BookEntity booke) {
-        bookentity = booke;
+    public void setbookentity(BookEntity b) {
+        bookentity = b;
+    }
+    public BookEntity getbookentity() {
+        return bookentity;
+    }
+    public List<BookEntity> getbooklist() {
+        return booklist;
     }
 
-    public List<BookEntity> getBookEntity() {
-        return Bookentiy;
+    public ProductEntity getproductentity() {
+        return productentity;
     }
 
-    public void copyproduct(ProductEntity producte) {
-        productentity = producte;
+    public void setproductentity(ProductEntity p) {
+        productentity = p;
     }
-
-    public void copyshoppingcart(List<ShoppingcartEntity> shoppingc) {
-        shoppingcart.addAll(shoppingc);
+    public void setshoppingcartentity(ShoppingcartEntity s) {
+        shoppingcartentity = s;
     }
-
-    public List<ProductEntity> getProductEntity() {
-        return productEntity;
+    public ShoppingcartEntity getshoppingcartentity() {
+        return shoppingcartentity;
+    }    
+    public void setshoppingcartlist(List<ShoppingcartEntity> s) {
+        shoppingcartlist = s;
+    }
+    public List<ShoppingcartEntity> getshoppingcartlist() {
+        return shoppingcartlist;
     }
 
 }

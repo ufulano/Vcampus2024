@@ -148,7 +148,7 @@ public class LibraryUserGUI extends JFrame {
 
 		JLabel lblLibraryIcon = new JLabel("");
 		lblLibraryIcon.setBounds(21, 10, 64, 64);
-		lblLibraryIcon.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("/resources/assets/icon/library.png")));
+		lblLibraryIcon.setIcon(new ImageIcon(LibraryUserGUI.class.getResource("")));//resources/assets/icon/library.png
 		contentPane.add(lblLibraryIcon);
 
 
