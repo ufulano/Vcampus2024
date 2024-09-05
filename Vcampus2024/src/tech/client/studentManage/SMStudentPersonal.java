@@ -23,11 +23,11 @@ import javax.swing.JButton;
 
 import java.text.SimpleDateFormat;
 
-=======
+
 /**
  * 学生查看自己的学籍信息，不可更改
  */
->>>>>>> 86aaba2af64370ae18b5240302f4dd058a62d07a
+
 public class SMStudentPersonal extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -66,27 +66,23 @@ public class SMStudentPersonal extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setBounds(345, 0, 404, 431);
-        contentPane.add(panel);
-        panel.setOpaque(false); // 设置为不透明，这样它会显示其父容器的背景
-        panel.setLayout(null);
-
-        JLabel lblNewLabel = new JLabel("学籍信息");
-        lblNewLabel.setBounds(115, 64, 133, 43);
-        panel.add(lblNewLabel);
-        lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
-
-<<<<<<< HEAD
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		panel.setBounds(383, 42, 404, 431);
 		contentPane.add(panel);
 		panel.setOpaque(false); // 设置面板不透明，允许背景显示
 		panel.setLayout(null);
+
+        JLabel lblNewLabel = new JLabel("学籍信息");
+        lblNewLabel.setBounds(115, 64, 133, 43);
+        panel.add(lblNewLabel);
+        lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+
 		
 		JLabel lblID = new JLabel("一卡通号：");
 		lblID.setFont(new Font("微软雅黑", Font.PLAIN, 20));
@@ -199,7 +195,7 @@ public class SMStudentPersonal extends JFrame {
 		contentPane.add(button_1);
 	}
 }
-=======
+
         JButton button = new JButton("返回");
         button.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         button.setBounds(617, 441, 132, 48);
@@ -207,14 +203,12 @@ public class SMStudentPersonal extends JFrame {
         contentPane.add(button);
         button.addActionListener(e -> this.dispose()); // 添加事件监听器
 
-        initializeLabelsAndTextFields(panel);
-
         JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/左喷泉背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
         contentPane.add(backgroundLabel);
     }
 
-    private void initializeLabelsAndTextFields(JPanel panel) {
+    private  void initializeLabelsAndTextFields(JPanel panel) {
         // 初始化标签和文本字段
         JLabel lblID = new JLabel("一卡通号：");
         lblID.setFont(new Font("微软雅黑", Font.PLAIN, 20));

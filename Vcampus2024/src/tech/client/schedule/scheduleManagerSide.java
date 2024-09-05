@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +21,7 @@ import tech.client.main.MainStudent;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import java.awt.Color;
+import javax.swing.JTextField;
 /**
  * 管理员的课程管理主页
  */
@@ -28,6 +30,7 @@ public class scheduleManagerSide extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -63,6 +66,11 @@ public class scheduleManagerSide extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		textField = new JTextField();
+		textField.setBounds(597, 103, 155, 28);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
 		// Head
 		JLabel lblVcampus = new JLabel("课程管理");
 		lblVcampus.setBounds(21, 10, 133, 43);
@@ -92,8 +100,14 @@ public class scheduleManagerSide extends JFrame {
 		contentPane.add(btnStudentList);
         
 		// 中央工作区
+		JButton btnNewButton = new JButton("查询");
+		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBounds(762, 99, 97, 33);
+		contentPane.add(btnNewButton);
+		
 		table = new JTable();
-        table.setBounds(211, 102, 645, 411);
+        table.setBounds(211, 148, 645, 365);
         table.setBackground(UIManager.getColor("Button.light"));
         contentPane.add(table);  
         

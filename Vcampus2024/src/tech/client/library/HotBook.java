@@ -25,7 +25,7 @@ public class HotBook extends JPanel {
 
 		JEditorPane editPicture = new JEditorPane();
 		editPicture.setEditable(false);
-		editPicture.setBounds(14, 13, 185, 260);
+		editPicture.setBounds(28, 10, 185, 260);
 		editPicture.setContentType("text/html");
 		add(editPicture);
 		editPicture.setText("<html><body><img src=\"" + img_url + "\"></body><html>");

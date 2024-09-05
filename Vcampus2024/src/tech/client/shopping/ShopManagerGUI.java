@@ -1,31 +1,22 @@
-package tech.client.library;
+package tech.client.shopping;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
-/**
- * 图书馆界面GUI，学生端和老师端
- */
-public class LibraryManagerGUI extends JFrame {
+
+
+public class ShopManagerGUI extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -36,11 +27,11 @@ public class LibraryManagerGUI extends JFrame {
     /**
      * Create the frame.
      */
-    public LibraryManagerGUI() {
-        setTitle("Vcampus·图书馆管理系统");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(LibraryManagerGUI.class.getResource("/resources/icon/icon2/library.png")));
+    public ShopManagerGUI() {
+        setTitle("Vcampus·商店管理系统");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(ShopManagerGUI.class.getResource("/resources/icon/icon2/shopping.png")));
         setResizable(false);
-        setSize(900,600);
+        setSize(1019, 758);
         setVisible(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 882, 689);
@@ -49,19 +40,15 @@ public class LibraryManagerGUI extends JFrame {
         setContentPane(contentPane);
 
         contentPane.setLayout(null);
-
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-        BookTable bookPanel = new BookTable();
-        bookPanel.setBackground(new Color(255, 255, 255));
-        bookPanel.setBorder(null);
-        bookPanel.setBounds(214, 86, 644, 477);
-        contentPane.add(bookPanel);
+        
+        // 中央工作区
+        iniCenterPanel();
 
 
         // Head
-        JLabel lblVcampus = new JLabel("图书管理系统");
-        lblVcampus.setBounds(21, 10, 220, 43);
+        JLabel lblVcampus = new JLabel("商店管理系统");
+        lblVcampus.setBounds(21, 10, 191, 43);
         lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
         lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 30));
         contentPane.add(lblVcampus);
@@ -80,35 +67,35 @@ public class LibraryManagerGUI extends JFrame {
         contentPane.add(btnBack);
 
         // 左侧按钮
-        JButton btnBooklist = new JButton("图书总览");
+        JButton btnBooklist = new JButton("商品总览");
         btnBooklist.setBounds(1, 77, 171, 84);
-        btnBooklist.setIcon(new ImageIcon(LibraryManagerGUI.class.getResource("")));
+        btnBooklist.setIcon(new ImageIcon(ShopManagerGUI.class.getResource("")));
         btnBooklist.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         btnBooklist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("图书总览按钮被点击");
+                System.out.println("商品总览按钮被点击");
                 // 添加图书总览逻辑
             }
         });
         contentPane.add(btnBooklist);
 
-        JButton btnManage = new JButton("借阅管理");
+        JButton btnManage = new JButton("订单管理");
         btnManage.setBounds(0, 171, 172, 84);
-        btnManage.setIcon(new ImageIcon(LibraryManagerGUI.class.getResource("")));
+        btnManage.setIcon(new ImageIcon(ShopManagerGUI.class.getResource("")));
         btnManage.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         btnManage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("借阅管理按钮被点击");
-                // 添加借阅管理逻辑
+                System.out.println("订单管理按钮被点击");
+                // 添加订单管理逻辑
             }
         });
         contentPane.add(btnManage);
 
-        JButton btnPush = new JButton("推送管理");
+        JButton btnPush = new JButton("首页推送管理");
         btnPush.setBounds(0, 265, 172, 84);
-        btnPush.setIcon(new ImageIcon(LibraryManagerGUI.class.getResource("")));
+        btnPush.setIcon(new ImageIcon(ShopManagerGUI.class.getResource("")));
         btnPush.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         btnPush.addActionListener(new ActionListener() {
             @Override
@@ -120,13 +107,23 @@ public class LibraryManagerGUI extends JFrame {
         contentPane.add(btnPush);
 
         // 背景
-        JLabel backgroundLabel = new JLabel(new ImageIcon(LibraryManagerGUI.class.getResource("/resources/picture/老师课表背景.png")));
+        JLabel backgroundLabel = new JLabel(new ImageIcon(ShopManagerGUI.class.getResource("/resources/picture/老师课表背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
         backgroundLabel.setLayout(null);
         contentPane.add(backgroundLabel);
 
         setVisible(true); // 确保窗口可见
         setSize(900, 600);
+    }
+    
+    public void iniCenterPanel() {
+    	// 初始化为商品总览界面
+        ProductsTable productsTable = new ProductsTable();
+        productsTable.setBackground(new Color(255, 255, 255));
+        productsTable.setBorder(null);
+        productsTable.setBounds(214, 86, 644, 477);
+        contentPane.add(productsTable);
+    	
     }
 }
 
