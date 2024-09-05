@@ -193,7 +193,7 @@ public class SMManagerSide extends JFrame {
 		btnDelete.setBackground(Color.white);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Stu=null;//初始化
+				/*Stu=null;//初始化
 				boolean windowOpen = false;
                 Window[] windows = JFrame.getWindows();//获取所有打开窗口
                 for (Window window : JFrame.getWindows()) {
@@ -235,8 +235,8 @@ public class SMManagerSide extends JFrame {
                     });
                 } else {
                     System.out.println("Manager window is already open.");
-                }
-                
+                }*/
+				menageOpreation.deleteStu(Stu);
 			}
 		});
 		contentPane.add(btnDelete);

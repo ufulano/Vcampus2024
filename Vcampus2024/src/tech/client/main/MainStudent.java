@@ -33,6 +33,7 @@ import Entity.UserEntity;
 import tech.client.studentManage.SMStudentPersonal;
 import tech.client.library.*;
 import java.awt.Window;
+import tech.client.schedule.*;
 /**
  * 用户主页，学生
  */
@@ -239,7 +240,22 @@ public class MainStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Class was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof scheduleStudentSide &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	scheduleStudentSide studentWindow = new scheduleStudentSide();
+                    studentWindow.setVisible(true);
+                } else {
+                    System.out.println("Student window is already open.");
+                }
             }
         });
 		//图书
