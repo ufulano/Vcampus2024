@@ -32,7 +32,7 @@ public class menageOpreation {
 	}
 	//删除学生
 	public static void deleteStu(UserEntity student) {
-		System.out.println("Getting students...");
+		System.out.println("Deleting students...");
 		//用于建立连接和消息
 		Message message;
 		message = new Message(Message.MessageType.STU,"DELETE STU");
@@ -53,7 +53,7 @@ public class menageOpreation {
 	}
 	//新建/更新学生
 	public static void refreshStu(UserEntity student) {
-		System.out.println("Getting students...");
+		System.out.println("Refreshing students...");
 		//用于建立连接和消息
 		Message message;
 		message = new Message(Message.MessageType.STU,"REFRESH STU");

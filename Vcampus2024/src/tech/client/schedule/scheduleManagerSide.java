@@ -3,6 +3,7 @@ package tech.client.schedule;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +16,9 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import tech.client.library.LibraryManagerGUI;
 import tech.client.library.LibraryUserGUI;
+import tech.client.main.MainManager;
 import tech.client.main.MainStudent;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
@@ -73,6 +76,25 @@ public class scheduleManagerSide extends JFrame {
 		JButton btnBack = new JButton("返回");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				 System.out.println("返回管理员主界面");
+					boolean windowOpen = false;
+	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+	                for (Window window : JFrame.getWindows()) {
+	                    if (window instanceof MainManager&&window.isVisible()) {
+	                        windowOpen = true;
+	                        scheduleManagerSide.this.dispose();
+	                        window.toFront(); // 将窗口带到最前面
+	                        break;
+	                    }
+	                }
+	                
+	                if (!windowOpen) {
+	                	MainManager window = new MainManager();
+	                	scheduleManagerSide.this.dispose();
+	                    window.setVisible(true);
+	                } else {
+	                    System.out.println("Manager main window is already open.");
+	                }
 			}
 		});
 		btnBack.setBounds(784, 10, 99, 46);

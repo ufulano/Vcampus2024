@@ -18,6 +18,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import Entity.BookEntity;
 import tech.client.main.MainStudent;
+
+import Entity.*;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.text.ParseException;
+import javax.swing.JOptionPane;
 /**
  * 管理员查看单个学生的学籍信息，根据功能不同有不同的初始化方式
  */
@@ -33,10 +39,15 @@ public class StudentDetails extends JFrame {
     private JTextField textFieldID;
     private JTextField textFieldMajor;
     private JTextField textField;
+    
+    private String status; // 用于记录操作状态
 
     public StudentDetails(String s) {
         setTitle("Vcampus·学生信息");
         setResizable(false);
+        
+        status = "新窗口";
+        
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 882, 689);
@@ -61,7 +72,20 @@ public class StudentDetails extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // 关闭当前窗口
+            	//先检查是否有字段为空
+            	boolean anyFieldEmpty = checkFieldsEmpty(textFieldName, textFieldGender, textFieldAge, 
+                        textFieldBirthplace, textFieldBirthday, 
+                        textFieldID, textFieldMajor);
+            	if(anyFieldEmpty) {
+            		 JOptionPane.showMessageDialog(null, "有字段为空！", 
+                             "Warning", JOptionPane.WARNING_MESSAGE);
+            		 return;
+            	}
+            	else {
+            		status = "确认";
+            		System.out.println("确认学生");
+            		dispose(); // 关闭当前窗口
+            	}
             }
         });
 
@@ -73,8 +97,8 @@ public class StudentDetails extends JFrame {
         panel.add(lblPassword);
         
         textField = new JTextField();
-        textField.setEnabled(false);
-        textField.setEditable(false);
+        //textField.setEnabled(false);
+        //textField.setEditable(false);
         textField.setColumns(10);
         textField.setBounds(208, 427, 189, 37);
         panel.add(textField);
@@ -173,6 +197,8 @@ public class StudentDetails extends JFrame {
         textFieldMajor.setColumns(10);
         textFieldMajor.setBounds(209, 386, 189, 37);
         panel.add(textFieldMajor);
+        
+
     }
 
     private void initializeBackground() {
@@ -180,5 +206,43 @@ public class StudentDetails extends JFrame {
         backgroundLabel.setBounds(0, 0, 900, 600);
         contentPane.add(backgroundLabel);
         backgroundLabel.setLayout(null);
+    }
+    
+    //点击确认时调用获取用户并传递
+    public UserEntity getUser() {
+        UserEntity user=new UserEntity();
+        user.setuName(textFieldName.getText());
+        user.setuGender(textFieldGender.getText());
+        user.setuAge(Integer.parseInt(textFieldAge.getText()));
+        user.setuBirthplace(textFieldBirthplace.getText());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//指定日期格式
+        try {
+        java.util.Date utilDate = dateFormat.parse(textFieldBirthday.getText());
+        user.setuBirthday(new Date(utilDate.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        user.setuID(textFieldID.getText());
+        user.setuMajor(Integer.parseInt(textFieldMajor.getText()));
+        System.out.println(user);
+    	return user;
+    }
+    
+    private static boolean checkFieldsEmpty(JTextField... fields) {
+        for (JTextField field : fields) {
+            if (field.getText().trim().isEmpty()) {
+                return true; // 找到空字段
+            }
+        }
+        return false; // 所有字段都有内容
+    }
+    
+    public String getStatus() {
+        return status; // 返回用户操作状态
+    }
+
+    // 设置状态的假设方法
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
