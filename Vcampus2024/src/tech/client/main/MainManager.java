@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -24,6 +25,9 @@ import javax.swing.border.EmptyBorder;
 
 import Entity.UserEntity;
 import tech.client.login.LoginGUI;
+import tech.client.studentManage.SMManagerSide;
+import tech.client.schedule.scheduleManagerSide;
+import tech.client.library.LibraryManagerGUI;
 
 public class MainManager extends JFrame {
 
@@ -59,6 +63,7 @@ public class MainManager extends JFrame {
 		UserEntity user = UserSession.getInstance().getUser();
 		System.out.println("Manager:");
 		System.out.println(user);
+		
 		
 		int width = 110; 
 		int height = 110; //icon大小
@@ -200,9 +205,24 @@ public class MainManager extends JFrame {
 			            @Override
 			            public void actionPerformed(ActionEvent e) {
 			                // 点击按钮时执行的代码
-			                System.out.println("Student was clicked!");
-			                //login();
-			            }
+			            	 System.out.println("Student was clicked!");
+				                boolean windowOpen = false;
+				                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+				                for (Window window : JFrame.getWindows()) {
+				                    if (window instanceof SMManagerSide&&window.isVisible()) {
+				                        windowOpen = true;
+				                        window.toFront(); // 将窗口带到最前面
+				                        break;
+				                    }
+				                }
+				                
+				                if (!windowOpen) {
+				                	SMManagerSide window = new SMManagerSide();
+				                    window.setVisible(true);
+				                } else {
+				                    System.out.println("Manager window is already open.");
+				                }
+				            }
 			        });
 				//课表
 				btnClass.addActionListener(new ActionListener() {
@@ -210,7 +230,22 @@ public class MainManager extends JFrame {
 		            public void actionPerformed(ActionEvent e) {
 		                // 点击按钮时执行的代码
 		                System.out.println("Class was clicked!");
-		                //login();
+		                boolean windowOpen = false;
+		                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+		                for (Window window : JFrame.getWindows()) {
+		                    if (window instanceof scheduleManagerSide&&window.isVisible()) {
+		                        windowOpen = true;
+		                        window.toFront(); // 将窗口带到最前面
+		                        break;
+		                    }
+		                }
+		                
+		                if (!windowOpen) {
+		                	scheduleManagerSide window = new scheduleManagerSide();
+		                    window.setVisible(true);
+		                } else {
+		                    System.out.println("Manager window is already open.");
+		                }
 		            }
 		        });
 				//图书
@@ -219,7 +254,22 @@ public class MainManager extends JFrame {
 		            public void actionPerformed(ActionEvent e) {
 		                // 点击按钮时执行的代码
 		                System.out.println("Library was clicked!");
-		                //login();
+		                boolean windowOpen = false;
+		                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+		                for (Window window : JFrame.getWindows()) {
+		                    if (window instanceof LibraryManagerGUI&&window.isVisible()) {
+		                        windowOpen = true;
+		                        window.toFront(); // 将窗口带到最前面
+		                        break;
+		                    }
+		                }
+		                
+		                if (!windowOpen) {
+		                	LibraryManagerGUI window = new LibraryManagerGUI();
+		                    window.setVisible(true);
+		                } else {
+		                    System.out.println("Manager window is already open.");
+		                }
 		            }
 		        });
 				//商城
@@ -228,7 +278,22 @@ public class MainManager extends JFrame {
 		            public void actionPerformed(ActionEvent e) {
 		                // 点击按钮时执行的代码
 		                System.out.println("Shop was clicked!");
-		                //login();
+		                /*boolean windowOpen = false;
+		                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+		                for (Window window : JFrame.getWindows()) {
+		                    if (window instanceof scheduleManagerSide&&window.isVisible()) {
+		                        windowOpen = true;
+		                        window.toFront(); // 将窗口带到最前面
+		                        break;
+		                    }
+		                }
+		                
+		                if (!windowOpen) {
+		                	scheduleManagerSide window = new scheduleManagerSide();
+		                    window.setVisible(true);
+		                } else {
+		                    System.out.println("Manager window is already open.");
+		                }*/
 		            }
 		        });
 				//登出按钮的点击事件监听

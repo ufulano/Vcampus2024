@@ -13,10 +13,11 @@ public class mainAssist {
 	public static void requireRouting(UserEntity user) {
 		JFrame target = null;
 		String userType = user.getuRole().toString();
+		System.out.print(userType);
 		//根据身份跳转到对应窗口
-		target = userType == UserType.STUDENT.toString() ? new MainStudent()
-				: userType == UserType.TEACHER.toString() ? new MainTeacher()
-				: userType == UserType.MANAGER.toString() ? new MainManager()
+		target = "学生".equals(userType) ? new MainStudent()
+				: "教师".equals(userType) ? new MainTeacher()
+				: "管理员".equals(userType) ? new MainManager()
 				: null;
 		if (target == null) {
 		       JOptionPane.showMessageDialog(
@@ -32,8 +33,10 @@ public class mainAssist {
 	//测试用
 	public static void requireRouting() {
 		JFrame target = null;
+		System.out.println("管理员");
 		//根据身份跳转到对应窗口
-		target = new MainStudent();
+		target = new MainManager();
+		//target = new MainStudent();
 		target.setVisible(true);
 	}
 }

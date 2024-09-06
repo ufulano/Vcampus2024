@@ -8,7 +8,11 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+
+import tech.client.main.MainStudent;
+import tech.client.studentManage.SMStudentPersonal;
 import Entity.BookEntity;
+
 
 /**
  * 图书馆界面GUI，学生端和老师端
@@ -85,7 +89,7 @@ public class LibraryUserGUI extends JFrame {
         HotList.setOpaque(false);
         HotList.setLayout(new GridLayout(0, 2, 10, 10)); // 设置布局为两列，间距为 10
         hotBookScrollPane = new JScrollPane(HotList);
-        hotBookScrollPane.setBounds(183, 126, 693, 427);
+        hotBookScrollPane.setBounds(182, 77, 693, 476);
         mainContentPane.add(hotBookScrollPane);
         hotBookScrollPane.setViewportView(HotList);
         HotList.setPreferredSize(new Dimension(hotBookScrollPane.getWidth() - 50, 300 * 5));
@@ -115,6 +119,7 @@ public class LibraryUserGUI extends JFrame {
         }
     }
 
+
     private void initBackground() {
         JLabel backgroundLabel = new JLabel(new ImageIcon(LibraryUserGUI.class.getResource("/resources/picture/老师课表背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
@@ -136,22 +141,54 @@ public class LibraryUserGUI extends JFrame {
 
     private void backButtonActionPerformed(ActionEvent e) {
         System.out.println("返回按钮被点击");
-        dispose(); // 关闭当前窗口
+        System.out.println("返回学生主界面");
+		boolean windowOpen = false;
+        Window[] windows = JFrame.getWindows();//获取所有打开窗口
+        for (Window window : JFrame.getWindows()) {
+            if (window instanceof MainStudent&&window.isVisible()) {
+                windowOpen = true;
+                dispose();
+                window.toFront(); // 将窗口带到最前面
+                break;
+            }
+        }
+        
+        if (!windowOpen) {
+        	MainStudent window = new MainStudent();
+        	dispose();
+            window.setVisible(true);
+        } else {
+            System.out.println("Manager main window is already open.");
+        }
     }
 
     private void myBorrowingsButtonActionPerformed(ActionEvent e) {
-        System.out.println("图书总览按钮被点击");
-        // 添加图书总览逻辑
+        System.out.println("我的借阅");
+        System.out.println("Student was clicked!");
+        boolean windowOpen = false;
+        Window[] windows = JFrame.getWindows();//获取所有打开窗口
+        for (Window window : JFrame.getWindows()) {
+            if (window instanceof MyBookGUI &&window.isVisible()) {
+                windowOpen = true;
+                window.toFront(); // 将窗口带到最前面
+                break;
+            }
+        }
+        
+        if (!windowOpen) {
+        	MyBookGUI studentWindow = new MyBookGUI();
+            studentWindow.setVisible(true);
+        } else {
+            System.out.println("Student window is already open.");
+        }
     }
 
     private void returnBooksButtonActionPerformed(ActionEvent e) {
-        System.out.println("借阅管理按钮被点击");
-        // 添加借阅管理逻辑
+        System.out.println("还书");
     }
 
     private void borrowBooksButtonActionPerformed(ActionEvent e) {
-        System.out.println("推送管理按钮被点击");
-        // 添加推送管理逻辑
+        System.out.println("借阅");
     }
 
     public static void main(String[] args) {

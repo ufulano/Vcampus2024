@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -21,6 +22,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import tech.client.main.MainManager;
+import tech.client.studentManage.SMManagerSide;
 
 /**
  * 图书馆界面GUI，学生端和老师端
@@ -76,8 +80,25 @@ public class LibraryManagerGUI extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("返回按钮被点击");
-                // 添加返回逻辑
-                dispose(); // 关闭当前窗口
+                System.out.println("返回管理员主界面");
+				boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof MainManager&&window.isVisible()) {
+                        windowOpen = true;
+                        LibraryManagerGUI.this.dispose();
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	MainManager window = new MainManager();
+                	LibraryManagerGUI.this.dispose();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Manager main window is already open.");
+                }
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));

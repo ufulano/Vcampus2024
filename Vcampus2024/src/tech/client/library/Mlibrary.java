@@ -2,6 +2,7 @@ package tech.client.library;
 
 import Entity.BookEntity; // 导入tech.connection包中的所有类
 import Entity.LoanEntity;
+
 import java.util.ArrayList; // 导入ArrayList类
 import java.util.List;
 import tech.connection.*; // 导入List接口
@@ -94,6 +95,7 @@ public class Mlibrary
         message=connection.ReceiveMessage();
         return message.getdata();
     }
+
 
     public List<LoanEntity> checkuserborrowed(String Uid)//查看用户借阅书本
     {

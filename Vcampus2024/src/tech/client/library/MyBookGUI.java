@@ -84,7 +84,7 @@ public class MyBookGUI extends JDialog {
 			public void mousePressed(MouseEvent e) {
 				if (e.getClickCount() == 1) {
 					int row = ((JTable) e.getSource()).rowAtPoint(e.getPoint());
-					txtISBN.setText(list.get(row).getISBN());
+					//txtISBN.setText(list.get(row).getISBN());
 				}
 			}
 		});

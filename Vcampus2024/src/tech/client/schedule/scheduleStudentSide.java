@@ -3,6 +3,10 @@ package tech.client.schedule;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.JButton;
 
+import tech.client.main.MainManager;
 import tech.client.main.MainStudent;
+import tech.client.studentManage.SMManagerSide;
 
 /**
  * 学生课表
@@ -79,6 +85,31 @@ public class scheduleStudentSide extends JFrame {
         btnBack.setBorderPainted(false);
         contentPane.add(btnBack);
 
+        btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("返回管理员主界面");
+				boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof MainStudent&&window.isVisible()) {
+                        windowOpen = true;
+                        scheduleStudentSide.this.dispose();
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	MainStudent window = new MainStudent();
+                	scheduleStudentSide.this.dispose();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Manager main window is already open.");
+                }
+			}
+		});
+        
+        
         table = new ScheduleTable();
         panel.add(table);
 
