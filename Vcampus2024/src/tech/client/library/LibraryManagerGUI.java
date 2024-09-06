@@ -51,6 +51,11 @@ public class LibraryManagerGUI extends JFrame {
         contentPane.setLayout(null);
 
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        
+        JButton btnRemove = new JButton("书籍挂失");
+        btnRemove.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+        btnRemove.setBounds(1, 359, 172, 84);
+        contentPane.add(btnRemove);
 
         BookTable bookPanel = new BookTable();
         bookPanel.setBackground(new Color(255, 255, 255));
@@ -106,18 +111,18 @@ public class LibraryManagerGUI extends JFrame {
         });
         contentPane.add(btnManage);
 
-        JButton btnPush = new JButton("推送管理");
-        btnPush.setBounds(0, 265, 172, 84);
-        btnPush.setIcon(new ImageIcon(LibraryManagerGUI.class.getResource("")));
-        btnPush.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-        btnPush.addActionListener(new ActionListener() {
+        JButton btnAdd = new JButton("新书入库");
+        btnAdd.setBounds(0, 265, 172, 84);
+        btnAdd.setIcon(new ImageIcon(LibraryManagerGUI.class.getResource("")));
+        btnAdd.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+        btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("推送管理按钮被点击");
                 // 添加推送管理逻辑
             }
         });
-        contentPane.add(btnPush);
+        contentPane.add(btnAdd);
 
         // 背景
         JLabel backgroundLabel = new JLabel(new ImageIcon(LibraryManagerGUI.class.getResource("/resources/picture/老师课表背景.png")));

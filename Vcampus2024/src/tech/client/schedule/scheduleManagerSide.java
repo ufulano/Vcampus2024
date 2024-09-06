@@ -81,6 +81,7 @@ public class scheduleManagerSide extends JFrame {
 		JButton btnBack = new JButton("返回");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
 		});
 		btnBack.setBounds(784, 10, 99, 46);
@@ -90,6 +91,10 @@ public class scheduleManagerSide extends JFrame {
 
 		// 左侧按钮
 		JButton btnManage = new JButton("课程总览");  // 选中查看所有课程，点击查看课程详情，【增加】【删改】跳转至课程详情页面
+		btnManage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnManage.setBounds(1, 77, 171, 84);
 		btnManage.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		contentPane.add(btnManage);

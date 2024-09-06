@@ -1,65 +1,107 @@
 package tech.client.library;
 
-import javax.swing.JPanel;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Color;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 
 public class HotBook extends JPanel {
+    private static final long serialVersionUID = 1L;
+    private JTextArea txtBookName;
+    private JTextArea txtAuthor;
+    private JTextArea txtPublisher;
+    private  JEditorPane edpPicture;
 
-	/**
-	 * 热门书籍模块
-	 * 用于图书馆主页进行展示
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Create the panel with default values.
+     */
+    public HotBook() {
+        initialize("default_image.png", "Unknown Book", "Unknown Author","Unknown Pubilsher");
+        setVisible(false); // Optionally set the panel to not visible initially
+    }
 
-	/**
-	 * Create the panel.
-	 */
-	public HotBook(String img_url, String bBookName, String bAuthor) {
-		setBackground(new Color(240, 240, 240));
-		setLayout(null);
+    /**
+     * Create the panel with specific values.
+     */
+    public HotBook(String img_url, String bookName, String author,String pubilsher) {
+        initialize(img_url, bookName, author,pubilsher);
+    }
 
-		JEditorPane editPicture = new JEditorPane();
-		editPicture.setEditable(false);
-		editPicture.setBounds(28, 10, 185, 260);
-		editPicture.setContentType("text/html");
-		add(editPicture);
-		editPicture.setText("<html><body><img src=\"" + img_url + "\"></body><html>");
+    private void initialize(String picture, String bookName, String author,String pubilsher) {
+        setBackground(new Color(240, 240, 240));
+        setBorder(new LineBorder(new Color(205, 226, 235), 3, true));
+        setSize(349, 315);
 
-		JLabel lblAuthor = new JLabel("");
-		lblAuthor.setIcon(new ImageIcon(HotBook.class.getResource("")));
-		lblAuthor.setBounds(209, 121, 32, 32);
-		add(lblAuthor);
+     // 创建和配置图片显示区域
+        edpPicture = createEditorPane(picture, 14, 10, 236, 261);
+        add(edpPicture);
 
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(HotBook.class.getResource("")));
-		label.setBounds(209, 33, 32, 32);
-		add(label);
+        // 创建和配置书名显示文本区域
+        txtBookName = createNameField(bookName, 213, 10, 120, 59);
+        add(txtBookName);
 
-		JTextArea txtTitle = new JTextArea();
-		txtTitle.setEditable(false);
-		txtTitle.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		txtTitle.setBounds(253, 63, 140, 55);
-		txtTitle.setText(bBookName);
-		
-		txtTitle.setLineWrap(true);
-		
-		add(txtTitle);
+        // 创建和配置作者显示文本区域
+        txtAuthor = createTextArea(author, 213, 79, 120, 59);
+        add(txtAuthor);
+        
+     // 创建和配置出版社显示文本区域
+        txtPublisher = createTextArea("", 213, 189, 120, 59);
+        add(txtPublisher);
+        {
+        	JTextArea textArea = new JTextArea();
+        	textArea.setText(pubilsher);
+        	textArea.setOpaque(false);
+        	textArea.setLineWrap(true);
+        	textArea.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        	textArea.setEditable(false);
+        	textArea.setBounds(181, 159, 158, 44);
+        	add(textArea);
+        }
+        {
+        	JButton btnNewButton = new JButton("立即借阅");
+        	btnNewButton.setBackground(new Color(205, 230, 233));
+        	btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        	btnNewButton.setBounds(181, 213, 147, 45);
+        	add(btnNewButton);
+        }
+    }
 
-		JTextArea txtAuthor = new JTextArea();
-		txtAuthor.setEditable(false);
-		txtAuthor.setFont(new Font("微软雅黑", Font.PLAIN,20));
-		txtAuthor.setBounds(253, 146, 140, 55);
-		txtAuthor.setText(bAuthor);
-		
-		txtAuthor.setLineWrap(true);
-		
-		add(txtAuthor);
+    
+    private JEditorPane createEditorPane(String html, int x, int y, int width, int height) {
+        setLayout(null);
+        JEditorPane editorPane = new JEditorPane();
+        editorPane.setBounds(14, 30, 157, 233);
+        editorPane.setEditable(false);
+        editorPane.setContentType("text/html");
+        editorPane.setText("<html><body>" + html + "</body></html>");
+        add(editorPane);
+        return editorPane;
+    }
 
+    private JTextArea createNameField(String text, int x, int y, int width, int height) {
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(181, 30, 147, 86);
+        textArea.setBackground(new Color(255, 255, 255));
+        textArea.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        textArea.setEditable(false);
+        textArea.setText(text);
+        textArea.setOpaque(false);
+        textArea.setLineWrap(true);
+        add(textArea);
+        return textArea;
+    }
 
-	}
+    private JTextArea createTextArea(String text, int x, int y, int width, int height) {
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(181, 105, 147, 44);
+        textArea.setFont(new Font("微软雅黑", Font.PLAIN, 12)); 
+        textArea.setEditable(false);
+        textArea.setText(text);
+        textArea.setOpaque(false);
+        textArea.setLineWrap(true);
+        add(textArea);
+        return textArea;
+    }
 }

@@ -14,7 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * 商店管理员主页
+ * 
+ */
 
 public class ShopManagerGUI extends JFrame {
 
@@ -93,19 +96,6 @@ public class ShopManagerGUI extends JFrame {
         });
         contentPane.add(btnManage);
 
-        JButton btnPush = new JButton("首页推送管理");
-        btnPush.setBounds(0, 265, 172, 84);
-        btnPush.setIcon(new ImageIcon(ShopManagerGUI.class.getResource("")));
-        btnPush.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-        btnPush.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("推送管理按钮被点击");
-                // 添加推送管理逻辑
-            }
-        });
-        contentPane.add(btnPush);
-
         // 背景
         JLabel backgroundLabel = new JLabel(new ImageIcon(ShopManagerGUI.class.getResource("/resources/picture/老师课表背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
@@ -121,7 +111,7 @@ public class ShopManagerGUI extends JFrame {
         ProductsTable productsTable = new ProductsTable();
         productsTable.setBackground(new Color(255, 255, 255));
         productsTable.setBorder(null);
-        productsTable.setBounds(214, 86, 644, 477);
+        productsTable.setBounds(208, 77, 692, 477);
         contentPane.add(productsTable);
     	
     }

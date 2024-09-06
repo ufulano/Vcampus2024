@@ -2,29 +2,31 @@ package tech.client.library;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import Entity.BookEntity;
 
 /**
  * 图书馆界面GUI，学生端和老师端
  */
 public class LibraryUserGUI extends JFrame {
-
     private static final long serialVersionUID = 1L;
     private JPanel mainContentPane;
     private JButton backButton;
     private JScrollPane hotBookScrollPane;
+    private JPanel HotList; // 定义 HotList 面板
 
-    /**
-     * Create the frame.
-     */
     public LibraryUserGUI() {
         initializeUI();
     }
 
     private void initializeUI() {
         setTitle("Vcampus·图书馆");
-        setIconImage(Toolkit.getDefaultToolkit().getImage(LibraryManagerGUI.class.getResource("/resources/icon/icon2/library.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(LibraryUserGUI.class.getResource("/resources/icon/icon2/library.png")));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 900, 600);
@@ -33,7 +35,6 @@ public class LibraryUserGUI extends JFrame {
         setContentPane(mainContentPane);
         mainContentPane.setLayout(null);
 
-        // 初始化组件
         initHeader();
         initNavigationButtons();
         initHotBookList();
@@ -77,20 +78,57 @@ public class LibraryUserGUI extends JFrame {
     }
 
     private void initHotBookList() {
-        JPanel hotBookPanel = new JPanel();
-        hotBookPanel.setBackground(new Color(255, 255, 255));
-        hotBookPanel.setLayout(new GridLayout(0, 1));
-        hotBookScrollPane = new JScrollPane(hotBookPanel);
-        hotBookScrollPane.setBounds(318, 115, 462, 403);
+        HotList = new JPanel();
+        HotList.setOpaque(false);
+        HotList.setLayout(new GridLayout(0, 2, 10, 10)); // 设置布局为两列，间距为 10
+        hotBookScrollPane = new JScrollPane(HotList);
+        hotBookScrollPane.setBounds(183, 126, 693, 427);
         mainContentPane.add(hotBookScrollPane);
-        hotBookScrollPane.setViewportView(hotBookPanel);
-        hotBookPanel.setPreferredSize(new Dimension(hotBookScrollPane.getWidth() - 50, 300 * 5));
+        hotBookScrollPane.setViewportView(HotList);
+        HotList.setPreferredSize(new Dimension(hotBookScrollPane.getWidth() - 50, 300 * 5));
+
+        // 获取图书列表
+        List<BookEntity> bookList = getBookList();
+
+        // 为方便调试使用缺省的 HotBook
+        int count = 0;
+        for (BookEntity book : bookList) {
+            HotBook bookBlock = new HotBook(
+                    book.getimg_url(),
+                    book.getbBookName(),
+                    book.getbAuthor(),
+                    book.getbPublisher()
+            );
+            bookBlock.setName(book.getbBookName());
+            HotList.add(bookBlock);
+            count++;
+        }
+
+        // 如果图书数量不足10个，添加空白的 HotBook 填充
+        while (count < 10) {
+            HotBook emptyBlock = new HotBook(); // 缺省构造，用于空白块
+            HotList.add(emptyBlock);
+            count++;
+        }
     }
 
     private void initBackground() {
-        JLabel backgroundLabel = new JLabel(new ImageIcon(LibraryManagerGUI.class.getResource("/resources/picture/老师课表背景.png")));
+        JLabel backgroundLabel = new JLabel(new ImageIcon(LibraryUserGUI.class.getResource("/resources/picture/老师课表背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
         mainContentPane.add(backgroundLabel);
+    }
+
+    private List<BookEntity> getBookList() {
+        // 创建图书列表
+        List<BookEntity> bookList = new ArrayList<>();
+        
+        // 添加图书数据到列表
+        bookList.add(new BookEntity(1, "The Great Gatsby", "F. Scott Fitzgerald", "Scribner", "9780743273565", 100, 50, "images/gatsby.jpg"));
+        bookList.add(new BookEntity(2, "1984", "George Orwell", "Secker and Warburg", "9780451524935", 150, 75, "images/1984.jpg"));
+        bookList.add(new BookEntity(3, "To Kill a Mockingbird", "Harper Lee", "J. B. Lippincott & Co.", "9780446310789", 200, 120, "images/mockingbird.jpg"));
+        
+
+        return bookList;
     }
 
     private void backButtonActionPerformed(ActionEvent e) {
@@ -113,9 +151,10 @@ public class LibraryUserGUI extends JFrame {
         // 添加推送管理逻辑
     }
 
-    /*
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(LibraryUserGUI::new);
+        SwingUtilities.invokeLater(() -> {
+            LibraryUserGUI frame = new LibraryUserGUI();
+            frame.setVisible(true);
+        });
     }
-    */
 }

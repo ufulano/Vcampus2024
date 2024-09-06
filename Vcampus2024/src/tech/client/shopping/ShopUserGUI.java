@@ -17,6 +17,7 @@ public class ShopUserGUI extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JPanel HotList; // 定义 HotList 面板
+    private JTextField textField;
 
     public ShopUserGUI() {
         initializeUI();
@@ -40,11 +41,20 @@ public class ShopUserGUI extends JFrame {
     }
 
     private void initUI() {
+        
+        JButton btnNewButton = new JButton("搜索");
+        btnNewButton.setBounds(631, 82, 93, 34);
+        contentPane.add(btnNewButton);
+        
+        textField = new JTextField();
+        textField.setBounds(323, 82, 288, 34);
+        contentPane.add(textField);
+        textField.setColumns(10);
         // 初始化 HotList 面板并设置为两列的网格布局
         HotList = new JPanel();
         HotList.setLayout(new GridLayout(0, 2, 10, 10)); // 设置布局为两列，间距为 10
         JScrollPane scrollPane = new JScrollPane(HotList);
-        scrollPane.setBounds(183, 117, 693, 436);
+        scrollPane.setBounds(183, 126, 693, 427);
         contentPane.add(scrollPane);
         scrollPane.setViewportView(HotList);
         HotList.setPreferredSize(new Dimension(scrollPane.getWidth() - 50, 300 * 5));

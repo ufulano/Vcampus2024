@@ -46,7 +46,7 @@ public class ProductsTable extends JPanel {
 
         // 初始化文本框和下拉框
         textName = new JTextField();
-        textName.setBounds(154, 21, 231, 30);
+        textName.setBounds(125, 21, 184, 30);
         textName.setColumns(10);
         add(textName);
 
@@ -57,7 +57,7 @@ public class ProductsTable extends JPanel {
 
         // 初始化查询按钮
         JButton btnSearch = new JButton("查询");
-        btnSearch.setBounds(414, 21, 80, 30);
+        btnSearch.setBounds(319, 20, 76, 30);
         btnSearch.setBackground(Color.white);
         btnSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -65,5 +65,13 @@ public class ProductsTable extends JPanel {
             }
         });
         add(btnSearch);
+        
+        JButton btnAdd = new JButton("添加商品");
+        btnAdd.setBounds(429, 21, 81, 30);
+        add(btnAdd);
+        
+        JButton btnRemove = new JButton("删除商品");
+        btnRemove.setBounds(515, 21, 81, 30);
+        add(btnRemove);
     }
 }

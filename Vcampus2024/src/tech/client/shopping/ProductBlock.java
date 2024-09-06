@@ -17,12 +17,12 @@ public class ProductBlock extends JPanel {
 
     // 缺省构造函数
     public ProductBlock() {
-    	setBorder(new LineBorder(new Color(205, 226, 235), 3, true));
         initialize("", "", "", 0);
-        setSize(351,309);
-        
+        setBorder(new LineBorder(new Color(205, 226, 235), 3, true));
+        setSize(350, 309);
+        setVisible(false); // 设置整个JPanel不可见
     }
- 
+
     // 带参数的构造函数
     public ProductBlock(String picture, String information, String type, float price) {
         initialize(picture, information, type, price);
