@@ -6,7 +6,7 @@ import tech.client.main.UserSession;
 import tech.connection.Message;
 import tech.connection.SocketClientWorker;
 
-public class menageOpreation {
+public class manageOpreation {
 	public static void menageOpreation() {}
 	public static List<UserEntity> getStudentManage(String s) {
 		//管理员登录获取学生信息
@@ -31,7 +31,7 @@ public class menageOpreation {
 			}
 	}
 	//删除学生
-	public static void deleteStu(UserEntity student) {
+	public static boolean deleteStu(UserEntity student) {
 		System.out.println("Deleting students...");
 		//用于建立连接和消息
 		Message message;
@@ -46,9 +46,10 @@ public class menageOpreation {
 		connection.SendMessage();
 		message=connection.ReceiveMessage();
 		System.out.println(message);
+		return true;
 		}else{
 			System.out.println("连接失败");//失败
-			
+			return false;
 			}
 	}
 	//新建/更新学生
