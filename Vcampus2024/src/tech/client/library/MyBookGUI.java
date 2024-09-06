@@ -38,6 +38,7 @@ public class MyBookGUI extends JDialog {
 	private JTable tblBeborrowed;
 	private DefaultTableModel model;
 	private JTextField txtISBN;
+	
 
 	/**
 	 * Create the dialog.
@@ -49,7 +50,7 @@ public class MyBookGUI extends JDialog {
 		setTitle("我的借阅");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MyBookGUI.class.getResource("/resources/icon/icon2/library.png")));
 		setResizable(false);
-		setSize(871,723);
+		setSize(941,667);
 		setBounds(100, 100, 623, 457);
 		getContentPane().setLayout(new BorderLayout());
 		
