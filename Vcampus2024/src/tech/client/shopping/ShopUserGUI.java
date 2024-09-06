@@ -43,6 +43,11 @@ public class ShopUserGUI extends JFrame {
     private void initUI() {
         
         JButton btnNewButton = new JButton("搜索");
+        btnNewButton.setContentAreaFilled(false);
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnNewButton.setBounds(631, 82, 93, 34);
         contentPane.add(btnNewButton);
         
@@ -50,6 +55,7 @@ public class ShopUserGUI extends JFrame {
         textField.setBounds(323, 82, 288, 34);
         contentPane.add(textField);
         textField.setColumns(10);
+        
         // 初始化 HotList 面板并设置为两列的网格布局
         HotList = new JPanel();
         HotList.setLayout(new GridLayout(0, 2, 10, 10)); // 设置布局为两列，间距为 10
@@ -85,19 +91,23 @@ public class ShopUserGUI extends JFrame {
 
         // 创建购物车按钮
         JButton btnCart = createIconButton("购物车", "/resources/icon/icon2/shopping.png", 40, 40);
+        btnCart.setContentAreaFilled(false);
         btnCart.setBounds(41, 481, 76, 70);
         contentPane.add(btnCart);
 
         // 创建分类按钮
         JButton btnDaily = new JButton("日用品");
+        btnDaily.setContentAreaFilled(false);
         btnDaily.setBounds(0, 261, 76, 70);
         contentPane.add(btnDaily);
 
         JButton btnStationery = new JButton("文具");
+        btnStationery.setContentAreaFilled(false);
         btnStationery.setBounds(0, 177, 76, 70);
         contentPane.add(btnStationery);
 
         JButton btnFood = new JButton("食品");
+        btnFood.setContentAreaFilled(false);
         btnFood.setBounds(0, 97, 76, 70);
         contentPane.add(btnFood);
 

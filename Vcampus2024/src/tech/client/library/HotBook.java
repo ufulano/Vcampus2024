@@ -31,6 +31,7 @@ public class HotBook extends JPanel {
 
     private void initialize(String picture, String bookName, String author,String pubilsher) {
         setBackground(new Color(240, 240, 240));
+        setOpaque(false);
         setBorder(new LineBorder(new Color(205, 226, 235), 3, true));
         setSize(349, 315);
 

@@ -60,18 +60,21 @@ public class LibraryUserGUI extends JFrame {
     private void initNavigationButtons() {
         JButton myBorrowingsButton = new JButton("我的借阅");
         myBorrowingsButton.setBounds(0, 77, 172, 84);
+        myBorrowingsButton.setContentAreaFilled(false);
         myBorrowingsButton.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         myBorrowingsButton.addActionListener(this::myBorrowingsButtonActionPerformed);
         mainContentPane.add(myBorrowingsButton);
 
         JButton returnBooksButton = new JButton("还书");
         returnBooksButton.setBounds(0, 171, 172, 84);
+        returnBooksButton.setContentAreaFilled(false);
         returnBooksButton.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         returnBooksButton.addActionListener(this::returnBooksButtonActionPerformed);
         mainContentPane.add(returnBooksButton);
 
         JButton borrowBooksButton = new JButton("借阅与检索");
         borrowBooksButton.setBounds(0, 265, 172, 84);
+        borrowBooksButton.setContentAreaFilled(false);
         borrowBooksButton.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         borrowBooksButton.addActionListener(this::borrowBooksButtonActionPerformed);
         mainContentPane.add(borrowBooksButton);
