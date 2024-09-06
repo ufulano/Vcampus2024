@@ -224,6 +224,7 @@ public class StudentDetails extends JFrame {
         }
         user.setuID(textFieldID.getText());
         user.setuMajor(Integer.parseInt(textFieldMajor.getText()));
+        user.setuPwd(textField.getText());
         System.out.println(user);
     	return user;
     }

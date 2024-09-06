@@ -7,6 +7,11 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -33,6 +38,12 @@ import javax.swing.JComboBox;
 import Entity.UserEntity;
 
 import tech.client.main.MainManager;
+
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
+import javax.swing.JOptionPane;
+
+
 /**
  * 管理员的学籍管理主页
  */
@@ -40,7 +51,7 @@ public class SMManagerSide extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private UserEntity Stu=new UserEntity();
+    private UserEntity Stu=new UserEntity();//用于接收学生细节窗口传递的学生
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
@@ -74,6 +85,19 @@ public class SMManagerSide extends JFrame {
         studentPanel.setBorder(null);
         studentPanel.setBounds(180, 70, 720, 493);
         contentPane.add(studentPanel);
+        
+        List<UserEntity> userList = List.of(
+		new UserEntity("1", "1", "和学校爆了", "2024830",
+	            "1", "1", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime())
+	            , "1", 1, "1"),
+        new UserEntity("2", "1", "和学校", "2024830",
+	            "1", "1", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime())
+	            , "1", 1, "1"),
+        new UserEntity("3", "1", "爆了", "2024830",
+	            "1", "1", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime())
+	            , "1", 1, "1")
+    );
+        studentPanel.addStulist(userList);
         
         // head
 		JLabel lblNewLabel = new JLabel("学生管理");
@@ -164,7 +188,7 @@ public class SMManagerSide extends JFrame {
 	                				//UserEntity user = UserSession.getInstance().getUser();
 	                                	 System.out.println("创建");
 	                                	 System.out.println(Stu);
-	                                	 menageOpreation.refreshStu(Stu);
+	                                	 manageOpreation.refreshStu(Stu);
 	                                }
 	                        } 
 	                    });
@@ -193,7 +217,12 @@ public class SMManagerSide extends JFrame {
 		btnDelete.setBackground(Color.white);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*Stu=null;//初始化
+				Stu=studentPanel.getStu();
+				if(Stu==null) {
+					return;
+				}
+				System.out.println("STU:"+Stu);
+				//初始化
 				boolean windowOpen = false;
                 Window[] windows = JFrame.getWindows();//获取所有打开窗口
                 for (Window window : JFrame.getWindows()) {
@@ -215,28 +244,23 @@ public class SMManagerSide extends JFrame {
                             String status = window.getStatus();
                             System.out.println("status:"+status);
                             if ("确认".equals(status)) {
-                            	Stu=window.getUser();
+                            	//Stu=window.getUser();
                             	System.out.println("STU:"+Stu);
                             } else {
                             	return;
                             }
-                           
-                            if(Stu!=null) {
-            				//UserEntity user = UserSession.getInstance().getUser();
-                            	 System.out.println("删除");
-                            	 System.out.println(Stu);
-                            	 menageOpreation.deleteStu(Stu);
+                            System.out.println("删除");
+                            if(manageOpreation.deleteStu(Stu)) {
+                                studentPanel.deleteStu();
                             }
                             else {
-                            	System.out.println("学生为空");
-                            	return;
+                            	JOptionPane.showMessageDialog(null, "删除失败", "错误", JOptionPane.ERROR_MESSAGE);
+                            }                           
                             }
-                        } 
-                    });
+                        });
                 } else {
                     System.out.println("Manager window is already open.");
-                }*/
-				menageOpreation.deleteStu(Stu);
+                }
 			}
 		});
 		contentPane.add(btnDelete);
@@ -257,21 +281,29 @@ class StudentTablePanel extends JPanel {
     private JTable infoTable;
     private JTextField textGrade;
     private DefaultTableModel model;
+    private TableRowSorter<DefaultTableModel> rowSorter; // 确保声明了 rowSorter
 
     @SuppressWarnings("serial")
-	public StudentTablePanel() {
+    public StudentTablePanel() {
         setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         setLayout(null); 
         setSize(900,600);
+
+        // 定义列名
+        String[] columnNames = {"学号", "姓名", "性别", "学号","年级", "专业", "出生日期", "出生地"};
+
         // 初始化表格模型
-        model = new DefaultTableModel() {
+        model = new DefaultTableModel(columnNames, 0) {
             @Override
-            public boolean isCellEditable(int a, int b) {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
         infoTable = new JTable(model);
+        rowSorter = new TableRowSorter<>(model);
+        infoTable.setRowSorter(rowSorter);
+
         JScrollPane jsp = new JScrollPane(infoTable);
         jsp.setBounds(42, 100, 619, 464);
 
@@ -296,10 +328,19 @@ class StudentTablePanel extends JPanel {
         btnSearch.setBackground(Color.white);
         btnSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // 查询逻辑
-            	// 查询后在表格展示
+                String grade = textGrade.getText();
+                String major = (String) comboMajor.getSelectedItem();
+
+                RowFilter<Object, Object> gradeFilter = RowFilter.regexFilter(grade, 3);
+                RowFilter<Object, Object> majorFilter = RowFilter.regexFilter(major, 4);
+                RowFilter<Object, Object> combinedFilter = RowFilter.andFilter(
+                        java.util.Arrays.asList(gradeFilter, majorFilter)
+                );
+
+                rowSorter.setRowFilter(combinedFilter);
             }
         });
+       
 
         // 添加组件到面板
         add(jsp);
@@ -312,5 +353,58 @@ class StudentTablePanel extends JPanel {
         // 设置面板大小
         this.setOpaque(false);
         this.validate();
+    }
+    
+    //向表格中添加学生
+    public void addStu(UserEntity user) {
+    	model.addRow(new Object[]{user.getuID(), user.getuName(), user.getuGender(),user.getuNumber()
+                , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace()});
+    }
+    public void addStulist(List<UserEntity> list) {
+    	for (UserEntity user : list) {
+            model.addRow(new Object[]{user.getuID(), user.getuName(), user.getuGender(),user.getuNumber()
+            , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace()});
+    	}
+    }
+
+    //删除学生
+    public void deleteStu() {
+    	//获取选中的行索引
+    	int selectedRow = infoTable.getSelectedRow();
+    	if (selectedRow >= 0) {
+    	    model.removeRow(selectedRow);
+    	} 
+    	else {
+    	    JOptionPane.showMessageDialog(null, "请先选择要删除的行", "错误", JOptionPane.ERROR_MESSAGE);
+    	}
+    }
+    
+    //获取选中的学生
+    //"学号", "姓名", "性别", "学号","年级", "专业", "出生日期", "出生地"
+    public UserEntity getStu() {
+    	UserEntity user=new UserEntity();
+    	int selectedRow = infoTable.getSelectedRow();
+    	if (selectedRow >= 0) {
+    		user.setuID(model.getValueAt(selectedRow, 0).toString());
+    		user.setuName(model.getValueAt(selectedRow, 1).toString());
+    	    user.setuGender(model.getValueAt(selectedRow, 2).toString());
+    	    user.setuNumber(model.getValueAt(selectedRow, 3).toString());
+    	    user.setuGrade(Integer.parseInt(model.getValueAt(selectedRow, 4).toString()));
+    	    user.setuMajor(Integer.parseInt(model.getValueAt(selectedRow, 5).toString()));
+    	    user.setuBirthplace(model.getValueAt(selectedRow, 7).toString());
+    	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//指定日期格式
+    	        try {
+    	        java.util.Date utilDate = dateFormat.parse(model.getValueAt(selectedRow, 6).toString());
+    	        user.setuBirthday(new Date(utilDate.getTime()));
+    	        } catch (ParseException e) {
+    	            e.printStackTrace();
+    	        }
+    	        System.out.println(user);
+    	} 
+    	else {
+    		JOptionPane.showMessageDialog(null, "未选中行", "错误", JOptionPane.ERROR_MESSAGE);
+    	    return null;
+    	}
+    	return user;
     }
 }
