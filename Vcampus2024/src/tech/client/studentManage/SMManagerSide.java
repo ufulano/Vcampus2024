@@ -67,6 +67,9 @@ public class SMManagerSide extends JFrame {
     }
 
     public SMManagerSide() {
+    	
+    	UserEntity user = UserSession.getInstance().getUser();
+    	
         // 设置窗口图标
         ImageIcon icon = new ImageIcon(SMStudentPersonal.class.getResource("/resources/icon/icon1/ic_student.png"));
         this.setIconImage(icon.getImage());
@@ -227,7 +230,7 @@ public class SMManagerSide extends JFrame {
                 }
                 
                 if (!windowOpen) {
-                	StudentDetails window = new StudentDetails("办理退学");
+                	StudentDetails window = new StudentDetails(Stu);
                     window.setVisible(true);
                     window.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override

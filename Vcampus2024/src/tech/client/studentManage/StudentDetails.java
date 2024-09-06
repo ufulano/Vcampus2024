@@ -45,7 +45,7 @@ public class StudentDetails extends JFrame {
     
     private String status; // 用于记录操作状态
 
-    public StudentDetails(String s) {
+    public StudentDetails(UserEntity user) {
         setTitle("Vcampus·学生信息");
         setResizable(false);
         
@@ -92,7 +92,7 @@ public class StudentDetails extends JFrame {
             }
         });
 
-        initializeLabelsAndTextFields(panel,s);
+        initializeLabelsAndTextFields(panel,user);
         
         JLabel lblPassword = new JLabel("密码：");
         lblPassword.setFont(new Font("微软雅黑", Font.PLAIN, 20));
@@ -100,8 +100,8 @@ public class StudentDetails extends JFrame {
         panel.add(lblPassword);
         
         textField = new JTextField();
-        //textField.setEnabled(false);
-        //textField.setEditable(false);
+        textField.setEnabled(false);
+        textField.setEditable(false);
         textField.setColumns(10);
         textField.setBounds(208, 427, 189, 37);
         panel.add(textField);
@@ -109,14 +109,11 @@ public class StudentDetails extends JFrame {
         setSize(900,600);
     }
 
-    private void initializeLabelsAndTextFields(JPanel panel,String s) {
+    private void initializeLabelsAndTextFields(JPanel panel,UserEntity user) {
         // 初始化标签和文本字段
 
-<<<<<<< Updated upstream
-        JLabel lblNewLabel = new JLabel(s);
-=======
+
         JLabel lblNewLabel = new JLabel("学生信息");
->>>>>>> Stashed changes
         lblNewLabel.setBounds(115, 64, 283, 43);
         panel.add(lblNewLabel);
         lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
@@ -157,50 +154,36 @@ public class StudentDetails extends JFrame {
         panel.add(lblBirthplace);
 
         textFieldName = new JTextField();
-        //textFieldName.setEnabled(false);
-        //textFieldName.setEditable(false);
+        textFieldName.setEnabled(false);
+        textFieldName.setEditable(false);
         textFieldName.setBounds(209, 125, 189, 37);
         panel.add(textFieldName);
         textFieldName.setColumns(10);
 
-<<<<<<< Updated upstream
-        textFieldGender = new JTextField();
-        //textFieldGender.setEnabled(false);
-        //textFieldGender.setEditable(false);
-        textFieldGender.setColumns(10);
-        textFieldGender.setBounds(209, 168, 189, 37);
-        panel.add(textFieldGender);
-=======
+
         JComboBox<String> comboBoxGender = new JComboBox<String>();
         comboBoxGender.setEnabled(false);
         comboBoxGender.setBounds(323, 168, 75, 37);
         comboBoxGender.addItem("男");
         comboBoxGender.addItem("女");
         panel.add(comboBoxGender);
->>>>>>> Stashed changes
 
         textFieldAge = new JTextField();
-        //textFieldAge.setEnabled(false);
-        //textFieldAge.setEditable(false);
+        textFieldAge.setEnabled(false);
+        textFieldAge.setEditable(false);
         textFieldAge.setColumns(10);
         textFieldAge.setBounds(209, 212, 189, 37);
         panel.add(textFieldAge);
 
         textFieldBirthplace = new JTextField();
-        //textFieldBirthplace.setEnabled(false);
-        //textFieldBirthplace.setEditable(false);
+        textFieldBirthplace.setEnabled(false);
+        textFieldBirthplace.setEditable(false);
         textFieldBirthplace.setColumns(10);
         textFieldBirthplace.setBounds(209, 296, 189, 37);
         panel.add(textFieldBirthplace);
 
         textFieldBirthday = new JTextField();
-<<<<<<< Updated upstream
-        //textFieldBirthday.setEnabled(false);
-        //textFieldBirthday.setEditable(false);
-        textFieldBirthday.setColumns(10);
-        textFieldBirthday.setBounds(209, 254, 189, 37);
-        panel.add(textFieldBirthday);
-=======
+
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  // 选择你需要的日期格式
 		textFieldBirthday.setText("");  // 格式化 Date 为 String
 		textFieldBirthday.setEnabled(false);
@@ -209,26 +192,32 @@ public class StudentDetails extends JFrame {
 		textFieldBirthday.setBounds(209, 254, 189, 37);
 		panel.add(textFieldBirthday);
 
->>>>>>> Stashed changes
 
         textFieldID = new JTextField();
-        //textFieldID.setEnabled(false);
-        //textFieldID.setEditable(false);
+        textFieldID.setEnabled(false);
+        textFieldID.setEditable(false);
         textFieldID.setColumns(10);
         textFieldID.setBounds(209, 343, 189, 37);
         panel.add(textFieldID);
 
         textFieldMajor = new JTextField();
-        //textFieldMajor.setEnabled(false);
-        //textFieldMajor.setEditable(false);
+        textFieldMajor.setEnabled(false);
+        textFieldMajor.setEditable(false);
         textFieldMajor.setColumns(10);
         textFieldMajor.setBounds(209, 386, 189, 37);
         panel.add(textFieldMajor);
         
-<<<<<<< Updated upstream
+        //填入内容
+        textFieldName.setText(user.getuName());
+        textFieldGender.setText(user.getuGender());
+        textFieldAge.setText(Integer.toString(user.getuAge()));
+        textFieldBirthplace.setText(user.getuBirthplace());
+        user.getuBirthday();
 
-=======
->>>>>>> Stashed changes
+        textFieldID.setText(user.getuID());
+        textFieldMajor.setText(Integer.toString(user.getuMajor()));
+        textField.setText(user.getuPwd());
+        
     }
 
     private void initializeBackground() {

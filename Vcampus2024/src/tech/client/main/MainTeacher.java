@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -23,7 +24,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Entity.UserEntity;
+import tech.client.library.LibraryUserGUI;
 import tech.client.login.LoginGUI;
+import tech.client.schedule.scheduleTeacherSide;
+import tech.client.shopping.ShopUserGUI;
 
 public class MainTeacher extends JFrame {
 
@@ -179,7 +183,22 @@ public class MainTeacher extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Class was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof scheduleTeacherSide &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	scheduleTeacherSide studentWindow = new scheduleTeacherSide();
+                    studentWindow.setVisible(true);
+                } else {
+                    System.out.println("Student window is already open.");
+                }
             }
         });
 		//图书
@@ -188,7 +207,22 @@ public class MainTeacher extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Library was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof LibraryUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	LibraryUserGUI window = new LibraryUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Library is already open.");
+                }
             }
         });
 		//商城
@@ -197,7 +231,22 @@ public class MainTeacher extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Shop was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof ShopUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	ShopUserGUI window = new ShopUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Shopping is already open.");
+                }
             }
         });
 		//登出按钮的点击事件监听

@@ -1,6 +1,10 @@
 package tech.client.shopping;
 
 import Entity.ProductEntity;
+import Entity.UserEntity;
+import tech.client.main.MainManager;
+import tech.client.main.UserSession;
+import tech.client.main.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -42,6 +46,9 @@ public class ShopUserGUI extends JFrame {
 
     private void initUI() {
         
+    	
+		UserEntity user = UserSession.getInstance().getUser();
+		
         JButton btnNewButton = new JButton("搜索");
         btnNewButton.setContentAreaFilled(false);
         btnNewButton.addActionListener(new ActionListener() {
@@ -121,6 +128,51 @@ public class ShopUserGUI extends JFrame {
         backButton.setContentAreaFilled(false);
         contentPane.add(backButton);
 
+        backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if("学生".equals(user.getuRole())) {
+					System.out.println("返回学生主界面");
+					boolean windowOpen = false;
+					Window[] windows = JFrame.getWindows();//获取所有打开窗口
+					for (Window window : JFrame.getWindows()) {
+						if (window instanceof MainStudent&&window.isVisible()) {
+							windowOpen = true;
+							dispose();
+							window.toFront(); // 将窗口带到最前面
+							break;
+						}
+					}
+                
+					if (!windowOpen) {
+						MainStudent window = new MainStudent();
+						dispose();
+						window.setVisible(true);
+					} else {
+						System.out.println("Student main window is already open.");
+					}
+				}else if("教师".equals(user.getuRole())) {
+					System.out.println("返回教师主界面");
+					boolean windowOpen = false;
+					Window[] windows = JFrame.getWindows();//获取所有打开窗口
+					for (Window window : JFrame.getWindows()) {
+						if (window instanceof MainTeacher&&window.isVisible()) {
+							windowOpen = true;
+							dispose();
+							window.toFront(); // 将窗口带到最前面
+							break;
+						}
+					}
+                
+					if (!windowOpen) {
+						MainTeacher window = new MainTeacher();
+						dispose();
+						window.setVisible(true);
+					} else {
+						System.out.println("Teacher main window is already open.");
+					}
+				}
+			}
+        });
         // 创建商店标签
         JLabel lblVcampus = new JLabel("商店", SwingConstants.CENTER);
         lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 30));

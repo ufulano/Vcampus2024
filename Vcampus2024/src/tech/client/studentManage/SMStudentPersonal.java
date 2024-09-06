@@ -1,6 +1,5 @@
 package tech.client.studentManage;
 
-<<<<<<< Updated upstream
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
@@ -14,19 +13,18 @@ import Entity.UserEntity;
 import tech.client.main.MainStudent;
 import tech.client.main.UserSession;
 
-=======
->>>>>>> Stashed changes
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-<<<<<<< Updated upstream
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 
 import java.text.SimpleDateFormat;
 
-=======
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +43,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import Entity.BookEntity;
 import tech.client.main.MainStudent;
->>>>>>> Stashed changes
+
 /**
  * 学生自己查看自己的学籍信息
  */
@@ -80,7 +78,7 @@ public class SMStudentPersonal extends JFrame {
         panel.setLayout(null);
 
 
-<<<<<<< Updated upstream
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -194,20 +192,16 @@ public class SMStudentPersonal extends JFrame {
 		backgroundLabel.setBounds(0, 0, 900, 600);
 		contentPane.add(backgroundLabel);
 		
-		JButton button = new JButton("New button");
+		/*JButton button = new JButton("New button");
 		button.setBounds(768, 549, 97, 23);
-		contentPane.add(button);
+		contentPane.add(button);*/
 		
 		JButton button_1 = new JButton("New button");
 		button_1.setBounds(790, 549, 97, 23);
 		contentPane.add(button_1);
-	}
-}
-        JButton button = new JButton("返回");
-=======
         JButton button = new JButton("确认");
         button.setBounds(613, 474, 132, 48);
->>>>>>> Stashed changes
+
         button.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         button.setBackground(Color.white);
         contentPane.add(button);
@@ -319,10 +313,6 @@ public class SMStudentPersonal extends JFrame {
         panel.add(textFieldMajor);
         
     }
-<<<<<<< Updated upstream
-}
-=======
-
     private void initializeBackground() {
         JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/左喷泉背景.png")));
         backgroundLabel.setBounds(0, 0, 900, 600);
@@ -330,4 +320,4 @@ public class SMStudentPersonal extends JFrame {
         backgroundLabel.setLayout(null);
     }
 }
->>>>>>> Stashed changes
+

@@ -35,8 +35,9 @@ public class mainAssist {
 		JFrame target = null;
 		System.out.println("管理员");
 		//根据身份跳转到对应窗口
-		target = new MainManager();
-		//target = new MainStudent();
+		//target = new MainManager();
+		//target = new MainTeacher();
+		target = new MainStudent();
 		target.setVisible(true);
 	}
 }

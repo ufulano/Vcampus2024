@@ -27,6 +27,7 @@ import Entity.UserEntity;
 import tech.client.login.LoginGUI;
 import tech.client.studentManage.SMManagerSide;
 import tech.client.schedule.scheduleManagerSide;
+import tech.client.shopping.ShopManagerGUI;
 import tech.client.library.LibraryManagerGUI;
 
 public class MainManager extends JFrame {
@@ -278,10 +279,10 @@ public class MainManager extends JFrame {
 		            public void actionPerformed(ActionEvent e) {
 		                // 点击按钮时执行的代码
 		                System.out.println("Shop was clicked!");
-		                /*boolean windowOpen = false;
+		                boolean windowOpen = false;
 		                Window[] windows = JFrame.getWindows();//获取所有打开窗口
 		                for (Window window : JFrame.getWindows()) {
-		                    if (window instanceof scheduleManagerSide&&window.isVisible()) {
+		                    if (window instanceof ShopManagerGUI &&window.isVisible()) {
 		                        windowOpen = true;
 		                        window.toFront(); // 将窗口带到最前面
 		                        break;
@@ -289,11 +290,11 @@ public class MainManager extends JFrame {
 		                }
 		                
 		                if (!windowOpen) {
-		                	scheduleManagerSide window = new scheduleManagerSide();
+		                	ShopManagerGUI window = new ShopManagerGUI();
 		                    window.setVisible(true);
 		                } else {
-		                    System.out.println("Manager window is already open.");
-		                }*/
+		                    System.out.println("Shopping is already open.");
+		                }
 		            }
 		        });
 				//登出按钮的点击事件监听

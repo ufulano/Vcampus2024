@@ -34,6 +34,7 @@ import tech.client.studentManage.SMStudentPersonal;
 import tech.client.library.*;
 import java.awt.Window;
 import tech.client.schedule.*;
+import tech.client.shopping.*;
 /**
  * 用户主页，学生
  */
@@ -288,7 +289,22 @@ public class MainStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Shop was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof ShopUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	ShopUserGUI window = new ShopUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Shopping is already open.");
+                }
             }
         });
 		//登出按钮的点击事件监听
