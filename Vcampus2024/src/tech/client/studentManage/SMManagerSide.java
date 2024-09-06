@@ -133,19 +133,12 @@ public class SMManagerSide extends JFrame {
 		btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		btnBack.setContentAreaFilled(false);
 		contentPane.add(btnBack);
-		
-        // 左侧功能栏
-        JButton btnReMajor = new JButton("转专业");
-        btnReMajor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnReMajor.setBounds(0, 356, 170, 80);
-        btnReMajor.setBackground(Color.white);
-        contentPane.add(btnReMajor);
         
-        JButton btnRePassword = new JButton("修改密码");
-        btnRePassword.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        btnRePassword.setBounds(0, 266, 170, 80);
-        btnRePassword.setBackground(Color.white);
-        contentPane.add(btnRePassword);
+        JButton btnRe = new JButton("修改信息");
+        btnRe.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnRe.setBounds(0, 266, 170, 80);
+        btnRe.setBackground(Color.white);
+        contentPane.add(btnRe);
 
         
 		JButton btnAdd = new JButton("办理入学");
