@@ -89,7 +89,7 @@ public class LibraryUserGUI extends JFrame {
         HotList.setOpaque(false);
         HotList.setLayout(new GridLayout(0, 2, 10, 10)); // 设置布局为两列，间距为 10
         hotBookScrollPane = new JScrollPane(HotList);
-        hotBookScrollPane.setBounds(183, 126, 693, 427);
+        hotBookScrollPane.setBounds(182, 77, 693, 476);
         mainContentPane.add(hotBookScrollPane);
         hotBookScrollPane.setViewportView(HotList);
         HotList.setPreferredSize(new Dimension(hotBookScrollPane.getWidth() - 50, 300 * 5));

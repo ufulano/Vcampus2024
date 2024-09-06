@@ -6,8 +6,11 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -109,7 +112,11 @@ public class StudentDetails extends JFrame {
     private void initializeLabelsAndTextFields(JPanel panel,String s) {
         // 初始化标签和文本字段
 
+<<<<<<< Updated upstream
         JLabel lblNewLabel = new JLabel(s);
+=======
+        JLabel lblNewLabel = new JLabel("学生信息");
+>>>>>>> Stashed changes
         lblNewLabel.setBounds(115, 64, 283, 43);
         panel.add(lblNewLabel);
         lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
@@ -129,10 +136,10 @@ public class StudentDetails extends JFrame {
         lblGender.setBounds(116, 160, 208, 45);
         panel.add(lblGender);
 
-        JLabel lblAge = new JLabel("年龄：");
-        lblAge.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-        lblAge.setBounds(116, 204, 208, 45);
-        panel.add(lblAge);
+        JLabel lblGrade = new JLabel("年级：");
+        lblGrade.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        lblGrade.setBounds(116, 204, 208, 45);
+        panel.add(lblGrade);
 
         JLabel lblMajor = new JLabel("专业：");
         lblMajor.setFont(new Font("微软雅黑", Font.PLAIN, 20));
@@ -156,12 +163,21 @@ public class StudentDetails extends JFrame {
         panel.add(textFieldName);
         textFieldName.setColumns(10);
 
+<<<<<<< Updated upstream
         textFieldGender = new JTextField();
         //textFieldGender.setEnabled(false);
         //textFieldGender.setEditable(false);
         textFieldGender.setColumns(10);
         textFieldGender.setBounds(209, 168, 189, 37);
         panel.add(textFieldGender);
+=======
+        JComboBox<String> comboBoxGender = new JComboBox<String>();
+        comboBoxGender.setEnabled(false);
+        comboBoxGender.setBounds(323, 168, 75, 37);
+        comboBoxGender.addItem("男");
+        comboBoxGender.addItem("女");
+        panel.add(comboBoxGender);
+>>>>>>> Stashed changes
 
         textFieldAge = new JTextField();
         //textFieldAge.setEnabled(false);
@@ -178,11 +194,22 @@ public class StudentDetails extends JFrame {
         panel.add(textFieldBirthplace);
 
         textFieldBirthday = new JTextField();
+<<<<<<< Updated upstream
         //textFieldBirthday.setEnabled(false);
         //textFieldBirthday.setEditable(false);
         textFieldBirthday.setColumns(10);
         textFieldBirthday.setBounds(209, 254, 189, 37);
         panel.add(textFieldBirthday);
+=======
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  // 选择你需要的日期格式
+		textFieldBirthday.setText("");  // 格式化 Date 为 String
+		textFieldBirthday.setEnabled(false);
+		textFieldBirthday.setEditable(false);
+		textFieldBirthday.setColumns(10);
+		textFieldBirthday.setBounds(209, 254, 189, 37);
+		panel.add(textFieldBirthday);
+
+>>>>>>> Stashed changes
 
         textFieldID = new JTextField();
         //textFieldID.setEnabled(false);
@@ -198,7 +225,10 @@ public class StudentDetails extends JFrame {
         textFieldMajor.setBounds(209, 386, 189, 37);
         panel.add(textFieldMajor);
         
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     }
 
     private void initializeBackground() {

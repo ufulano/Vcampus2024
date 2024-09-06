@@ -96,17 +96,20 @@ public class ShopUserGUI extends JFrame {
         contentPane.add(btnCart);
 
         // 创建分类按钮
-        JButton btnDaily = new JButton("日用品");
+        JButton btnDaily = createIconButton("购物车", "/resources/icon/icon2/shopping.png", 40, 40);
         btnDaily.setContentAreaFilled(false);
+        btnDaily.setBorderPainted(false);
         btnDaily.setBounds(0, 261, 76, 70);
         contentPane.add(btnDaily);
 
         JButton btnStationery = new JButton("文具");
         btnStationery.setContentAreaFilled(false);
+        btnStationery.setBorderPainted(false);
         btnStationery.setBounds(0, 177, 76, 70);
         contentPane.add(btnStationery);
 
         JButton btnFood = new JButton("食品");
+        btnFood.setBorderPainted(false);
         btnFood.setContentAreaFilled(false);
         btnFood.setBounds(0, 97, 76, 70);
         contentPane.add(btnFood);
@@ -153,18 +156,19 @@ public class ShopUserGUI extends JFrame {
     }
 
     private JButton createIconButton(String text, String iconPath, int iconWidth, int iconHeight) {
-        JButton button = new JButton("");
-        button.addActionListener(new ActionListener() {
+        JButton buttonCart = new JButton("");
+        buttonCart.setBorderPainted(false);
+        buttonCart.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
         	}
         });
-        button.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        buttonCart.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         try {
             InputStream iconStream = ShopUserGUI.class.getResourceAsStream(iconPath);
             if (iconStream == null) {
                 System.err.println("Icon not found: " + iconPath);
-                return button;
+                return buttonCart;
             }
             BufferedImage iconImage = ImageIO.read(iconStream);
             BufferedImage resizedImage = new BufferedImage(iconWidth, iconHeight, BufferedImage.TYPE_INT_ARGB);
@@ -172,14 +176,16 @@ public class ShopUserGUI extends JFrame {
             g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g2d.drawImage(iconImage.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH), 0, 0, null);
             g2d.dispose();
-            button.setIcon(new ImageIcon(resizedImage));
+            buttonCart.setIcon(new ImageIcon(resizedImage));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        button.setHorizontalTextPosition(SwingConstants.CENTER);
-        button.setVerticalTextPosition(SwingConstants.CENTER);
-        return button;
+        buttonCart.setHorizontalTextPosition(SwingConstants.CENTER);
+        buttonCart.setVerticalTextPosition(SwingConstants.CENTER);
+        return buttonCart;
     }
+    
+    
 
     private void initBackground() {
         JLabel backgroundLabel = new JLabel(new ImageIcon(ShopUserGUI.class.getResource("/resources/picture/老师课表背景.png")));
