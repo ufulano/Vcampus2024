@@ -16,6 +16,7 @@ public class ProductEntity implements Serializable {
     private String pLabel; // 数据类型为varchar(500)
     private String pIntro; // 数据类型为text
     private String pAuthorIntro; // 数据类型为text
+    private String pAutor; // 数据类型为varchar(50)
 
     public ProductEntity() {
     }
@@ -105,6 +106,14 @@ public class ProductEntity implements Serializable {
         this.pAuthorIntro = pAuthorIntro;
     }
 
+    public String getpAutor() {
+        return this.pAutor;
+    }
+
+    public void setpAutor(String pAutor) {
+        this.pAutor = pAutor;
+    }
+
     @Override
     public String toString() {
         return "ProductEntity{" +
@@ -117,6 +126,7 @@ public class ProductEntity implements Serializable {
                 ", pLabel='" + pLabel + '\'' +
                 ", pIntro='" + pIntro + '\'' +
                 ", pAuthorIntro='" + pAuthorIntro + '\'' +
+                ", pAutor='" + pAutor + '\'' +
                 '}';
     }
 }

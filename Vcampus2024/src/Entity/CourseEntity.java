@@ -10,7 +10,7 @@ public class CourseEntity implements Serializable {
     private int cYear; // 数据类型为int，默认值为24
     private String cCourseName; // 数据类型为varchar(10)，非空
     private int cCredits; // 数据类型为int，默认值为2
-    private int uMajor; // 数据类型为int
+    private int cMajor; // 数据类型为int
     private int cGrade; // 数据类型为int，默认值为1
     private int cCapacity; // 数据类型为int，默认值为10
     private int cAvailable; // 数据类型为int，默认值为10
@@ -21,14 +21,14 @@ public class CourseEntity implements Serializable {
     public CourseEntity() {
     }
 
-    public CourseEntity(String cCourseID, int cYear, String cCourseName, int cCredits, int uMajor, int cGrade,
+    public CourseEntity(String cCourseID, int cYear, String cCourseName, int cCredits, int cMajor, int cGrade,
             int cCapacity,
             int cAvailable, Boolean cEnd, String uName, String uNumber) {
         this.cCourseID = cCourseID;
         this.cYear = cYear;
         this.cCourseName = cCourseName;
         this.cCredits = cCredits;
-        this.uMajor = uMajor;
+        this.cMajor = cMajor;
         this.cGrade = cGrade;
         this.cCapacity = cCapacity;
         this.cAvailable = cAvailable;
@@ -69,12 +69,12 @@ public class CourseEntity implements Serializable {
         this.cCredits = cCredits;
     }
 
-    public int getuMajor() {
-        return this.uMajor;
+    public int getcMajor() {
+        return this.cMajor;
     }
 
-    public void setuMajor(int uMajor) {
-        this.uMajor = uMajor;
+    public void setcMajor(int cMajor) {
+        this.cMajor = cMajor;
     }
 
     public int getcGrade() {
@@ -132,7 +132,7 @@ public class CourseEntity implements Serializable {
                 ", cYear=" + cYear +
                 ", cCourseName='" + cCourseName + '\'' +
                 ", cCredits=" + cCredits +
-                ", uMajor='" + uMajor + '\'' +
+                ", cMajor='" + cMajor + '\'' +
                 ", cGrade=" + cGrade +
                 ", cCapacity=" + cCapacity +
                 ", cAvailable=" + cAvailable +

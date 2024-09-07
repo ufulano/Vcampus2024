@@ -17,7 +17,7 @@ public class ShopUserGUI extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JPanel HotList; // 定义 HotList 面板
-    private JTextField textField;
+    private JTextField textQ;
 
     public ShopUserGUI() {
         initializeUI();
@@ -35,26 +35,26 @@ public class ShopUserGUI extends JFrame {
 
         initUI();
         initBackground();
-         // 加载产品到 HotList
+        // 加载产品到 HotList
 
         setVisible(true);
     }
 
     private void initUI() {
         
-        JButton btnNewButton = new JButton("搜索");
-        btnNewButton.setContentAreaFilled(false);
-        btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
+        JButton btnQ = new JButton("搜索");
+        btnQ.setContentAreaFilled(false);
+        btnQ.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
         });
-        btnNewButton.setBounds(631, 82, 93, 34);
-        contentPane.add(btnNewButton);
+        btnQ.setBounds(631, 82, 93, 34);
+        contentPane.add(btnQ);
         
-        textField = new JTextField();
-        textField.setBounds(323, 82, 288, 34);
-        contentPane.add(textField);
-        textField.setColumns(10);
+        textQ = new JTextField();
+        textQ.setBounds(323, 82, 288, 34);
+        contentPane.add(textQ);
+        textQ.setColumns(10);
         
         // 初始化 HotList 面板并设置为两列的网格布局
         HotList = new JPanel();
@@ -88,31 +88,26 @@ public class ShopUserGUI extends JFrame {
             HotList.add(emptyBlock);
             count++;
         }
+        
+        // 设置滚动条位置到最顶部
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                scrollPane.getViewport().setViewPosition(new Point(0, 0));
+            }
+        });
 
-        // 创建购物车按钮
-        JButton btnCart = createIconButton("购物车", "/resources/icon/icon2/shopping.png", 40, 40);
+        JButton btnCart = new JButton("购物车");
         btnCart.setContentAreaFilled(false);
-        btnCart.setBounds(41, 481, 76, 70);
+        btnCart.setBorderPainted(false);
+        btnCart.setBounds(10, 172, 163, 70);
         contentPane.add(btnCart);
-
-        // 创建分类按钮
-        JButton btnDaily = createIconButton("购物车", "/resources/icon/icon2/shopping.png", 40, 40);
-        btnDaily.setContentAreaFilled(false);
-        btnDaily.setBorderPainted(false);
-        btnDaily.setBounds(0, 261, 76, 70);
-        contentPane.add(btnDaily);
-
-        JButton btnStationery = new JButton("文具");
-        btnStationery.setContentAreaFilled(false);
-        btnStationery.setBorderPainted(false);
-        btnStationery.setBounds(0, 177, 76, 70);
-        contentPane.add(btnStationery);
-
-        JButton btnFood = new JButton("食品");
-        btnFood.setBorderPainted(false);
-        btnFood.setContentAreaFilled(false);
-        btnFood.setBounds(0, 97, 76, 70);
-        contentPane.add(btnFood);
+        
+        JButton btnStationery_1_1 = new JButton("历史订单");
+        btnStationery_1_1.setContentAreaFilled(false);
+        btnStationery_1_1.setBorderPainted(false);
+        btnStationery_1_1.setBounds(10, 82, 163, 70);
+        contentPane.add(btnStationery_1_1);
 
         // 创建返回按钮
         JButton backButton = new JButton("返回");
@@ -127,8 +122,7 @@ public class ShopUserGUI extends JFrame {
         lblVcampus.setBounds(0, 10, 117, 77);
         contentPane.add(lblVcampus);
     }
-
-
+    
     private void loadProducts(JPanel productPanel) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -154,38 +148,6 @@ public class ShopUserGUI extends JFrame {
             new ProductEntity(3, "Product 3", new BigDecimal("29.99"), 200, "image3.png", 4.9f, "Food", "Intro3", "AuthorIntro3")
         );
     }
-
-    private JButton createIconButton(String text, String iconPath, int iconWidth, int iconHeight) {
-        JButton buttonCart = new JButton("");
-        buttonCart.setBorderPainted(false);
-        buttonCart.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-        	}
-        });
-        buttonCart.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        try {
-            InputStream iconStream = ShopUserGUI.class.getResourceAsStream(iconPath);
-            if (iconStream == null) {
-                System.err.println("Icon not found: " + iconPath);
-                return buttonCart;
-            }
-            BufferedImage iconImage = ImageIO.read(iconStream);
-            BufferedImage resizedImage = new BufferedImage(iconWidth, iconHeight, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = resizedImage.createGraphics();
-            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g2d.drawImage(iconImage.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH), 0, 0, null);
-            g2d.dispose();
-            buttonCart.setIcon(new ImageIcon(resizedImage));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        buttonCart.setHorizontalTextPosition(SwingConstants.CENTER);
-        buttonCart.setVerticalTextPosition(SwingConstants.CENTER);
-        return buttonCart;
-    }
-    
-    
 
     private void initBackground() {
         JLabel backgroundLabel = new JLabel(new ImageIcon(ShopUserGUI.class.getResource("/resources/picture/老师课表背景.png")));

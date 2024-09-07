@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * 购物车窗口，后续还需要调整图标
  */
-public class CartPanel extends JPanel {
+public class OrderDetail extends JPanel {
     private static final long serialVersionUID = 1L;
     private JPopupMenu popupMenu;
     private List<ProductEntity> products;
@@ -27,7 +27,7 @@ public class CartPanel extends JPanel {
     private JScrollPane scrollPane;
 
     // 缺省构造函数
-    public CartPanel() {
+    public OrderDetail() {
     	setBackground(new Color(216, 238, 248));
         popupMenu = new JPopupMenu();
         products = new ArrayList<>();
@@ -54,27 +54,39 @@ public class CartPanel extends JPanel {
         productTable.getColumn("价格").setCellRenderer(new DefaultTableCellRenderer());
         productTable.getColumn("价格").setCellEditor(new DefaultCellEditor(new JTextField()));
         setLayout(null);
-        
-        JButton btnNewButton = new JButton("移除商品");// 要添加图标！
-        btnNewButton.setBounds(216, 28, 63, 32);
-        add(btnNewButton);
 
         scrollPane = new JScrollPane(productTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBounds(26, 70, 258, 369);
+        scrollPane.setBounds(26, 70, 387, 312);
         add(scrollPane);
         
-        JLabel lblNewLabel = new JLabel("购物车"); // 要添加图标！
+        JLabel lblNewLabel = new JLabel("订单详情");
         lblNewLabel.setFont(new Font("微软雅黑", Font.BOLD, 26));
-        lblNewLabel.setBounds(26, 10, 92, 55);
+        lblNewLabel.setBounds(26, 10, 162, 55);
         add(lblNewLabel);
         
-        JButton btnNewButton_1 = new JButton("结算");
-        btnNewButton_1.setBounds(192, 449, 92, 69);
+        JButton btnNewButton_1 = new JButton("确认支付");
+        btnNewButton_1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnNewButton_1.setBounds(256, 463, 157, 55);
+        btnNewButton_1.setContentAreaFilled(false);
         add(btnNewButton_1);
+        
+        JLabel lblNewLabel_1 = new JLabel("总价：<>");
+        lblNewLabel_1.setForeground(new Color(128, 64, 0));
+        lblNewLabel_1.setFont(new Font("微软雅黑", Font.BOLD, 26));
+        lblNewLabel_1.setBounds(232, 412, 178, 41);
+        add(lblNewLabel_1);
 
         initializeDefaultProducts();
     }
+    
 
+    // 使用传入的产品列表初始化products
+    public OrderDetail(List<ProductEntity> initialProducts) {
+        this(); 
+        products = new ArrayList<>(initialProducts);
+        initializeDefaultProducts(); 
+    }
+    
     private void initializeDefaultProducts() {
         List<ProductEntity> productList = getProductList();
         if (productList != null) {
@@ -134,16 +146,17 @@ public class CartPanel extends JPanel {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("购物车");
+            JFrame frame = new JFrame("确认订单");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(320,570);
+            frame.setSize(450,600);
             frame.setResizable(false); // 设置窗口大小不可调整
 
-            CartPanel productDisplayPanel = new CartPanel();
+            OrderDetail productDisplayPanel = new OrderDetail();
             frame.getContentPane().add(productDisplayPanel);
-
-            // 设置窗口居中显示
+            
+         // 设置窗口居中显示
             frame.setLocationRelativeTo(null); // 相对于屏幕居中
+
 
             frame.setVisible(true);
         });

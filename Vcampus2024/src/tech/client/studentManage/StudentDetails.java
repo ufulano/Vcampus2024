@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -38,10 +41,10 @@ public class StudentDetails extends JFrame {
     private JTextField textFieldGender;
     private JTextField textFieldAge;
     private JTextField textFieldBirthplace;
-    private JTextField textFieldBirthday;
     private JTextField textFieldID;
     private JTextField textFieldMajor;
     private JTextField textField;
+    private JSpinner birthdaySpinner;
     
     private String status; // 用于记录操作状态
 
@@ -112,11 +115,7 @@ public class StudentDetails extends JFrame {
     private void initializeLabelsAndTextFields(JPanel panel,String s) {
         // 初始化标签和文本字段
 
-<<<<<<< Updated upstream
-        JLabel lblNewLabel = new JLabel(s);
-=======
         JLabel lblNewLabel = new JLabel("学生信息");
->>>>>>> Stashed changes
         lblNewLabel.setBounds(115, 64, 283, 43);
         panel.add(lblNewLabel);
         lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
@@ -163,21 +162,19 @@ public class StudentDetails extends JFrame {
         panel.add(textFieldName);
         textFieldName.setColumns(10);
 
-<<<<<<< Updated upstream
         textFieldGender = new JTextField();
         //textFieldGender.setEnabled(false);
         //textFieldGender.setEditable(false);
         textFieldGender.setColumns(10);
         textFieldGender.setBounds(209, 168, 189, 37);
         panel.add(textFieldGender);
-=======
+
         JComboBox<String> comboBoxGender = new JComboBox<String>();
         comboBoxGender.setEnabled(false);
         comboBoxGender.setBounds(323, 168, 75, 37);
         comboBoxGender.addItem("男");
         comboBoxGender.addItem("女");
         panel.add(comboBoxGender);
->>>>>>> Stashed changes
 
         textFieldAge = new JTextField();
         //textFieldAge.setEnabled(false);
@@ -193,23 +190,16 @@ public class StudentDetails extends JFrame {
         textFieldBirthplace.setBounds(209, 296, 189, 37);
         panel.add(textFieldBirthplace);
 
-        textFieldBirthday = new JTextField();
-<<<<<<< Updated upstream
-        //textFieldBirthday.setEnabled(false);
-        //textFieldBirthday.setEditable(false);
-        textFieldBirthday.setColumns(10);
-        textFieldBirthday.setBounds(209, 254, 189, 37);
-        panel.add(textFieldBirthday);
-=======
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  // 选择你需要的日期格式
-		textFieldBirthday.setText("");  // 格式化 Date 为 String
-		textFieldBirthday.setEnabled(false);
-		textFieldBirthday.setEditable(false);
-		textFieldBirthday.setColumns(10);
-		textFieldBirthday.setBounds(209, 254, 189, 37);
-		panel.add(textFieldBirthday);
+        // 创建并设置日期选择器
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2000, Calendar.JANUARY, 1); // 设置为2000年1月1日
+        java.util.Date defaultDate = calendar.getTime();
+        SpinnerDateModel model = new SpinnerDateModel(defaultDate, null, null, Calendar.DAY_OF_MONTH);
+        birthdaySpinner = new JSpinner(model);
+        birthdaySpinner.setEditor(new JSpinner.DateEditor(birthdaySpinner, "yyyy-MM-dd"));
+        birthdaySpinner.setBounds(209, 254, 189, 37);
+        panel.add(birthdaySpinner);
 
->>>>>>> Stashed changes
 
         textFieldID = new JTextField();
         //textFieldID.setEnabled(false);
@@ -225,10 +215,6 @@ public class StudentDetails extends JFrame {
         textFieldMajor.setBounds(209, 386, 189, 37);
         panel.add(textFieldMajor);
         
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     }
 
     private void initializeBackground() {

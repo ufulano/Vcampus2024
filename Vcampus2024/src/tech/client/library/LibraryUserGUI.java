@@ -8,11 +8,9 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-
 import tech.client.main.MainStudent;
 import tech.client.studentManage.SMStudentPersonal;
 import Entity.BookEntity;
-
 
 /**
  * 图书馆界面GUI，学生端和老师端
@@ -101,7 +99,7 @@ public class LibraryUserGUI extends JFrame {
         int count = 0;
         for (BookEntity book : bookList) {
             HotBook bookBlock = new HotBook(
-                    book.getimg_url(),
+                    book.getbImg_url(),
                     book.getbBookName(),
                     book.getbAuthor(),
                     book.getbPublisher()
@@ -117,8 +115,12 @@ public class LibraryUserGUI extends JFrame {
             HotList.add(emptyBlock);
             count++;
         }
+        
+        // 设置滚动条位置到最顶部
+        SwingUtilities.invokeLater(() -> {
+            hotBookScrollPane.getViewport().setViewPosition(new Point(0, 0));
+        });
     }
-
 
     private void initBackground() {
         JLabel backgroundLabel = new JLabel(new ImageIcon(LibraryUserGUI.class.getResource("/resources/picture/老师课表背景.png")));
@@ -142,20 +144,20 @@ public class LibraryUserGUI extends JFrame {
     private void backButtonActionPerformed(ActionEvent e) {
         System.out.println("返回按钮被点击");
         System.out.println("返回学生主界面");
-		boolean windowOpen = false;
-        Window[] windows = JFrame.getWindows();//获取所有打开窗口
-        for (Window window : JFrame.getWindows()) {
-            if (window instanceof MainStudent&&window.isVisible()) {
+        boolean windowOpen = false;
+        Window[] windows = JFrame.getWindows(); // 获取所有打开窗口
+        for (Window window : windows) {
+            if (window instanceof MainStudent && window.isVisible()) {
                 windowOpen = true;
                 dispose();
                 window.toFront(); // 将窗口带到最前面
                 break;
             }
         }
-        
+
         if (!windowOpen) {
-        	MainStudent window = new MainStudent();
-        	dispose();
+            MainStudent window = new MainStudent();
+            dispose();
             window.setVisible(true);
         } else {
             System.out.println("Manager main window is already open.");
@@ -166,17 +168,17 @@ public class LibraryUserGUI extends JFrame {
         System.out.println("我的借阅");
         System.out.println("Student was clicked!");
         boolean windowOpen = false;
-        Window[] windows = JFrame.getWindows();//获取所有打开窗口
-        for (Window window : JFrame.getWindows()) {
-            if (window instanceof MyBookGUI &&window.isVisible()) {
+        Window[] windows = JFrame.getWindows(); // 获取所有打开窗口
+        for (Window window : windows) {
+            if (window instanceof MyBookGUI && window.isVisible()) {
                 windowOpen = true;
                 window.toFront(); // 将窗口带到最前面
                 break;
             }
         }
-        
+
         if (!windowOpen) {
-        	MyBookGUI studentWindow = new MyBookGUI();
+            MyBookGUI studentWindow = new MyBookGUI();
             studentWindow.setVisible(true);
         } else {
             System.out.println("Student window is already open.");

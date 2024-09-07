@@ -2,14 +2,23 @@ package Entity;
 
 import java.io.Serializable;
 
+import java.util.List;
+import java.util.Arrays;
+
 public class ScheduleEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    private List<String> availableClassrooms = Arrays.asList("A101", "A102", "A103", "A104", "A105", "A106", "A107",
+            "A108", "A109", "B101", "B102", "B103", "B104", "B105", "B106", "B107", "B108", "B109", "C101", "C102",
+            "C103", "C104", "C105", "C106", "C107", "C108", "C109", "D101", "D102", "D103", "D104", "D105", "D106",
+            "D107", "D108", "D109");
 
     private int sID; // 0bSID: int unsigned
     private String cCourseID; // A-Z sCourseID: varchar(10)
     private int sDayofWeek; // 0-6 sDayofWeek: int
     private int sTimePeriod;
     private String sClassroom; // A-Z sClassroom: varchar(10)
+    private String uNumber; // A-Z uNumber: varchar(10)
 
     public enum sDayOfWeek {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
@@ -33,6 +42,10 @@ public class ScheduleEntity implements Serializable {
     }
 
     public ScheduleEntity() {
+    }
+
+    public List<String> copyAvailableClassrooms() {
+        return List.copyOf(this.availableClassrooms);
     }
 
     public ScheduleEntity(int sID, String cCourseID, int sDayofWeek, int sTimePeriod, String sClassroom) {
@@ -83,6 +96,14 @@ public class ScheduleEntity implements Serializable {
         this.sClassroom = sClassroom;
     }
 
+    public String getuNumber() {
+        return this.uNumber;
+    }
+
+    public void setuNumber(String uNumber) {
+        this.uNumber = uNumber;
+    }
+
     @Override
     public String toString() {
         return "ScheduleEntity{" +
@@ -91,6 +112,7 @@ public class ScheduleEntity implements Serializable {
                 ", sDayofWeek=" + sDayofWeek +
                 ", sTimePeriod=" + sTimePeriod +
                 ", sClassroom='" + sClassroom + '\'' +
+                ", uNumber='" + uNumber + '\'' +
                 '}';
     }
 }

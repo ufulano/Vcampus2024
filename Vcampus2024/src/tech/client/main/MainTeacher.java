@@ -63,28 +63,34 @@ public class MainTeacher extends JFrame {
 		int height = 110; //icon大小
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainStudent.class.getResource("/resources/icon/icon1/school.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 903, 606);
-		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaption);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 903, 606);
+        contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(239, 0, 609, 569);
+		panel.setBounds(87, 10, 877, 557);
 		panel.setOpaque(false); // 设置面板不透明，允许背景显示
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		
-		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/学生主页背景.png")));
-		backgroundLabel.setBounds(0, 0, 900, 600);
-		contentPane.add(backgroundLabel);
+
+		// 学籍信息按钮点击事件处理代码
+		JButton btnStudentStatus = new JButton();
+		btnStudentStatus.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		       
+		    }
+		});
 		
 		ImageIcon originalIcon = new ImageIcon(MainStudent.class.getResource("/resources/icon/icon2/学籍.png"));
 		Image scaledImage = originalIcon.getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+		btnStudentStatus.setIcon(new ImageIcon(scaledImage));
+		btnStudentStatus.setContentAreaFilled(false);
+		btnStudentStatus.setBorderPainted(false);
+		btnStudentStatus.setBounds(0, 375, 151, 154);
 
 		
 		JButton btnClass = new JButton("");
@@ -94,7 +100,7 @@ public class MainTeacher extends JFrame {
 		btnClass.setContentAreaFilled(false);
 		btnClass.setBorderPainted(false);
 		btnClass.setBorder(null);
-		btnClass.setBounds(277, 184,151, 154);
+		btnClass.setBounds(134, 375,151, 154);
 
 		
 		JButton btnLibrary = new JButton("");
@@ -108,7 +114,7 @@ public class MainTeacher extends JFrame {
 		btnLibrary.setContentAreaFilled(false);
 		btnLibrary.setBorderPainted(false);
 		btnLibrary.setBorder(null);
-		btnLibrary.setBounds(448, 184,151, 154);
+		btnLibrary.setBounds(260, 377,151, 154);
 
 		
 		JButton btnShop = new JButton("");
@@ -122,54 +128,60 @@ public class MainTeacher extends JFrame {
 		btnShop.setContentAreaFilled(false);
 		btnShop.setBorderPainted(false);
 		btnShop.setBorder(null);
-		btnShop.setBounds(101, 184,151, 154);
+		btnShop.setBounds(408, 375,151, 154);
 		
-		
-		
+		ImageSlider imageSlider = new ImageSlider();
+        // 测试图片地址
+        String[] imageUrls = {
+            "https://example.com/image1.jpg",
+            "https://example.com/image2.jpg",
+            "https://example.com/image3.jpg"
+        };
+        imageSlider.setImageUrls(imageUrls);
+        imageSlider.setVisible(true);
+        imageSlider.setBounds(64, 56, 590, 327);
+        panel.add(imageSlider);
+        
 		JLabel lblShop = new JLabel("校园超市");
 		lblShop.setForeground(new Color(102, 0, 0));
 		lblShop.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		lblShop.setBounds(154, 312, 60, 26);
+		lblShop.setBounds(458, 503, 60, 26);
 		panel.add(lblShop);
 		
 		JLabel lblLibrary = new JLabel("图书馆");
 		lblLibrary.setForeground(new Color(102, 0, 0));
 		lblLibrary.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		lblLibrary.setBounds(506, 305, 60, 41);
+		lblLibrary.setBounds(318, 498, 60, 41);
 		panel.add(lblLibrary);
-
 		
-		JButton btnNewButton_1_4 = new JButton("New button");
-		btnNewButton_1_4.setBounds(303, 388, 113, 130);
-		panel.add(btnNewButton_1_4);
-		
-		JButton btnNewButton_1_5 = new JButton("New button");
-		btnNewButton_1_5.setBounds(476, 388, 113, 130);
+		JButton btnBank = new JButton("银行");
+		btnBank.setBounds(569, 399, 113, 130);
 
-		JLabel lblXuanke = new JLabel("课程管理");
-		lblXuanke.setForeground(new Color(102, 0, 0));
-		lblXuanke.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		lblXuanke.setBounds(325, 312, 68, 26);
-		panel.add(lblXuanke);
+		JLabel lblClass = new JLabel("我的课程");
+		lblClass.setForeground(new Color(102, 0, 0));
+		lblClass.setFont(new Font("微软雅黑", Font.BOLD, 14));
+		lblClass.setBounds(182, 503, 68, 26);
+		panel.add(lblClass);
+		
+		JLabel lblStudentStatus = new JLabel("学籍信息");
+		lblStudentStatus.setForeground(new Color(102, 0, 0));
+		lblStudentStatus.setFont(new Font("微软雅黑", Font.BOLD, 14));
+		lblStudentStatus.setLabelFor(btnStudentStatus);
+		lblStudentStatus.setBounds(49, 503, 60, 26);
+		panel.add(lblStudentStatus);
+
+		panel.add(btnStudentStatus);
 		panel.add(btnClass);
 		panel.add(btnLibrary);
 		panel.add(btnShop);
-		panel.add(btnNewButton_1_5);
+		panel.add(btnBank);
+
+		panel.add(btnStudentStatus);
+		panel.add(btnClass);
+		panel.add(btnLibrary);
+		panel.add(btnShop);
+		panel.add(btnBank);
 		
-		JButton btnOut = new JButton("登出");
-		btnOut.setFont(new Font("幼圆", Font.BOLD, 12));
-		btnOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnOut.setBounds(1049, 21, 111, 36);
-		contentPane.add(btnOut);
-		
-		LocalDate today = LocalDate.now();
-		String name=user.getuName();
-		JLabel labelWelcome = new JLabel(greeting()+"! "+name+"，今天是 "+today);
-		labelWelcome.setBounds(120, 80, 460, 50);
-		panel.add(labelWelcome);
 		
 		
 		//功能模块的点击事件监听
@@ -200,6 +212,14 @@ public class MainTeacher extends JFrame {
                 //login();
             }
         });
+		JButton btnOut = new JButton("登出");
+		btnOut.setBounds(553, 10, 101, 36);
+		panel.add(btnOut);
+		btnOut.setFont(new Font("幼圆", Font.BOLD, 12));
+		btnOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		//登出按钮的点击事件监听
 		btnOut.addActionListener(new ActionListener() {
             @Override
@@ -226,7 +246,11 @@ public class MainTeacher extends JFrame {
   
             }
         });
+
+
 	}
+	
+
 
 	
 	public static String greeting() {

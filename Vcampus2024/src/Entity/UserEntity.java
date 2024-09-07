@@ -8,11 +8,11 @@ import java.sql.Date;
 public class UserEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public enum Gender {
+    public enum uGender {
         MALE, FEMALE
     }
 
-    public enum Role {
+    public enum uRole {
         Manager, Student, Teacher
     }
 
@@ -23,8 +23,6 @@ public class UserEntity implements Serializable {
     private int uAge;
     private String uGender; // enum('男', '女') 需要根据实际枚举值来定义
     private String uRole; // enum('管理员', ...) 需要根据实际枚举值来定义
-    private int uProperty;
-    private String uPayPwd;
     private int uGrade;
     private int uMajor;
     private Date uBirthday;
@@ -35,21 +33,19 @@ public class UserEntity implements Serializable {
 
     public UserEntity(String uID, String uPwd, String uName, String uNumber,
             String uGender, String uRole,
-            int uMajor, int uGrade, Date uBirthday, String uBirthplace,
-            int uProperty, String uPayPwd) {
+            int uMajor, int uGrade, Date uBirthday, String uBirthplace) {
         this.uID = uID;
         this.uPwd = uPwd;
         this.uName = uName;
         this.uNumber = uNumber;
         this.uGender = uGender;
         this.uRole = uRole;
-        this.uPayPwd = uPayPwd;
-        this.uProperty = uProperty;
         this.uGrade = uGrade;
         this.uMajor = uMajor;
         this.uBirthplace = uBirthplace;
         this.uBirthday = uBirthday;
         updateAge();
+        
     }
 
     public void updateAge() {
@@ -113,22 +109,6 @@ public class UserEntity implements Serializable {
         this.uRole = uRole;
     }
 
-    public int getuProperty() {
-        return this.uProperty;
-    }
-
-    public void setuProperty(int uProperty) {
-        this.uProperty = uProperty;
-    }
-
-    public String getuPayPwd() {
-        return this.uPayPwd;
-    }
-
-    public void setuPayPwd(String uPayPwd) {
-        this.uPayPwd = uPayPwd;
-    }
-
     public int getuGrade() {
         return this.uGrade;
     }
@@ -171,8 +151,6 @@ public class UserEntity implements Serializable {
                 ", uAge=" + uAge +
                 ", uGender='" + uGender + '\'' +
                 ", uRole='" + uRole + '\'' +
-                ", uProperty=" + uProperty +
-                ", uPayPwd='" + uPayPwd + '\'' +
                 ", uGrade=" + uGrade +
                 ", uMajor=" + uMajor +
                 ", uBirthday=" + uBirthday +
