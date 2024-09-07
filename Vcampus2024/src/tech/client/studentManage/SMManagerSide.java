@@ -237,7 +237,10 @@ public class SMManagerSide extends JFrame {
 	                            if(manageOpreation.refreshStu(Stu)&&Stu!=null) {
 	                            	System.out.println("创建");
                                	 	System.out.println(Stu);
-                               	 	studentPanel.addStu(Stu);
+                                    JOptionPane.showMessageDialog(null, 
+                                            "入学成功", 
+                                            "提示", 
+                                            JOptionPane.INFORMATION_MESSAGE);
 	                            }
 	                            else {
 	                            	JOptionPane.showMessageDialog(null, "入学失败", "错误", JOptionPane.ERROR_MESSAGE);
@@ -372,6 +375,7 @@ class StudentTablePanel extends JPanel {
             	//与后端通信
             	List<UserEntity> list=manageOpreation.getStudentManage(s);
             	if(list!=null) {
+            	model.setRowCount(0);
             	addStulist(list);
             	}
             	else {

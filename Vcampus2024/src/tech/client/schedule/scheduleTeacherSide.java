@@ -20,6 +20,8 @@ import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import java.awt.Color;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *  老师课表，可查看选课名单
  *  UI基本设计完成
@@ -101,10 +103,31 @@ public class scheduleTeacherSide extends JFrame {
 
 		// 中间部分
 		// 用于显示信息
-		table = new JTable();
-		table.setBounds(214, 142, 645, 426);
+        // 创建表格模型
+        String[] columnNames = {"Course ID", "Year", "Course Name", "Credits", "Major", "Grade", "Capacity", "Available", "Ended", "User Name", "User Number"};
+        Object[][] data = {
+            {"C101", 2024, "Mathematics", 3, 1, 1, 30, 30, false, "Alice", "20240001"},
+            {"C102", 2024, "Physics", 4, 1, 1, 30, 28, false, "Bob", "20240002"},
+            {"C103", 2024, "Chemistry", 3, 1, 1, 30, 25, false, "Charlie", "20240003"}
+        };
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+        table.setBounds(214, 142, 645, 426);
         table.setBackground(UIManager.getColor("Button.light"));
         contentPane.add(table);
+
+        // 设置表格的列宽
+        table.getColumnModel().getColumn("Course ID").setPreferredWidth(80);
+        table.getColumnModel().getColumn("Year").setPreferredWidth(50);
+        table.getColumnModel().getColumn("Course Name").setPreferredWidth(150);
+        table.getColumnModel().getColumn("Credits").setPreferredWidth(60);
+        table.getColumnModel().getColumn("Major").setPreferredWidth(60);
+        table.getColumnModel().getColumn("Grade").setPreferredWidth(60);
+        table.getColumnModel().getColumn("Capacity").setPreferredWidth(80);
+        table.getColumnModel().getColumn("Available").setPreferredWidth(80);
+        table.getColumnModel().getColumn("Ended").setPreferredWidth(80);
+        table.getColumnModel().getColumn("User Name").setPreferredWidth(100);
+        table.getColumnModel().getColumn("User Number").setPreferredWidth(120);
 		
 		JButton btnNewButton = new JButton("查询");
 		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 12));

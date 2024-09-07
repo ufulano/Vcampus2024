@@ -354,7 +354,7 @@ public class StudentDetailsBlank extends JFrame {
         user.setuGender((String) comboBoxGender.getSelectedItem());
         user.setuGrade(Integer.parseInt(textFieldGrade.getText()));
         user.setuBirthplace(textFieldBirthplace.getText());
-       
+        user.setuPwd(textFieldPassWord.getText());
         java.util.Date selectedDate = (java.util.Date) birthdaySpinner.getValue();
         user.setuBirthday(new Date(selectedDate.getTime()));
 
