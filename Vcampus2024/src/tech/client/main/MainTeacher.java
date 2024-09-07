@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -23,12 +24,19 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Entity.UserEntity;
+import tech.client.library.LibraryUserGUI;
 import tech.client.login.LoginGUI;
+import tech.client.schedule.scheduleTeacherSide;
+import tech.client.shopping.ShopUserGUI;
 
 public class MainTeacher extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField textFieldWelcom;
+	private ImageSlider imageSlider;
+	private JTextField txtVcampus;
+	
 
 	/**
 	 * Launch the application.
@@ -59,8 +67,8 @@ public class MainTeacher extends JFrame {
 		UserEntity user = UserSession.getInstance().getUser();
 		System.out.println(user);
 		
-		int width = 110; 
-		int height = 110; //icon大小
+		int width = 90; 
+		int height = 90; //icon大小
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainStudent.class.getResource("/resources/icon/icon1/school.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,25 +80,13 @@ public class MainTeacher extends JFrame {
         contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(87, 10, 877, 557);
+		panel.setBounds(0, 0, 917, 567);
 		panel.setOpaque(false); // 设置面板不透明，允许背景显示
 		contentPane.add(panel);
 		panel.setLayout(null);
-
-		// 学籍信息按钮点击事件处理代码
-		JButton btnStudentStatus = new JButton();
-		btnStudentStatus.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		       
-		    }
-		});
 		
 		ImageIcon originalIcon = new ImageIcon(MainStudent.class.getResource("/resources/icon/icon2/学籍.png"));
-		Image scaledImage = originalIcon.getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
-		btnStudentStatus.setIcon(new ImageIcon(scaledImage));
-		btnStudentStatus.setContentAreaFilled(false);
-		btnStudentStatus.setBorderPainted(false);
-		btnStudentStatus.setBounds(0, 375, 151, 154);
+		Image scaledImage = originalIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 		
 		JButton btnClass = new JButton("");
@@ -100,7 +96,7 @@ public class MainTeacher extends JFrame {
 		btnClass.setContentAreaFilled(false);
 		btnClass.setBorderPainted(false);
 		btnClass.setBorder(null);
-		btnClass.setBounds(134, 375,151, 154);
+		btnClass.setBounds(226, 432,151, 154);
 
 		
 		JButton btnLibrary = new JButton("");
@@ -114,7 +110,7 @@ public class MainTeacher extends JFrame {
 		btnLibrary.setContentAreaFilled(false);
 		btnLibrary.setBorderPainted(false);
 		btnLibrary.setBorder(null);
-		btnLibrary.setBounds(260, 377,151, 154);
+		btnLibrary.setBounds(400, 441,132, 126);
 
 		
 		JButton btnShop = new JButton("");
@@ -128,7 +124,7 @@ public class MainTeacher extends JFrame {
 		btnShop.setContentAreaFilled(false);
 		btnShop.setBorderPainted(false);
 		btnShop.setBorder(null);
-		btnShop.setBounds(408, 375,151, 154);
+		btnShop.setBounds(572, 459,121, 108);
 		
 		ImageSlider imageSlider = new ImageSlider();
         // 测试图片地址
@@ -139,51 +135,103 @@ public class MainTeacher extends JFrame {
         };
         imageSlider.setImageUrls(imageUrls);
         imageSlider.setVisible(true);
-        imageSlider.setBounds(64, 56, 590, 327);
+        
+        JLabel lblXuanke_1 = new JLabel("我的课表");
+        lblXuanke_1.setForeground(new Color(102, 0, 0));
+        lblXuanke_1.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        lblXuanke_1.setBounds(105, 541, 68, 26);
+        panel.add(lblXuanke_1);
+        
+        ImageIcon originalIcon4 = new ImageIcon(MainStudent.class.getResource("/resources/icon/icon2/课表.png"));
+		Image scaledImage4 = originalIcon4.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        JButton btnSchedule = new JButton("");
+        btnSchedule.setIcon(new ImageIcon(scaledImage4));
+        btnSchedule.setContentAreaFilled(false);
+        btnSchedule.setBorderPainted(false);
+        btnSchedule.setBorder(null);
+        btnSchedule.setBounds(67, 432, 151, 154);
+        panel.add(btnSchedule);
+        
+        imageSlider.setBounds(163, 95, 590, 336);
         panel.add(imageSlider);
         
 		JLabel lblShop = new JLabel("校园超市");
 		lblShop.setForeground(new Color(102, 0, 0));
 		lblShop.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		lblShop.setBounds(458, 503, 60, 26);
+		lblShop.setBounds(609, 541, 60, 26);
 		panel.add(lblShop);
 		
 		JLabel lblLibrary = new JLabel("图书馆");
 		lblLibrary.setForeground(new Color(102, 0, 0));
 		lblLibrary.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		lblLibrary.setBounds(318, 498, 60, 41);
+		lblLibrary.setBounds(446, 534, 60, 41);
 		panel.add(lblLibrary);
 		
-		JButton btnBank = new JButton("银行");
-		btnBank.setBounds(569, 399, 113, 130);
+		// 创建银行按钮
+		JButton btnBank = new JButton();
+		ImageIcon originalIcon5 = new ImageIcon(MainManager.class.getResource("/resources/icon/icon2/银行.png")); // 假设银行图标的路径
+		Image scaledImage5 = originalIcon5.getImage().getScaledInstance(85, 85, Image.SCALE_SMOOTH);
+		btnBank.setIcon(new ImageIcon(scaledImage5));
+		btnBank.setContentAreaFilled(false);
+		btnBank.setBorderPainted(false);
+		btnBank.setBorder(null);
+		btnBank.setBounds(742, 450, 127, 117); // 更新按钮位置和大小以匹配其他按钮
+		panel.add(btnBank);
 
-		JLabel lblClass = new JLabel("我的课程");
-		lblClass.setForeground(new Color(102, 0, 0));
-		lblClass.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		lblClass.setBounds(182, 503, 68, 26);
-		panel.add(lblClass);
-		
-		JLabel lblStudentStatus = new JLabel("学籍信息");
-		lblStudentStatus.setForeground(new Color(102, 0, 0));
-		lblStudentStatus.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		lblStudentStatus.setLabelFor(btnStudentStatus);
-		lblStudentStatus.setBounds(49, 503, 60, 26);
-		panel.add(lblStudentStatus);
-
-		panel.add(btnStudentStatus);
+		JLabel lblXuanke = new JLabel("自主选课");
+		lblXuanke.setForeground(new Color(102, 0, 0));
+		lblXuanke.setFont(new Font("微软雅黑", Font.BOLD, 14));
+		lblXuanke.setBounds(271, 541, 68, 26);
+		panel.add(lblXuanke);
 		panel.add(btnClass);
 		panel.add(btnLibrary);
 		panel.add(btnShop);
 		panel.add(btnBank);
-
-		panel.add(btnStudentStatus);
 		panel.add(btnClass);
 		panel.add(btnLibrary);
 		panel.add(btnShop);
 		panel.add(btnBank);
 		
+		String name=user.getuName();
+		String number=user.getuNumber();
+		LocalDate today = LocalDate.now();
+		JLabel labelWelcome = new JLabel(greeting()+"! "+number+" "+name+" 今天是 "+today);
+		labelWelcome.setForeground(new Color(141, 102, 75));
+		labelWelcome.setFont(new Font("幼圆", Font.BOLD, 16));
+		labelWelcome.setBounds(332, 10, 460, 42);
+		panel.add(labelWelcome);
+		
+		JButton btnOut = new JButton("");
+		ImageIcon originalIcon6 = new ImageIcon(MainManager.class.getResource("/resources/icon/icon2/退出.png")); // 假设银行图标的路径
+		Image scaledImage6 = originalIcon6.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH);
+		btnOut.setIcon(new ImageIcon(scaledImage6));
+		btnOut.setContentAreaFilled(false);
+		btnOut.setBorderPainted(false);
+		btnOut.setBorder(null);
+		btnOut.setBounds(802, 10, 68, 50);
+		panel.add(btnOut);
+		btnOut.setFont(new Font("幼圆", Font.BOLD, 12));
+		
+		JLabel lblShop_1 = new JLabel("网上银行");
+		lblShop_1.setForeground(new Color(102, 0, 0));
+		lblShop_1.setFont(new Font("微软雅黑", Font.BOLD, 14));
+		lblShop_1.setBounds(775, 541, 60, 26);
+		panel.add(lblShop_1);
+		
+		txtVcampus = new JTextField();
+		txtVcampus.setOpaque(false);
+		txtVcampus.setFont(new Font("幼圆", Font.BOLD, 30));
+		txtVcampus.setText("虚拟校园系统");
+		txtVcampus.setBounds(55, 2, 199, 83);
+		txtVcampus.setBorder(null);
+		panel.add(txtVcampus);
+		
+		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/5功能主页背景.png")));
+		backgroundLabel.setBounds(0, 0, 900, 600);
+		contentPane.add(backgroundLabel);
 		
 		
+
 		//功能模块的点击事件监听
 		//课表
 		btnClass.addActionListener(new ActionListener() {
@@ -191,7 +239,22 @@ public class MainTeacher extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Class was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof scheduleTeacherSide &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	scheduleTeacherSide studentWindow = new scheduleTeacherSide();
+                    studentWindow.setVisible(true);
+                } else {
+                    System.out.println("Student window is already open.");
+                }
             }
         });
 		//图书
@@ -200,7 +263,22 @@ public class MainTeacher extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Library was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof LibraryUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	LibraryUserGUI window = new LibraryUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Library is already open.");
+                }
             }
         });
 		//商城
@@ -209,17 +287,24 @@ public class MainTeacher extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Shop was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof ShopUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	ShopUserGUI window = new ShopUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Shopping is already open.");
+                }
             }
         });
-		JButton btnOut = new JButton("登出");
-		btnOut.setBounds(553, 10, 101, 36);
-		panel.add(btnOut);
-		btnOut.setFont(new Font("幼圆", Font.BOLD, 12));
-		btnOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		//登出按钮的点击事件监听
 		btnOut.addActionListener(new ActionListener() {
             @Override
@@ -246,11 +331,7 @@ public class MainTeacher extends JFrame {
   
             }
         });
-
-
 	}
-	
-
 
 	
 	public static String greeting() {

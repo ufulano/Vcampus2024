@@ -33,6 +33,8 @@ public class MainManager extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private ImageSlider imageSlider;
+	private JTextField txtVcampus;
 
 	/**
 	 * Launch the application.
@@ -65,35 +67,53 @@ public class MainManager extends JFrame {
 		System.out.println(user);
 		
 		
-		int width = 110; 
-		int height = 110; //icon大小
+		int width = 90; 
+		int height = 90; //icon大小
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainStudent.class.getResource("/resources/icon/icon1/school.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 903, 606);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaption);
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(239, 0, 609, 569);
+		panel.setBounds(0, 0, 887, 600);
 		panel.setOpaque(false); // 设置面板不透明，允许背景显示
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		
-		JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/学生主页背景.png")));
-		backgroundLabel.setBounds(0, 0, 900, 600);
-		contentPane.add(backgroundLabel);
-		
 		String name=user.getuName();
 		String number=user.getuNumber();
 		LocalDate today = LocalDate.now();
-		JLabel labelWelcome = new JLabel(greeting()+"! "+number+" "+name+" 今天是 "+today);
-		labelWelcome.setBounds(120, 80, 460, 50);
+
+		ImageSlider imageSlider = new ImageSlider();
+        // 测试图片地址
+        String[] imageUrls = {
+            "https://example.com/image1.jpg",
+            "https://example.com/image2.jpg",
+            "https://example.com/image3.jpg"
+        };
+        imageSlider.setImageUrls(imageUrls);
+        imageSlider.setVisible(true);
+        imageSlider.setBounds(152, 103, 590, 327);
+        panel.add(imageSlider);
+		
+        txtVcampus = new JTextField();
+		txtVcampus.setOpaque(false);
+		txtVcampus.setFont(new Font("幼圆", Font.BOLD, 30));
+		txtVcampus.setText("虚拟校园系统");
+		txtVcampus.setBounds(55, 2, 199, 83);
+		txtVcampus.setBorder(null);
+		panel.add(txtVcampus);
+		
+        JLabel labelWelcome = new JLabel(greeting()+"! "+number+" "+name+" 今天是 "+today);
+		labelWelcome.setForeground(new Color(141, 102, 75));
+		labelWelcome.setFont(new Font("幼圆", Font.BOLD, 16));
+		labelWelcome.setBounds(332, 10, 460, 42);
 		panel.add(labelWelcome);
 		
 		// 学籍信息按钮点击事件处理代码
@@ -105,11 +125,11 @@ public class MainManager extends JFrame {
 				});
 				
 				ImageIcon originalIcon = new ImageIcon(MainStudent.class.getResource("/resources/icon/icon2/学籍.png"));
-				Image scaledImage = originalIcon.getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+				Image scaledImage = originalIcon.getImage().getScaledInstance(85,85, Image.SCALE_SMOOTH);
 				btnStudentStatus.setIcon(new ImageIcon(scaledImage));
 				btnStudentStatus.setContentAreaFilled(false);
 				btnStudentStatus.setBorderPainted(false);
-				btnStudentStatus.setBounds(104, 184, 151, 154);
+				btnStudentStatus.setBounds(89, 454, 117, 114);
 
 				
 				JButton btnClass = new JButton("");
@@ -119,7 +139,7 @@ public class MainManager extends JFrame {
 				btnClass.setContentAreaFilled(false);
 				btnClass.setBorderPainted(false);
 				btnClass.setBorder(null);
-				btnClass.setBounds(277, 184,151, 154);
+				btnClass.setBounds(297, 454,104, 114);
 
 				
 				JButton btnLibrary = new JButton("");
@@ -133,7 +153,7 @@ public class MainManager extends JFrame {
 				btnLibrary.setContentAreaFilled(false);
 				btnLibrary.setBorderPainted(false);
 				btnLibrary.setBorder(null);
-				btnLibrary.setBounds(448, 184,151, 154);
+				btnLibrary.setBounds(698, 451,117, 117);
 
 				
 				JButton btnShop = new JButton("");
@@ -147,58 +167,81 @@ public class MainManager extends JFrame {
 				btnShop.setContentAreaFilled(false);
 				btnShop.setBorderPainted(false);
 				btnShop.setBorder(null);
-				btnShop.setBounds(104, 364,151, 154);
+				btnShop.setBounds(501, 440,117, 136);
 				
 				
 				
-				JLabel lblShop = new JLabel("超市管理系统");
+				JLabel lblShop = new JLabel("商店管理");
 				lblShop.setForeground(new Color(102, 0, 0));
 				lblShop.setFont(new Font("微软雅黑", Font.BOLD, 14));
-				lblShop.setBounds(145, 492, 86, 26);
+				lblShop.setBounds(539, 542, 67, 26);
 				panel.add(lblShop);
 				
-				JLabel lblLibrary = new JLabel("图书馆管理系统");
+				JLabel lblLibrary = new JLabel("图书管理");
 				lblLibrary.setForeground(new Color(102, 0, 0));
 				lblLibrary.setFont(new Font("微软雅黑", Font.BOLD, 14));
-				lblLibrary.setBounds(476, 305, 104, 41);
+				lblLibrary.setBounds(725, 535, 67, 41);
 				panel.add(lblLibrary);
 
-				
-				JButton btnNewButton_1_4 = new JButton("New button");
-				btnNewButton_1_4.setBounds(303, 388, 113, 130);
-				panel.add(btnNewButton_1_4);
-				
-				JButton btnNewButton_1_5 = new JButton("New button");
-				btnNewButton_1_5.setBounds(476, 388, 113, 130);
-
-				JLabel lblXuanke = new JLabel("选课系统");
+				JLabel lblXuanke = new JLabel("选课管理");
 				lblXuanke.setForeground(new Color(102, 0, 0));
 				lblXuanke.setFont(new Font("微软雅黑", Font.BOLD, 14));
-				lblXuanke.setBounds(326, 312, 67, 26);
+				lblXuanke.setBounds(325, 542, 67, 26);
 				panel.add(lblXuanke);
 				
 				JLabel lblStudentStatus = new JLabel("学籍管理系统");
 				lblStudentStatus.setForeground(new Color(102, 0, 0));
 				lblStudentStatus.setFont(new Font("微软雅黑", Font.BOLD, 14));
 				lblStudentStatus.setLabelFor(btnStudentStatus);
-				lblStudentStatus.setBounds(145, 312, 86, 26);
+				lblStudentStatus.setBounds(108, 542, 86, 26);
 				panel.add(lblStudentStatus);
 
 				panel.add(btnStudentStatus);
 				panel.add(btnClass);
 				panel.add(btnLibrary);
 				panel.add(btnShop);
-				panel.add(btnNewButton_1_5);
 				
-				JButton btnOut = new JButton("登出");
+				JLabel backgroundLabel = new JLabel(new ImageIcon(MainStudent.class.getResource("/resources/picture/4功能主页背景.png")));
+				backgroundLabel.setBounds(0, 0, 900, 600);
+				contentPane.add(backgroundLabel);
+				
+				JButton btnOut = new JButton("");
+				ImageIcon originalIcon6 = new ImageIcon(MainManager.class.getResource("/resources/icon/icon2/退出.png")); // 假设银行图标的路径
+				Image scaledImage6 = originalIcon6.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH);
+				btnOut.setIcon(new ImageIcon(scaledImage6));
+				btnOut.setContentAreaFilled(false);
+				btnOut.setBorderPainted(false);
+				btnOut.setBorder(null);
+				btnOut.setBounds(802, 10, 68, 50);
+				panel.add(btnOut);
 				btnOut.setFont(new Font("幼圆", Font.BOLD, 12));
+				//登出按钮的点击事件监听
 				btnOut.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				btnOut.setBounds(1049, 21, 111, 36);
-				contentPane.add(btnOut);
-				
+				            @Override
+				            public void actionPerformed(ActionEvent e) {
+				                // 弹出确认对话框
+				                int option = JOptionPane.showConfirmDialog(
+				                        null,                           // 父组件 (null 使对话框在屏幕中央)
+				                        "确定要登出吗？",                 // 提示消息
+				                        "确认登出",                     // 对话框标题
+				                        JOptionPane.YES_NO_OPTION        // 按钮类型 (YES 和 NO)
+				                );
+
+				                // 根据用户选择执行操作
+				                if (option == JOptionPane.YES_OPTION) {
+				                    System.out.println("退出登录");
+				                    // 执行登出操作
+				                    LoginGUI loginGUI = new LoginGUI();
+				                    MainManager.this.dispose();
+				                    loginGUI.setVisible(true);
+				                } else {
+				                    System.out.println("取消操作");
+				                    // 可以在这里执行用户取消登出的操作
+				                }
+				  
+				            }
+				        });
+		        
 				//功能模块的点击事件监听
 				//学籍信息
 				btnStudentStatus.addActionListener(new ActionListener() {
@@ -296,32 +339,6 @@ public class MainManager extends JFrame {
 		                }*/
 		            }
 		        });
-				//登出按钮的点击事件监听
-				btnOut.addActionListener(new ActionListener() {
-		            @Override
-		            public void actionPerformed(ActionEvent e) {
-		                // 弹出确认对话框
-		                int option = JOptionPane.showConfirmDialog(
-		                        null,                           // 父组件 (null 使对话框在屏幕中央)
-		                        "确定要登出吗？",                 // 提示消息
-		                        "确认登出",                     // 对话框标题
-		                        JOptionPane.YES_NO_OPTION        // 按钮类型 (YES 和 NO)
-		                );
-
-		                // 根据用户选择执行操作
-		                if (option == JOptionPane.YES_OPTION) {
-		                    System.out.println("退出登录");
-		                    // 执行登出操作
-		                    LoginGUI loginGUI = new LoginGUI();
-		                    MainManager.this.dispose();
-		                    loginGUI.setVisible(true);
-		                } else {
-		                    System.out.println("取消操作");
-		                    // 可以在这里执行用户取消登出的操作
-		                }
-		  
-		            }
-		        });
 
 	}
 	
@@ -340,5 +357,7 @@ public class MainManager extends JFrame {
         return greeting;
 
 	}
+	
+	
 
 }

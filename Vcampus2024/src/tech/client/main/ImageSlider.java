@@ -12,8 +12,8 @@ public class ImageSlider extends JPanel {
     private final List<JEditorPane> imagePanes;
     private final Timer timer;
     private int currentImageIndex;
-    private final int fadeDuration = 300; // 300毫秒完成淡入淡出
-    private final int showDuration = 15000; // 显示图片15000毫秒（15秒）
+    private final int fadeDuration = 100; // 淡入淡出时间
+    private final int showDuration = 100; // 持续显示时间
     private boolean fadeIn = false; // 开始时不进行淡入
     private int alpha = 255; // 初始设置为不透明
 
