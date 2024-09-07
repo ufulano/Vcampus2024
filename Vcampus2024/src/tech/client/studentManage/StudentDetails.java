@@ -39,7 +39,9 @@ public class StudentDetails extends JFrame {
     private JPanel contentPane;
     private JTextField textFieldName;
     private JTextField textFieldGender;
-    private JTextField textFieldAge;
+
+    private JTextField textFieldBirthday;
+    private JTextField textFieldGrade;
     private JTextField textFieldBirthplace;
     private JTextField textFieldID;
     private JTextField textFieldMajor;
@@ -48,7 +50,7 @@ public class StudentDetails extends JFrame {
     
     private String status; // 用于记录操作状态
 
-    public StudentDetails(String s) {
+    public StudentDetails(UserEntity user) {
         setTitle("Vcampus·学生信息");
         setResizable(false);
         
@@ -78,41 +80,20 @@ public class StudentDetails extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//先检查是否有字段为空
-            	boolean anyFieldEmpty = checkFieldsEmpty(textFieldName, textFieldGender, textFieldAge, 
-                        textFieldBirthplace, textFieldBirthday, 
-                        textFieldID, textFieldMajor);
-            	if(anyFieldEmpty) {
-            		 JOptionPane.showMessageDialog(null, "有字段为空！", 
-                             "Warning", JOptionPane.WARNING_MESSAGE);
-            		 return;
-            	}
-            	else {
+
             		status = "确认";
             		System.out.println("确认学生");
             		dispose(); // 关闭当前窗口
-            	}
             }
         });
 
-        initializeLabelsAndTextFields(panel,s);
+        initializeLabelsAndTextFields(panel,user);
         
-        JLabel lblPassword = new JLabel("密码：");
-        lblPassword.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-        lblPassword.setBounds(115, 419, 208, 45);
-        panel.add(lblPassword);
-        
-        textField = new JTextField();
-        //textField.setEnabled(false);
-        //textField.setEditable(false);
-        textField.setColumns(10);
-        textField.setBounds(208, 427, 189, 37);
-        panel.add(textField);
         initializeBackground();
         setSize(900,600);
     }
 
-    private void initializeLabelsAndTextFields(JPanel panel,String s) {
+    private void initializeLabelsAndTextFields(JPanel panel,UserEntity user) {
         // 初始化标签和文本字段
 
         JLabel lblNewLabel = new JLabel("学生信息");
@@ -156,65 +137,68 @@ public class StudentDetails extends JFrame {
         panel.add(lblBirthplace);
 
         textFieldName = new JTextField();
-        //textFieldName.setEnabled(false);
-        //textFieldName.setEditable(false);
+        textFieldName.setEnabled(false);
+        textFieldName.setEditable(false);
         textFieldName.setBounds(209, 125, 189, 37);
         panel.add(textFieldName);
         textFieldName.setColumns(10);
 
         textFieldGender = new JTextField();
-        //textFieldGender.setEnabled(false);
-        //textFieldGender.setEditable(false);
+        textFieldGender.setEnabled(false);
+        textFieldGender.setEditable(false);
         textFieldGender.setColumns(10);
         textFieldGender.setBounds(209, 168, 189, 37);
         panel.add(textFieldGender);
 
-        JComboBox<String> comboBoxGender = new JComboBox<String>();
-        comboBoxGender.setEnabled(false);
-        comboBoxGender.setBounds(323, 168, 75, 37);
-        comboBoxGender.addItem("男");
-        comboBoxGender.addItem("女");
-        panel.add(comboBoxGender);
 
-        textFieldAge = new JTextField();
-        //textFieldAge.setEnabled(false);
-        //textFieldAge.setEditable(false);
-        textFieldAge.setColumns(10);
-        textFieldAge.setBounds(209, 212, 189, 37);
-        panel.add(textFieldAge);
+        textFieldGrade = new JTextField();
+        textFieldGrade.setEnabled(false);
+        textFieldGrade.setEditable(false);
+        textFieldGrade.setColumns(10);
+        textFieldGrade.setBounds(209, 212, 189, 37);
+        panel.add(textFieldGrade);
 
         textFieldBirthplace = new JTextField();
-        //textFieldBirthplace.setEnabled(false);
-        //textFieldBirthplace.setEditable(false);
+        textFieldBirthplace.setEnabled(false);
+        textFieldBirthplace.setEditable(false);
         textFieldBirthplace.setColumns(10);
         textFieldBirthplace.setBounds(209, 296, 189, 37);
         panel.add(textFieldBirthplace);
 
-        // 创建并设置日期选择器
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2000, Calendar.JANUARY, 1); // 设置为2000年1月1日
-        java.util.Date defaultDate = calendar.getTime();
-        SpinnerDateModel model = new SpinnerDateModel(defaultDate, null, null, Calendar.DAY_OF_MONTH);
-        birthdaySpinner = new JSpinner(model);
-        birthdaySpinner.setEditor(new JSpinner.DateEditor(birthdaySpinner, "yyyy-MM-dd"));
-        birthdaySpinner.setBounds(209, 254, 189, 37);
-        panel.add(birthdaySpinner);
+        // 日期
+        textFieldBirthday = new JTextField();
+        textFieldBirthday.setEnabled(false);
+        textFieldBirthday.setEditable(false);
+        textFieldBirthday.setColumns(10);
+        textFieldBirthday.setBounds(209, 254, 189, 37);
+        panel.add(textFieldBirthday);
+
 
 
         textFieldID = new JTextField();
-        //textFieldID.setEnabled(false);
-        //textFieldID.setEditable(false);
+        textFieldID.setEnabled(false);
+        textFieldID.setEditable(false);
         textFieldID.setColumns(10);
         textFieldID.setBounds(209, 343, 189, 37);
         panel.add(textFieldID);
 
         textFieldMajor = new JTextField();
-        //textFieldMajor.setEnabled(false);
-        //textFieldMajor.setEditable(false);
+        textFieldMajor.setEnabled(false);
+        textFieldMajor.setEditable(false);
         textFieldMajor.setColumns(10);
         textFieldMajor.setBounds(209, 386, 189, 37);
         panel.add(textFieldMajor);
         
+
+        textFieldName.setText(user.getuName());
+        textFieldGender.setText(user.getuGender());
+        textFieldGrade.setText(Integer.toString(user.getuGrade()));
+        textFieldBirthplace.setText(user.getuBirthplace());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        textFieldBirthday.setText(dateFormat.format(user.getuBirthday()));
+        textFieldID.setText(user.getuID());
+        textFieldMajor.setText(Integer.toString(user.getuMajor()));
+
     }
 
     private void initializeBackground() {
@@ -224,35 +208,7 @@ public class StudentDetails extends JFrame {
         backgroundLabel.setLayout(null);
     }
     
-    //点击确认时调用获取用户并传递
-    public UserEntity getUser() {
-        UserEntity user=new UserEntity();
-        user.setuName(textFieldName.getText());
-        user.setuGender(textFieldGender.getText());
-        user.setuAge(Integer.parseInt(textFieldAge.getText()));
-        user.setuBirthplace(textFieldBirthplace.getText());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//指定日期格式
-        try {
-        java.util.Date utilDate = dateFormat.parse(textFieldBirthday.getText());
-        user.setuBirthday(new Date(utilDate.getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        user.setuID(textFieldID.getText());
-        user.setuMajor(Integer.parseInt(textFieldMajor.getText()));
-        user.setuPwd(textField.getText());
-        System.out.println(user);
-    	return user;
-    }
-    
-    private static boolean checkFieldsEmpty(JTextField... fields) {
-        for (JTextField field : fields) {
-            if (field.getText().trim().isEmpty()) {
-                return true; // 找到空字段
-            }
-        }
-        return false; // 所有字段都有内容
-    }
+
     
     public String getStatus() {
         return status; // 返回用户操作状态

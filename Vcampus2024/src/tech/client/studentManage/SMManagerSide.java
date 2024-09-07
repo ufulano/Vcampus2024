@@ -36,13 +36,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import Entity.UserEntity;
-
 import tech.client.main.MainManager;
 
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 import javax.swing.JOptionPane;
-
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableColumn;
 
 /**
  * 管理员的学籍管理主页
@@ -67,6 +67,9 @@ public class SMManagerSide extends JFrame {
     }
 
     public SMManagerSide() {
+    	
+    	UserEntity user = UserSession.getInstance().getUser();
+    	
         // 设置窗口图标
         ImageIcon icon = new ImageIcon(SMStudentPersonal.class.getResource("/resources/icon/icon1/ic_student.png"));
         this.setIconImage(icon.getImage());
@@ -86,18 +89,20 @@ public class SMManagerSide extends JFrame {
         studentPanel.setBounds(180, 70, 720, 493);
         contentPane.add(studentPanel);
         
+        /*测试
         List<UserEntity> userList = List.of(
 		new UserEntity("1", "1", "和学校爆了", "2024830",
 	            "1", "1", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime())
-	            , "1", 1, "1"),
+	            , "1"),
         new UserEntity("2", "1", "和学校", "2024830",
 	            "1", "1", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime())
-	            , "1", 1, "1"),
+	            , "1"),
         new UserEntity("3", "1", "爆了", "2024830",
 	            "1", "1", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime())
-	            , "1", 1, "1")
+	            , "1")
     );
         studentPanel.addStulist(userList);
+        */
         
         // head
 		JLabel lblNewLabel = new JLabel("学生管理");
@@ -139,19 +144,16 @@ public class SMManagerSide extends JFrame {
         btnRe.setBounds(0, 266, 170, 80);
         btnRe.setBackground(Color.white);
         contentPane.add(btnRe);
-
-        
-		JButton btnAdd = new JButton("办理入学");
-		btnAdd.setBounds(0, 86, 170, 80);
-		btnAdd.setIcon(new ImageIcon(MyBookGUI.class.getResource("")));
-		btnAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		btnAdd.setBackground(Color.white);
-		btnAdd.addActionListener(new ActionListener() {
+        btnRe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// 这里要添加错误提示
-				Stu=null;//初始化
+				Stu=studentPanel.getStu();
+				if(Stu==null) {
+					return;
+				}
+				System.out.println("STU:"+Stu);
 				//跳转到学生细节页面
-				System.out.println("打开学生细节...");
+				System.out.println("修改，打开学生细节...");
 				 boolean windowOpen = false;
 	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
 	                for (Window window : JFrame.getWindows()) {
@@ -163,7 +165,7 @@ public class SMManagerSide extends JFrame {
 	                }
 	                
 	                if (!windowOpen) {
-	                	StudentDetails window = new StudentDetails("办理入学");
+	                	StudentDetailsBlank window = new StudentDetailsBlank(Stu);
 	                    window.setVisible(true);
 	                    
 	                    window.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -177,28 +179,79 @@ public class SMManagerSide extends JFrame {
 	                            	return;
 	                            }
 	                            
-	                            if(Stu!=null) {
-	                				//UserEntity user = UserSession.getInstance().getUser();
-	                                	 System.out.println("创建");
-	                                	 System.out.println(Stu);
-	                                	 manageOpreation.refreshStu(Stu);
-	                                }
+	                            if(manageOpreation.refreshStu(Stu)&&Stu!=null) {
+	                            	System.out.println("创建");
+                               	 	System.out.println(Stu);
+                               	 	studentPanel.deleteStu();
+                               	 	studentPanel.addStu(Stu);
+	                            }
+	                            else {
+	                            	JOptionPane.showMessageDialog(null, "修改失败", "错误", JOptionPane.ERROR_MESSAGE);
+	                            }  
 	                        } 
 	                    });
 	                }
 	                else {
 	                    System.out.println("Manager window is already open.");
 	                }
-				//按ID查询学生是否存在
-				/*List<UserEntity> userlist =menageOpreation.getStudentManage(newStu.getuID());
-				//学生不存在
-				if(userlist!=null) {
-					
-				}
-				else {
-					System.out.println("学生已存在！");
-					return;
-				}*/
+				
+			}
+		});
+        
+		JButton btnAdd = new JButton("办理入学");
+		btnAdd.setBounds(0, 86, 170, 80);
+		btnAdd.setIcon(new ImageIcon(MyBookGUI.class.getResource("")));
+		btnAdd.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		btnAdd.setBackground(Color.white);
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// 这里要添加错误提示
+				Stu=null;//初始化
+				//跳转到学生细节页面
+				System.out.println("入学，打开学生细节...");
+				 boolean windowOpen = false;
+	                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+	                for (Window window : JFrame.getWindows()) {
+	                    if (window instanceof StudentDetails&&window.isVisible()) {
+	                        windowOpen = true;
+	                        window.toFront(); // 将窗口带到最前面
+	                        break;
+	                    }
+	                }
+	                
+	                if (!windowOpen) {
+	                	StudentDetailsBlank window = new StudentDetailsBlank();
+	                    window.setVisible(true);
+	                    
+	                    window.addWindowListener(new java.awt.event.WindowAdapter() {
+	                        @Override
+	                        public void windowClosed(java.awt.event.WindowEvent e) {
+	                            // 在窗口关闭时检测状态
+	                            String status = window.getStatus();
+	                            if ("确认".equals(status)) {
+	                            	Stu=window.getUser();
+	                            } else {
+	                            	return;
+	                            }
+
+	                            if(manageOpreation.refreshStu(Stu)&&Stu!=null) {
+	                            	System.out.println("创建");
+                               	 	System.out.println(Stu);
+                                    JOptionPane.showMessageDialog(null, 
+                                            "入学成功", 
+                                            "提示", 
+                                            JOptionPane.INFORMATION_MESSAGE);
+	                            }
+	                            else {
+	                            	JOptionPane.showMessageDialog(null, "入学失败", "错误", JOptionPane.ERROR_MESSAGE);
+	                            }      
+	                        } 
+	                    });
+	                }
+	                else {
+	                    System.out.println("Manager window is already open.");
+	                }
+
 			}
 		});
 		contentPane.add(btnAdd);
@@ -227,7 +280,7 @@ public class SMManagerSide extends JFrame {
                 }
                 
                 if (!windowOpen) {
-                	StudentDetails window = new StudentDetails("办理退学");
+                	StudentDetails window = new StudentDetails(Stu);
                     window.setVisible(true);
                     window.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
@@ -283,7 +336,7 @@ class StudentTablePanel extends JPanel {
         setSize(900,600);
 
         // 定义列名
-        String[] columnNames = {"学号", "姓名", "性别", "学号","年级", "专业", "出生日期", "出生地"};
+        String[] columnNames = {"一卡通号", "姓名", "性别", "学号","年级", "专业", "出生日期", "出生地","密码"};
 
         // 初始化表格模型
         model = new DefaultTableModel(columnNames, 0) {
@@ -296,6 +349,12 @@ class StudentTablePanel extends JPanel {
         infoTable = new JTable(model);
         rowSorter = new TableRowSorter<>(model);
         infoTable.setRowSorter(rowSorter);
+        
+        TableColumnModel columnModel = infoTable.getColumnModel();
+        TableColumn passwordColumn = columnModel.getColumn(8); // “密码”列的索引是8
+        passwordColumn.setMinWidth(0);
+        passwordColumn.setMaxWidth(0);
+        passwordColumn.setWidth(0);
 
         JScrollPane jsp = new JScrollPane(infoTable);
         jsp.setBounds(42, 100, 619, 464);
@@ -305,32 +364,24 @@ class StudentTablePanel extends JPanel {
         textGrade.setBounds(287, 50, 113, 30);
         textGrade.setColumns(10);
 
-        JComboBox<String> comboMajor = new JComboBox<>(new String[] {"计算机科学", "电子工程", "机械工程"});
-        comboMajor.setBounds(89, 49, 151, 30);
-
-        // 初始化标签
-        JLabel lblMajor = new JLabel("专业");
-        lblMajor.setBounds(50, 55, 100, 20);
-
-        JLabel lblGrade = new JLabel("年级");
-        lblGrade.setBounds(250, 55, 100, 20);
-
         // 初始化查询按钮
         JButton btnSearch = new JButton("查询");
         btnSearch.setBounds(428, 49, 80, 30);
         btnSearch.setBackground(Color.white);
         btnSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String grade = textGrade.getText();
-                String major = (String) comboMajor.getSelectedItem();
+                //获取文本框中的内容
+            	String s=textGrade.getText();
+            	//与后端通信
+            	List<UserEntity> list=manageOpreation.getStudentManage(s);
+            	if(list!=null) {
+            	model.setRowCount(0);
+            	addStulist(list);
+            	}
+            	else {
+            		JOptionPane.showMessageDialog(null, "添加失败", "错误", JOptionPane.ERROR_MESSAGE);
+            	}
 
-                RowFilter<Object, Object> gradeFilter = RowFilter.regexFilter(grade, 3);
-                RowFilter<Object, Object> majorFilter = RowFilter.regexFilter(major, 4);
-                RowFilter<Object, Object> combinedFilter = RowFilter.andFilter(
-                        java.util.Arrays.asList(gradeFilter, majorFilter)
-                );
-
-                rowSorter.setRowFilter(combinedFilter);
             }
         });
        
@@ -338,9 +389,6 @@ class StudentTablePanel extends JPanel {
         // 添加组件到面板
         add(jsp);
         add(textGrade);
-        add(comboMajor);
-        add(lblMajor);
-        add(lblGrade);
         add(btnSearch);
 
         // 设置面板大小
@@ -351,12 +399,12 @@ class StudentTablePanel extends JPanel {
     //向表格中添加学生
     public void addStu(UserEntity user) {
     	model.addRow(new Object[]{user.getuID(), user.getuName(), user.getuGender(),user.getuNumber()
-                , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace()});
+                , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace(),user.getuPwd()});
     }
     public void addStulist(List<UserEntity> list) {
     	for (UserEntity user : list) {
             model.addRow(new Object[]{user.getuID(), user.getuName(), user.getuGender(),user.getuNumber()
-            , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace()});
+            , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace(),user.getuPwd()});
     	}
     }
 
@@ -385,6 +433,7 @@ class StudentTablePanel extends JPanel {
     	    user.setuGrade(Integer.parseInt(model.getValueAt(selectedRow, 4).toString()));
     	    user.setuMajor(Integer.parseInt(model.getValueAt(selectedRow, 5).toString()));
     	    user.setuBirthplace(model.getValueAt(selectedRow, 7).toString());
+    	    user.setuPwd(model.getValueAt(selectedRow, 8).toString());
     	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//指定日期格式
     	        try {
     	        java.util.Date utilDate = dateFormat.parse(model.getValueAt(selectedRow, 6).toString());

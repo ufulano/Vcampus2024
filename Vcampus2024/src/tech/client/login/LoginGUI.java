@@ -107,6 +107,87 @@ public class LoginGUI extends JFrame {
         txtPassword.setColumns(10);
         contentPane.add(txtPassword);
 
+
+		
+		//登录按钮的点击事件监听
+				btnLogin.addActionListener(new ActionListener() {
+			            @Override
+			            public void actionPerformed(ActionEvent e) {
+			                // 点击按钮时执行的代码
+			                System.out.println("Button was clicked!");
+			                login();
+			            }
+			        });
+}
+//登录操作的用户界面响应
+public void login()
+{
+	errorLabel.setText("");//初始化
+	/*判断用户名和密码是否为空
+	*getText()无法用于获取JPasswordField类的文本
+	*.getPassword()将返回char数组
+	*/
+    if (txtUsername.getText().trim().equals("") || new String(txtPassword.getPassword()).trim().equals("")) {
+    	
+    	errorLabel.setForeground(Color.RED);
+    	contentPane.add(errorLabel);
+    	errorLabel.setText("有字段为空！");
+        return;
+    }
+    
+    System.out.println("测试用用户");
+    /*    public UserEntity(String uID, String uPwd, String uName, String uNumber,
+            String uGender, String uRole,
+            int uMajor, int uGrade, Date uBirthday, String uBirthplace)*/
+    UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
+            "1", "0", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1");
+    System.out.println("Main:");
+    System.out.println(user);
+    UserSession session = UserSession.getInstance();
+    session.setUser(user);
+    mainAssist.requireRouting();
+    dispose();
+    //向服务器发送连接
+    //创建连接的唯一实例
+    SocketClientWorker connection = SocketClientWorker.getInstance();
+    /*Message message=LoginVerify.verify(txtUsername.getText(),new String(txtPassword.getPassword()));
+    if(message==null||message.getdata()==null) {
+    	System.out.println("登陆失败");
+    	errorLabel.setForeground(Color.RED);
+    	contentPane.add(errorLabel);
+    	errorLabel.setText("登陆失败！");
+    	return;
+    }
+    
+    if("FAIL".equals(message.getdata()[0])) {
+    	System.out.println("登陆失败");
+    	errorLabel.setForeground(Color.RED);
+    	contentPane.add(errorLabel);
+    	errorLabel.setText("登陆失败！");
+    	return;
+    }
+    UserEntity user = message.getuserentity();
+    System.out.println(user);
+    System.out.println("跳转中");
+    if("SUCCESS".equals(message.getdata()[0])) {
+    	System.out.println("跳转中");
+    	UserSession session = UserSession.getInstance();
+    	session.setUser(user);
+    	//mainAssist.requireRouting(user);
+    	mainAssist.requireRouting();
+    	}
+    else {
+    	System.out.println("跳转失败");
+    }
+    if("FAIL".equals(message.getdata()[0])) {
+    	errorLabel.setForeground(Color.RED);
+		contentPane.add(errorLabel);
+		errorLabel.setText("密码错误，登录失败！");
+		txtPassword.setText("");
+    }
+		*/
+
+
         // 登录按钮
         JButton btnLogin = new JButton("");
         btnLogin.setIcon(new ImageIcon(LoginGUI.class.getResource("/resources/icon/icon1/loginSmall.png")));
@@ -214,24 +295,5 @@ public class LoginGUI extends JFrame {
         });
     }
 
-    // 登录操作的用户界面响应
-    public void login() {
-        errorLabel.setText("");
-        if (txtUsername.getText().trim().equals("") || new String(txtPassword.getPassword()).trim().equals("")) {
-            errorLabel.setForeground(Color.RED);
-            contentPane.add(errorLabel);
-            errorLabel.setText("有字段为空！");
-            return;
-        }
-
-        System.out.println("测试用用户");
-        UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
-                "1", "1", 2, 1, new Date(System.currentTimeMillis()), "1", 1, "1");
-        System.out.println("Main:");
-        System.out.println(user);
-        UserSession session = UserSession.getInstance();
-        session.setUser(user);
-        mainAssist.requireRouting();
-        dispose();
-    }
+   
 }
