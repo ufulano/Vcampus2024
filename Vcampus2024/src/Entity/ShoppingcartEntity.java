@@ -3,12 +3,11 @@ package Entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ShoppingcartEntity implements Serializable {
+public class ShoppingcartEntity extends ProductEntity {
     private static final long serialVersionUID = 1L;
 
     // 列名映射为Java类成员变量，数据类型根据SQL表定义
     private String uNumber; // 数据类型为varchar(15)，非空，主键
-    private String pProductID; // 数据类型为int(10) unsigned zerofill，非空，主键
     private int sQuantity; // 数据类型为int
     private BigDecimal pPrice; // 数据类型为BigDecimal
     private BigDecimal sTotalprice; // 数据类型为BigDecimal
@@ -16,10 +15,9 @@ public class ShoppingcartEntity implements Serializable {
     public ShoppingcartEntity() {
     }
 
-    public ShoppingcartEntity(String uNumber, String pProductID, int sQuantity, BigDecimal pPrice,
+    public ShoppingcartEntity(String uNumber, int sQuantity, BigDecimal pPrice,
             BigDecimal sTotalprice) {
         this.uNumber = uNumber;
-        this.pProductID = pProductID;
         this.sQuantity = sQuantity;
         this.pPrice = pPrice;
         this.sTotalprice = sTotalprice;
@@ -31,14 +29,6 @@ public class ShoppingcartEntity implements Serializable {
 
     public void setUNumber(String uNumber) {
         this.uNumber = uNumber;
-    }
-
-    public String getpProductID() {
-        return this.pProductID;
-    }
-
-    public void setpProductID(String pProductID) {
-        this.pProductID = pProductID;
     }
 
     public int getsQuantity() {
@@ -69,7 +59,7 @@ public class ShoppingcartEntity implements Serializable {
     public String toString() {
         return "ShoppingcartEntity{" +
                 "uNumber='" + uNumber + '\'' +
-                ", pProductID='" + pProductID + '\'' +
+                ", pProductID='" + getpProductID() + '\'' +
                 ", sQuantity=" + sQuantity +
                 ", pPrice=" + pPrice +
                 ", sTotalprice=" + sTotalprice +

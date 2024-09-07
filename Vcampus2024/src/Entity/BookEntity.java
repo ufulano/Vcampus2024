@@ -12,13 +12,13 @@ public class BookEntity implements Serializable {
     private String bISBN; // A-Z bISBN: varchar(20)
     private int bTotal; // 0-9 bTotal: int，默认值为0
     private int bAvailable; // 0-9 bAvailable: int，默认值为0
-    private String img_url; // A-z img_url: varchar(200)
+    private String bImg_url; // A-z bImg_url: varchar(200)
 
     public BookEntity() {
     }
 
     public BookEntity(int bBookID, String bBookName, String bAuthor, String bPublisher, String bISBN, int bTotal,
-            int bAvailable, String img_url) {
+            int bAvailable, String bImg_url) {
         this.bBookID = bBookID;
         this.bBookName = bBookName;
         this.bAuthor = bAuthor;
@@ -26,7 +26,7 @@ public class BookEntity implements Serializable {
         this.bISBN = bISBN;
         this.bTotal = bTotal;
         this.bAvailable = bAvailable;
-        this.img_url = img_url;
+        this.bImg_url = bImg_url;
     }
 
     public int getbBookID() {
@@ -57,8 +57,8 @@ public class BookEntity implements Serializable {
         return this.bAvailable;
     }
 
-    public String getimg_url() {
-        return this.img_url;
+    public String getbImg_url() {
+        return this.bImg_url;
     }
 
     public void setbBookID(int bBookID) {
@@ -89,14 +89,14 @@ public class BookEntity implements Serializable {
         this.bAvailable = bAvailable;
     }
 
-    public void setimg_url(String img_url) {
-        this.img_url = img_url;
+    public void setbImg_url(String bImg_url) {
+        this.bImg_url = bImg_url;
     }
 
     @Override
     public String toString() {
         return "BookEntity{" + "bBookID=" + bBookID + ", bBookName='" + bBookName + '\'' + ", bAuthor='" + bAuthor
                 + '\'' + ", bPublisher='" + bPublisher + '\'' + ", bISBN='" + bISBN + '\'' + ", bTotal=" + bTotal
-                + ", bAvailable=" + bAvailable + ", img_url='" + img_url + '\'' + '}';
+                + ", bAvailable=" + bAvailable + ", bImg_url='" + bImg_url + '\'' + '}';
     }
 }

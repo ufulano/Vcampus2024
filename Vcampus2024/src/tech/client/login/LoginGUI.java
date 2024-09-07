@@ -176,8 +176,11 @@ public void login()
     }
     
     System.out.println("测试用用户");
+    /*    public UserEntity(String uID, String uPwd, String uName, String uNumber,
+            String uGender, String uRole,
+            int uMajor, int uGrade, Date uBirthday, String uBirthplace)*/
     UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
-            "1", "0", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1", 1, "1");
+            "1", "0", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1");
     System.out.println("Main:");
     System.out.println(user);
     UserSession session = UserSession.getInstance();
