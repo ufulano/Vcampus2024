@@ -117,7 +117,7 @@ public class scheduleTeacherSide extends JFrame {
         contentPane.add(table);
 
         // 设置表格的列宽
-        table.getColumnModel().getColumn("Course ID").setPreferredWidth(80);
+        /*table.getColumnModel().getColumn("Course ID").setPreferredWidth(80);
         table.getColumnModel().getColumn("Year").setPreferredWidth(50);
         table.getColumnModel().getColumn("Course Name").setPreferredWidth(150);
         table.getColumnModel().getColumn("Credits").setPreferredWidth(60);
@@ -127,7 +127,7 @@ public class scheduleTeacherSide extends JFrame {
         table.getColumnModel().getColumn("Available").setPreferredWidth(80);
         table.getColumnModel().getColumn("Ended").setPreferredWidth(80);
         table.getColumnModel().getColumn("User Name").setPreferredWidth(100);
-        table.getColumnModel().getColumn("User Number").setPreferredWidth(120);
+        table.getColumnModel().getColumn("User Number").setPreferredWidth(120);*/
 		
 		JButton btnNewButton = new JButton("查询");
 		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 12));
@@ -155,4 +155,6 @@ public class scheduleTeacherSide extends JFrame {
         contentPane.add(backgroundLabel);
                             
 	}
+	
+	//表格操作
 }

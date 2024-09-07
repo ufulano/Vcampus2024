@@ -174,7 +174,9 @@ public class SMManagerSide extends JFrame {
 	                            // 在窗口关闭时检测状态
 	                            String status = window.getStatus();
 	                            if ("确认".equals(status)) {
+									String unumber = Stu.getuNumber();
 	                            	Stu=window.getUser();
+									Stu.setuNumber(unumber);
 	                            } else {
 	                            	return;
 	                            }
@@ -234,7 +236,7 @@ public class SMManagerSide extends JFrame {
 	                            	return;
 	                            }
 
-	                            if(manageOpreation.refreshStu(Stu)&&Stu!=null) {
+	                            if(manageOpreation.newStu(Stu)&&Stu!=null) {
 	                            	System.out.println("创建");
                                	 	System.out.println(Stu);
                                     JOptionPane.showMessageDialog(null, 

@@ -23,7 +23,7 @@ public class manageOpreation {
 		connection.SendMessage();
 		message=connection.ReceiveMessage();
 		System.out.println(message);
-		return message.getuserlisty();
+		return message.getuserlist();
 		}else{
 			System.out.println("连接失败");//失败
 			return null;
@@ -52,12 +52,34 @@ public class manageOpreation {
 			return false;
 			}
 	}
-	//新建/更新学生
+	//更新学生
 	public static boolean refreshStu(UserEntity student) {
 		System.out.println("Refreshing students...");
 		//用于建立连接和消息
 		Message message;
 		message = new Message(Message.MessageType.STU,"REFRESH STU");
+		message.setuserentity(student);
+		System.out.println(message);
+		//发送消息
+		SocketClientWorker connection = SocketClientWorker.getInstance();
+		connection.SetMessage(message);
+		if(connection.Connect()){
+		//成功连接
+		connection.SendMessage();
+		message=connection.ReceiveMessage();
+		System.out.println(message);
+		return true;
+		}else{
+			System.out.println("连接失败");//失败
+			return false;
+			}
+	}
+	//新建学生
+	public static boolean newStu(UserEntity student) {
+		System.out.println("Refreshing students...");
+		//用于建立连接和消息
+		Message message;
+		message = new Message(Message.MessageType.STU,"New STU");
 		message.setuserentity(student);
 		System.out.println(message);
 		//发送消息

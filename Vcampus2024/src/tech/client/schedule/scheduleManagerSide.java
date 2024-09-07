@@ -6,6 +6,10 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,18 +17,36 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
+import Entity.UserEntity;
+import Entity.CourseEntity;
 import tech.client.library.LibraryManagerGUI;
 import tech.client.library.LibraryUserGUI;
 import tech.client.main.MainManager;
 import tech.client.main.MainStudent;
+import tech.client.studentManage.manageOpreation;
+
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JTextField;
+
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableColumn;
+
 /**
  * 管理员的课程管理主页
  */
@@ -32,7 +54,6 @@ public class scheduleManagerSide extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
 	private JTextField textField;
 
 	/**
@@ -90,7 +111,7 @@ public class scheduleManagerSide extends JFrame {
 	                for (Window window : JFrame.getWindows()) {
 	                    if (window instanceof MainManager&&window.isVisible()) {
 	                        windowOpen = true;
-	                        scheduleManagerSide.this.dispose();
+	                        dispose();
 	                        window.toFront(); // 将窗口带到最前面
 	                        break;
 	                    }
@@ -98,7 +119,7 @@ public class scheduleManagerSide extends JFrame {
 	                
 	                if (!windowOpen) {
 	                	MainManager window = new MainManager();
-	                	scheduleManagerSide.this.dispose();
+	                	dispose();
 	                    window.setVisible(true);
 	                } else {
 	                    System.out.println("Manager main window is already open.");
@@ -109,11 +130,19 @@ public class scheduleManagerSide extends JFrame {
 		btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		btnBack.setContentAreaFilled(false);
 		contentPane.add(btnBack);
+		
+		 // 创建课程列表（默认）
+        MTablePanel table = new MTablePanel();
+        table.setBorder(null);
+        table.setBounds(190, 80, 645, 450);
+        contentPane.add(table);
 
 		// 左侧按钮
 		JButton btnManage = new JButton("课程总览");  // 选中查看所有课程，点击查看课程详情，【增加】【删改】跳转至课程详情页面
 		btnManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//设置为课程列表
+			    table.courseList();
 			}
 		});
 		btnManage.setBounds(1, 77, 171, 84);
@@ -124,6 +153,12 @@ public class scheduleManagerSide extends JFrame {
 		btnStudentList.setBounds(0, 171, 172, 84);
 		btnStudentList.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		contentPane.add(btnStudentList);
+		btnStudentList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//设置为课程列表
+			    table.stuList();
+			}
+		});
         
 		// 中央工作区
 		JButton btnNewButton = new JButton("查询");
@@ -131,11 +166,8 @@ public class scheduleManagerSide extends JFrame {
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setBounds(762, 99, 97, 33);
 		contentPane.add(btnNewButton);
-		
-		table = new JTable();
-        table.setBounds(211, 148, 645, 365);
-        table.setBackground(UIManager.getColor("Button.light"));
-        contentPane.add(table);  
+        
+    
         
 		JButton btnRe = new JButton("删改");
 		btnRe.setBackground(Color.WHITE);
@@ -156,4 +188,133 @@ public class scheduleManagerSide extends JFrame {
         contentPane.add(backgroundLabel);
                         
 	}
+}
+class MTablePanel extends JPanel {
+    private static final long serialVersionUID = 1L;
+    private JTable infoTable;
+    private DefaultTableModel model;
+    private TableRowSorter<DefaultTableModel> rowSorter; // 确保声明了 rowSorter
+
+    @SuppressWarnings("serial")
+    public MTablePanel() {
+        setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        setLayout(null); 
+        setSize(900,600);
+
+        // 定义列名
+        String[] columnNames = {"课程编号", "学年", "课程名称", "学分","年级", "专业", "最大容量", "剩余名额","授课教师","工号"};
+
+        // 初始化表格模型
+        model = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        infoTable = new JTable(model);
+        rowSorter = new TableRowSorter<>(model);
+        infoTable.setRowSorter(rowSorter);
+   
+
+        JScrollPane jsp = new JScrollPane(infoTable);
+        jsp.setBounds(42, 100, 619, 464);
+   
+
+        // 添加组件到面板
+        add(jsp);
+
+        // 设置面板大小
+        this.setOpaque(false);
+        this.validate();
+    }
+    
+    //替换为学生列表
+    public void stuList() {
+    	//清空当前列表
+    	model.setRowCount(0);
+    	//更换列名
+    	String[] columnNames = {"一卡通号", "姓名", "性别", "学号","年级", "专业", "出生日期", "出生地","密码"};
+    	model.setColumnIdentifiers(columnNames);
+    	 TableColumnModel columnModel = infoTable.getColumnModel();
+         TableColumn passwordColumn = columnModel.getColumn(8); // “密码”列的索引是8
+         passwordColumn.setMinWidth(0);
+         passwordColumn.setMaxWidth(0);
+         passwordColumn.setWidth(0);
+    }
+    //替换为课程列表
+    public void courseList() {
+    	//清空当前列表
+    	model.setRowCount(0);
+    	//更换列名
+    	String[] columnNames = {"课程编号", "学年", "课程名称", "学分","年级", "专业", "最大容量", "剩余名额","是否结束","授课教师","工号"};
+    	model.setColumnIdentifiers(columnNames);
+    }
+    
+    //向表格中添加课程
+    public void addCourse(CourseEntity course) {
+    	model.addRow(new Object[]{course.getcCourseID(), course.getcYear(), course.getcCourseName(),course.getcCredits()
+                , course.getcGrade(), course.getcMajor(), course.getcCapacity(), course.getcAvailable(),course.getcEnd()
+                ,course.getuName(),course.getuNumber()});
+    }
+    public void addCourselist(List<CourseEntity> list) {
+    	for (CourseEntity course : list) {
+            model.addRow(new Object[]{course.getcCourseID(), course.getcYear(), course.getcCourseName(),course.getcCredits()
+                    , course.getcGrade(), course.getcMajor(), course.getcCapacity(), course.getcAvailable(),course.getcEnd()
+                    ,course.getuName(),course.getuNumber()});
+    	}
+    }
+    //向表格中添加学生
+    public void addStu(UserEntity user) {
+    	model.addRow(new Object[]{user.getuID(), user.getuName(), user.getuGender(),user.getuNumber()
+                , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace(),user.getuPwd()});
+    }
+    public void addStulist(List<UserEntity> list) {
+    	for (UserEntity user : list) {
+            model.addRow(new Object[]{user.getuID(), user.getuName(), user.getuGender(),user.getuNumber()
+            , user.getuGrade(), user.getuMajor(), user.getuBirthday(), user.getuBirthplace(),user.getuPwd()});
+    	}
+    }
+
+    //删除学生
+    public void deleteStu() {
+    	//获取选中的行索引
+    	int selectedRow = infoTable.getSelectedRow();
+    	if (selectedRow >= 0) {
+    	    model.removeRow(selectedRow);
+    	} 
+    	else {
+    	    JOptionPane.showMessageDialog(null, "请先选择要删除的行", "错误", JOptionPane.ERROR_MESSAGE);
+    	}
+    }
+    
+    //获取选中的学生
+    //"学号", "姓名", "性别", "学号","年级", "专业", "出生日期", "出生地"
+    public UserEntity getStu() {
+    	UserEntity user=new UserEntity();
+    	int selectedRow = infoTable.getSelectedRow();
+    	if (selectedRow >= 0) {
+    		user.setuID(model.getValueAt(selectedRow, 0).toString());
+    		user.setuName(model.getValueAt(selectedRow, 1).toString());
+    	    user.setuGender(model.getValueAt(selectedRow, 2).toString());
+    	    user.setuNumber(model.getValueAt(selectedRow, 3).toString());
+    	    user.setuGrade(Integer.parseInt(model.getValueAt(selectedRow, 4).toString()));
+    	    user.setuMajor(Integer.parseInt(model.getValueAt(selectedRow, 5).toString()));
+    	    user.setuBirthplace(model.getValueAt(selectedRow, 7).toString());
+    	    user.setuPwd(model.getValueAt(selectedRow, 8).toString());
+    	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");//指定日期格式
+    	        try {
+    	        java.util.Date utilDate = dateFormat.parse(model.getValueAt(selectedRow, 6).toString());
+    	        user.setuBirthday(new Date(utilDate.getTime()));
+    	        } catch (ParseException e) {
+    	            e.printStackTrace();
+    	        }
+    	        System.out.println(user);
+    	} 
+    	else {
+    		JOptionPane.showMessageDialog(null, "未选中行", "错误", JOptionPane.ERROR_MESSAGE);
+    	    return null;
+    	}
+    	return user;
+    }
 }
