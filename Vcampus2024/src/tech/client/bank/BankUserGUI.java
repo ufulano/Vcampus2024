@@ -141,9 +141,6 @@ public class BankUserGUI extends JFrame {
 		panel.add(btnRecharge);
 		panel.add(btnPassword);
 
-		panel.add(btnOrders);
-		panel.add(btnRecharge);
-		panel.add(btnPassword);
 		
 		JLabel backgroundLabel = new JLabel(new ImageIcon(BankUserGUI.class.getResource("/resources/picture/银行背景 .png")));
 		backgroundLabel.setBounds(0, 0, 900, 581);
@@ -161,6 +158,11 @@ public class BankUserGUI extends JFrame {
 		btnOut.setBounds(802, 10, 68, 50);
 		panel.add(btnOut);
 		btnOut.setFont(new Font("幼圆", Font.BOLD, 12));
+		btnOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JLabel lblShop_1 = new JLabel("修改密码");
 		lblShop_1.setForeground(new Color(102, 0, 0));

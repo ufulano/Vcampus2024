@@ -146,6 +146,7 @@ public class LibraryUserGUI extends JFrame {
 
     private void backButtonActionPerformed(ActionEvent e) {
     	UserEntity user = UserSession.getInstance().getUser();
+    	System.out.println("session"+user);
         System.out.println("返回按钮被点击");
 
         if("学生".equals(user.getuRole())) {

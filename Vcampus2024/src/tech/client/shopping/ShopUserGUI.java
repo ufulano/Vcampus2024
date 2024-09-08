@@ -50,9 +50,9 @@ public class ShopUserGUI extends JFrame {
     	
 		UserEntity user = UserSession.getInstance().getUser();
 		
-        JButton btnNewButton = new JButton("搜索");
-        btnNewButton.setContentAreaFilled(false);
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnQ = new JButton("搜索");
+        btnQ.setContentAreaFilled(false);
+        btnQ.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         	}
 

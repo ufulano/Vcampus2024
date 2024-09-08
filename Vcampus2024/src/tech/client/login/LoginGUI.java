@@ -239,11 +239,12 @@ public class LoginGUI extends JFrame {
             String uGender, String uRole,
             int uMajor, int uGrade, Date uBirthday, String uBirthplace)*/
         UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
-                "1", "0", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1");
+                "1", "学生", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1");
         System.out.println("Main:");
         System.out.println(user);
-        UserSession session = UserSession.getInstance();
+        UserSession session = UserSession.getInstance();//初始化单例类
         session.setUser(user);
+        System.out.println("session"+session);
         mainAssist.requireRouting();
         dispose();
         //向服务器发送连接

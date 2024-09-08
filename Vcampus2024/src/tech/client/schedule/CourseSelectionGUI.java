@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entity.CourseEntity;
+import tech.client.main.MainStudent;
 
 /**
  * 选课界面GUI，学生端
@@ -200,16 +201,66 @@ public class CourseSelectionGUI extends JFrame {
 
     private void backButtonActionPerformed(ActionEvent e) {
         System.out.println("返回按钮被点击");
-        dispose(); // 关闭当前窗口
+		boolean windowOpen = false;
+        Window[] windows = JFrame.getWindows();//获取所有打开窗口
+        for (Window window : JFrame.getWindows()) {
+            if (window instanceof CourseSelectionGUI&&window.isVisible()) {
+                windowOpen = true;
+                dispose();
+                window.toFront(); // 将窗口带到最前面
+                break;
+            }
+        }
+        
+        if (!windowOpen) {
+        	CourseSelectionGUI window = new CourseSelectionGUI();
+        	dispose();
+        	System.out.println("回到选课界面.");
+            window.setVisible(true);
+        } else {
+            System.out.println("Course main window is already open.");
+        }
     }
     private void manageCourses() {
         // 实现管理课程的功能
         System.out.println("Managing courses...");
+        boolean windowOpen = false;
+        Window[] windows = JFrame.getWindows();//获取所有打开窗口
+        for (Window window : JFrame.getWindows()) {
+            if (window instanceof SelectedCoursesGUI &&window.isVisible()) {
+                windowOpen = true;
+                window.toFront(); // 将窗口带到最前面
+                break;
+            }
+        }
+        
+        if (!windowOpen) {
+        	SelectedCoursesGUI studentWindow = new SelectedCoursesGUI();
+            studentWindow.setVisible(true);
+        } else {
+            System.out.println("Student window is already open.");
+        }
     }
 
     private void showMySchedule() {
         // 实现显示我的课表的功能
         System.out.println("My schedule...");
+        boolean windowOpen = false;
+        Window[] windows = JFrame.getWindows();//获取所有打开窗口
+        for (Window window : JFrame.getWindows()) {
+            if (window instanceof scheduleStudentSide &&window.isVisible()) {
+                windowOpen = true;
+                window.toFront(); // 将窗口带到最前面
+                break;
+            }
+        }
+        
+        if (!windowOpen) {
+        	scheduleStudentSide studentWindow = new scheduleStudentSide();
+            studentWindow.setVisible(true);
+        } else {
+            System.out.println("Student window is already open.");
+        }
     }
     
     

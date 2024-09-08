@@ -4,14 +4,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import Entity.CourseEntity;
-import Entity.ScheduleEntity;
+import tech.client.main.UserSession;
+import tech.client.studentManage.StudentDetails;
+import tech.client.studentManage.manageOpreation;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import Entity.*;
 
 public class SelectedCoursesGUI extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -55,7 +61,7 @@ public class SelectedCoursesGUI extends JFrame {
      		btnBack.setContentAreaFilled(false);
      		mainContentPane.add(btnBack);
 
-        // 初始化已选课程数据
+        // 获得已选课程
         selectedCourses = getSelectedCourses();
 
         // 创建表格模型
@@ -63,19 +69,26 @@ public class SelectedCoursesGUI extends JFrame {
         Object[][] data = new Object[selectedCourses.size()][columnNames.length];
         for (int i = 0; i < selectedCourses.size(); i++) {
             CourseEntity course = selectedCourses.get(i);
+            ScheduleEntity schedule=courseOperation.getSchedule(course);
+            if(course!=null&&schedule!=null) {
             // ScheduleEntity schedule = selectedCourses.get(i);
             data[i] = new Object[]{
                 course.getcCourseID(),
                 course.getcCourseName(),
                 course.getcCredits(),
                 course.getcCapacity(),
-                //schedule.getsDayofWeek(),
-                //schedule.getsTimePeriod(),
-                //schedule.getsClassroom(),
+                schedule.getsDayofWeek(),
+                schedule.getsTimePeriod(),
+                schedule.getsClassroom(),
                 " ",
                 " ",
                 ""
             };
+            }
+            else {
+            	JOptionPane.showMessageDialog(null, "信息拉取失败", "错误", JOptionPane.ERROR_MESSAGE);
+            	return;
+            }
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
@@ -89,16 +102,50 @@ public class SelectedCoursesGUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(coursesTable);
         scrollPane.setBounds(10, 61, 864, 397);
         mainContentPane.add(scrollPane);
+        
+        //退选操作
+        btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if("成功".equals(courseOperation.backcourse(getCourse()))){
+				 JOptionPane.showMessageDialog(null, 
+                         "退选成功", 
+                         "提示", 
+                         JOptionPane.INFORMATION_MESSAGE);
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "退选失败", "错误", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
     }
 
-       
-
+     //获取表格选中栏
+    public CourseEntity getCourse() {
+    	CourseEntity course=new CourseEntity();
+    	//获取选中的行索引
+    	int selectedRow = coursesTable.getSelectedRow();
+    	if (selectedRow >= 0) {
+    		course.setcCourseID(coursesTable.getValueAt(selectedRow, 0).toString());
+    		course.setcCourseName(coursesTable.getValueAt(selectedRow, 1).toString());
+    		course.setcCredits(Integer.parseInt(coursesTable.getValueAt(selectedRow, 2).toString()));
+    		course.setcCapacity(Integer.parseInt(coursesTable.getValueAt(selectedRow, 3).toString()));
+    	    System.out.println(course);
+    	} 
+    	else {
+    		JOptionPane.showMessageDialog(null, "未选中行", "错误", JOptionPane.ERROR_MESSAGE);
+    	    return null;
+    	}
+    	return course;
+    }
+    
+    
+    //获取当前学生的选课列表
     private List<CourseEntity> getSelectedCourses() {
-        // 这里应该是调用后端接口获取已选课程列表的逻辑
-        // 暂时使用一个示例列表来代替
-        List<CourseEntity> courses = new ArrayList<>();
+    	UserEntity stu = UserSession.getInstance().getUser();
+        List<CourseEntity> courses = courseOperation.checkselectedcourse(stu);
         courses.add(new CourseEntity("1", 2024, "高等数学", 4, 1, 1, 60, 50, true, "张三", "1001"));
         courses.add(new CourseEntity("2", 2024, "线性代数", 3, 2, 1, 50, 40, false, "李四", "1002"));
+        
         return courses;
     }
 
