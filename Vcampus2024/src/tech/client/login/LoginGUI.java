@@ -239,7 +239,7 @@ public class LoginGUI extends JFrame {
             String uGender, String uRole,
             int uMajor, int uGrade, Date uBirthday, String uBirthplace)*/
         UserEntity user = new UserEntity("1", "1", "和学校爆了", "2024830",
-                "1", "学生", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1");
+                "1", "教师", 2, 1, new Date(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()).getTime()), "1");
         System.out.println("Main:");
         System.out.println(user);
         UserSession session = UserSession.getInstance();//初始化单例类

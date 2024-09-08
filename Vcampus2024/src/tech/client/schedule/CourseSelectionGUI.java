@@ -90,6 +90,14 @@ public class CourseSelectionGUI extends JFrame {
         textField.setBounds(292, 82, 158, 34);
         mainContentPane.add(textField);
         textField.setColumns(10);
+        
+        //查询
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	String s=textField.getText();
+            	 List<CourseEntity> list=courseOperation.getCourselist(s);
+            }
+        });
         JLabel lblVcampus = new JLabel("选课系统", SwingConstants.CENTER);
         lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 30));
         lblVcampus.setBounds(21, 10, 138, 43);
@@ -101,6 +109,7 @@ public class CourseSelectionGUI extends JFrame {
         backButton.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         backButton.setContentAreaFilled(false);
         mainContentPane.add(backButton);
+        
     }
 
     private void initNavigationButtons() {
@@ -283,6 +292,9 @@ public class CourseSelectionGUI extends JFrame {
         });
     }
     
+    /*
+     * 新增类
+     */
     public class CourseSelection {
         private CourseEntity course;
         private boolean isSelected;

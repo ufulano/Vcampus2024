@@ -91,7 +91,7 @@ public class courseOperation {
     }
     
     //查看某个学生已选的所有课程
-    public List<CourseEntity> checkusercourse(UserEntity userentity)
+    public static List<CourseEntity> checkusercourse(UserEntity userentity)
     {
         Message message=new Message(Message.MessageType.COURSE);
         message.setdata("CHECKUSERCOURSE");
@@ -236,7 +236,7 @@ public class courseOperation {
 	 }
 	 
 	 //获取某个课程的其他信息（按课程ID查找）
-	 public static ScheduleEntity getSchedule(CourseEntity course)
+	 public static List<ScheduleEntity> getSchedule(CourseEntity course)
 	 {
 	    Message message=new Message(Message.MessageType.COURSE);
 	    message.setdata("GET_COURSE_CSHEDULE",course.getcCourseID());
@@ -252,7 +252,7 @@ public class courseOperation {
 	        System.out.println("连接失败");// 失败
 
 	    }
-	    return message.getscheduleentity();
+	    return message.getschedulelist();
 	 }
 
 	 public List<CourseEntity> searchcourse(String searchname)//查找老师或课程
