@@ -31,7 +31,7 @@ import tech.client.studentManage.SMStudentPersonal;
 /**
  * 单个课程详情界面
  */
-public class CourseDetails extends JDialog {
+public class DeleteCourse extends JDialog {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class CourseDetails extends JDialog {
 	 * Create the dialog.
 	 */
 	
-	public CourseDetails() {
+	public DeleteCourse() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
@@ -56,7 +56,7 @@ public class CourseDetails extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(317, 10, 404, 472);
+		panel.setBounds(317, 10, 404, 444);
 		contentPane.add(panel);
 		panel.setOpaque(false); 
 		panel.setLayout(null);
@@ -69,7 +69,7 @@ public class CourseDetails extends JDialog {
 		
 		JButton button = new JButton("确认");
 		button.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		button.setBounds(589, 492, 132, 48);
+		button.setBounds(589, 464, 132, 48);
 		button.setBackground(Color.white);
 		contentPane.add(button);
 		
@@ -142,7 +142,7 @@ public class CourseDetails extends JDialog {
 		textFieldAvailable.setEnabled(false);
 		textFieldAvailable.setEditable(false);
 		textFieldAvailable.setColumns(10);
-		textFieldAvailable.setBounds(209, 386, 189, 76);
+		textFieldAvailable.setBounds(209, 386, 189, 37);
 		panel.add(textFieldAvailable);
 		
 		textFieldCapacity = new JTextField();

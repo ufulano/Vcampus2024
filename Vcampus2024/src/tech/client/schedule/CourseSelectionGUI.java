@@ -29,6 +29,7 @@ public class CourseSelectionGUI extends JFrame {
     }
 
     private void initializeUI() {
+    	
         setTitle("Vcampus·选课系统");
         setIconImage(Toolkit.getDefaultToolkit().getImage(CourseSelectionGUI.class.getResource("")));
         setResizable(false);
@@ -44,6 +45,8 @@ public class CourseSelectionGUI extends JFrame {
         initCourseList();
         initBackground();
 
+        setResizable(false) ;
+    	setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -76,6 +79,7 @@ public class CourseSelectionGUI extends JFrame {
     	
         
         btnNewButton = new JButton("搜索");
+        btnNewButton.setBackground(Color.WHITE);
         btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         btnNewButton.setBounds(460, 80, 93, 34);
         mainContentPane.add(btnNewButton);
@@ -101,6 +105,7 @@ public class CourseSelectionGUI extends JFrame {
     private void initNavigationButtons() {
         // 左侧按钮
         JButton btnManageCourses = new JButton("已选课程"); 
+        btnManageCourses.setBackground(Color.WHITE);
         btnManageCourses.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 添加管理课程的逻辑
@@ -113,6 +118,7 @@ public class CourseSelectionGUI extends JFrame {
         mainContentPane.add(btnManageCourses);
 
         JButton btnMySchedule = new JButton("我的课表"); // 直接跳转到我的课表
+        btnMySchedule.setBackground(Color.WHITE);
         btnMySchedule.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 添加查看我的课表的逻辑
@@ -138,20 +144,21 @@ public class CourseSelectionGUI extends JFrame {
         CourseList.setPreferredSize(new Dimension(courseScrollPane.getWidth() - 50, 300 * 5));
 
         // 获取课程列表
-        List<CourseEntity> courseList = getCourseList();
+        List<CourseSelection> courseList = getCourseList();
 
         // 为方便调试使用缺省的 CourseSelectionBlock
         int count = 0;
-        for (CourseEntity course : courseList) {
+        for (CourseSelection courseselection : courseList) {
             CourseSelectionBlock courseBlock = new CourseSelectionBlock(
-                    course.getcCourseID(),
-                    course.getcCourseName(),
-                    course.getcCredits(),
-                    course.getcCapacity(),
-                    course.getcAvailable(),
+            		courseselection.course.getcCourseID(),
+            		courseselection.course.getcCourseName(),
+            		courseselection.course.getcCredits(),
+            		courseselection.course.getcCapacity(),
+            		courseselection.course.getcAvailable(),
                     "星期一", // 假设的星期几
                     "1-2节", // 假设的节数
-                    "张三" // 假设的任课老师
+                    "张三" ,// 假设的任课老师  
+                    courseselection.getisSelected()
             );
             CourseList.add(courseBlock);
             count++;
@@ -186,13 +193,14 @@ public class CourseSelectionGUI extends JFrame {
         System.out.println("Displaying all courses...");
     }
 
-    private List<CourseEntity> getCourseList() {
+    private List<CourseSelection> getCourseList() {
         // 创建课程列表
-        List<CourseEntity> courseList = new ArrayList<>();
-        
+        List<CourseSelection> courseList = new ArrayList<>();
+        CourseEntity C1 = new CourseEntity("1", 2024, "高等数学", 4, 1, 1, 60, 50, true, "张三", "1001");
+        CourseEntity C2 = new CourseEntity("2", 2024, "线性代数", 3, 2, 1, 50, 40, false, "李四", "1002");
         // 添加课程数据到列表
-        courseList.add(new CourseEntity("1", 2024, "高等数学", 4, 1, 1, 60, 50, true, "张三", "1001"));
-        courseList.add(new CourseEntity("2", 2024, "线性代数", 3, 2, 1, 50, 40, false, "李四", "1002"));
+        courseList.add( new CourseSelection(C1,true));
+        courseList.add( new CourseSelection(C2,false));
         // 更多课程数据...
 
         return courseList;
@@ -219,5 +227,37 @@ public class CourseSelectionGUI extends JFrame {
             CourseSelectionGUI frame = new CourseSelectionGUI();
             frame.setVisible(true);
         });
+    }
+    
+    public class CourseSelection {
+        private CourseEntity course;
+        private boolean isSelected;
+
+        public CourseSelection(CourseEntity course, boolean isSelected) {
+            this.course = course;
+            this.isSelected = isSelected;
+        }
+        public CourseEntity getCourse() {
+            return course;
+        }
+
+        public void setCourse(CourseEntity course) {
+            this.course = course;
+        }
+        public boolean getisSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
+
+        @Override
+        public String toString() {
+            return "CourseSelection{" +
+                    "course=" + course +
+                    ", isSelected=" + isSelected +
+                    '}';
+        }
     }
 }

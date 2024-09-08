@@ -32,6 +32,7 @@ public class SelectedCoursesGUI extends JFrame {
         setContentPane(mainContentPane);
      		
      		JButton btnRemove = new JButton("退选");
+     		btnRemove.setBackground(Color.WHITE);
      		btnRemove.setFont(new Font("微软雅黑", Font.PLAIN, 20));
      		btnRemove.setContentAreaFilled(false);
      		btnRemove.setBounds(775, 486, 99, 46);
@@ -50,7 +51,7 @@ public class SelectedCoursesGUI extends JFrame {
      				dispose();
      			}
      		});
-     		btnBack.setBounds(751, 12, 99, 46);
+     		btnBack.setBounds(775, 12, 99, 46);
      		btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));
      		btnBack.setContentAreaFilled(false);
      		mainContentPane.add(btnBack);
@@ -89,6 +90,11 @@ public class SelectedCoursesGUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(coursesTable);
         scrollPane.setBounds(10, 61, 864, 397);
         mainContentPane.add(scrollPane);
+        
+        JLabel lblNewLabel = new JLabel("选中课程点击下方“退选”即可退选课程！");
+        lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+        lblNewLabel.setBounds(164, 32, 228, 15);
+        mainContentPane.add(lblNewLabel);
     }
 
        

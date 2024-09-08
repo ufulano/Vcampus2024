@@ -6,10 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * 选课模块
- */
-
 public class CourseSelectionBlock extends JPanel {
     private static final long serialVersionUID = 1L;
     private String courseID;
@@ -21,14 +17,15 @@ public class CourseSelectionBlock extends JPanel {
     private String timePeriod; // 节数
     private String instructor; // 任课老师
     private JButton btnSelectCourse;
+    private boolean isSelected; // 是否已选
     
-    // 缺省构造函数
+ // 缺省构造函数
     public CourseSelectionBlock() {
         setVisible(false); // 设置整个JPanel不可见
     }
 
     public CourseSelectionBlock(String courseID, String courseName, int credits, int capacity, int available, 
-                                String dayOfWeek, String timePeriod, String instructor) {
+                                String dayOfWeek, String timePeriod, String instructor, boolean isSelected) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.credits = credits;
@@ -37,6 +34,7 @@ public class CourseSelectionBlock extends JPanel {
         this.dayOfWeek = dayOfWeek;
         this.timePeriod = timePeriod;
         this.instructor = instructor;
+        this.isSelected = isSelected;
         initialize();
     }
 
@@ -45,63 +43,58 @@ public class CourseSelectionBlock extends JPanel {
         setBackground(Color.WHITE);
         setLayout(null);
 
-        // 设置全局字体为微软雅黑
         Font yaheiFont = new Font("微软雅黑", Font.PLAIN, 16);
 
-        // 课程名称
         JLabel lblCourseName = new JLabel(courseName);
         lblCourseName.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         lblCourseName.setBounds(55, 22, 200, 25);
         add(lblCourseName);
 
-        // 学分
         JLabel lblCredits = new JLabel("学分: " + credits);
         lblCredits.setFont(yaheiFont);
         lblCredits.setBounds(55, 52, 200, 25);
         add(lblCredits);
 
-        // 容量
         JLabel lblCapacity = new JLabel("容量: " + capacity);
         lblCapacity.setFont(yaheiFont);
         lblCapacity.setBounds(55, 82, 200, 25);
         add(lblCapacity);
 
-        // 剩余名额
         JLabel lblAvailable = new JLabel("剩余: " + available);
         lblAvailable.setFont(yaheiFont);
         lblAvailable.setBounds(55, 112, 200, 25);
         add(lblAvailable);
 
-        // 排课时间
         JLabel lblSchedule = new JLabel("时间: " + dayOfWeek + " " + timePeriod);
         lblSchedule.setVerticalAlignment(SwingConstants.TOP);
         lblSchedule.setFont(yaheiFont);
         lblSchedule.setBounds(55, 182, 222, 44);
         add(lblSchedule);
 
-        // 任课老师
         JLabel lblInstructor = new JLabel("老师: " + instructor);
         lblInstructor.setFont(yaheiFont);
         lblInstructor.setBounds(55, 147, 200, 25);
         add(lblInstructor);
 
-        // 选课按钮
-        btnSelectCourse = new JButton("选择课程");
+        btnSelectCourse = new JButton(isSelected ? "已选" : "选择课程");
         btnSelectCourse.setBackground(new Color(205, 230, 233));
-        btnSelectCourse.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnSelectCourse.setFont(yaheiFont);
         btnSelectCourse.setBounds(55, 225, 222, 44);
         btnSelectCourse.setOpaque(false);
-        btnSelectCourse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selectCourse();
-            }
-        });
+        if (isSelected) {
+            btnSelectCourse.setEnabled(false);
+        } else {
+            btnSelectCourse.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    selectCourse();
+                }
+            });
+        }
         add(btnSelectCourse);
     }
 
     private void selectCourse() {
-        // 实现选择课程的功能
         System.out.println("Selected course: " + courseName);
     }
 
@@ -116,6 +109,7 @@ public class CourseSelectionBlock extends JPanel {
                 ", dayOfWeek='" + dayOfWeek + '\'' +
                 ", timePeriod='" + timePeriod + '\'' +
                 ", instructor='" + instructor + '\'' +
+                ", isSelected=" + isSelected +
                 '}';
     }
 }
