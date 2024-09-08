@@ -36,6 +36,8 @@ import tech.client.studentManage.SMStudentPersonal;
 import tech.client.library.*;
 import java.awt.Window;
 import tech.client.schedule.*;
+import tech.client.shopping.*;
+import tech.client.bank.*;
 /**
  * 用户主页，学生
  */
@@ -78,10 +80,8 @@ public class MainStudent extends JFrame {
 	public MainStudent() {
 		
 		UserEntity user = UserSession.getInstance().getUser();
-        
-        System.out.println("Student: " + user);
-		System.out.println("Student:");
-		System.out.println(user);
+		System.out.println("session"+user);
+   
 				
 		int width = 90; 
 		int height = 90; //icon大小
@@ -260,8 +260,32 @@ public class MainStudent extends JFrame {
 	                }
 	            }
 	        });
-		//课表
+		//选课
 		btnClass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 点击按钮时执行的代码
+                System.out.println("Class was clicked!");
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof CourseSelectionGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	CourseSelectionGUI studentWindow = new CourseSelectionGUI();
+                    studentWindow.setVisible(true);
+                } else {
+                    System.out.println("Student window is already open.");
+                }
+            }
+        });
+		//课表
+		btnSchedule.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
@@ -314,7 +338,46 @@ public class MainStudent extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // 点击按钮时执行的代码
                 System.out.println("Shop was clicked!");
-                //login();
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof ShopUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	ShopUserGUI window = new ShopUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Shopping is already open.");
+                }
+            }
+        });
+		//银行
+		btnBank.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 点击按钮时执行的代码
+                System.out.println("Bank was clicked!");
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof BankUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	BankUserGUI window = new BankUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Shopping is already open.");
+                }
             }
         });
 		

@@ -1,5 +1,6 @@
 package tech.client.schedule;
 
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -223,3 +224,4 @@ public class AddCourse extends JDialog {
         });
     }
 }
+
