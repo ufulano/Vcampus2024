@@ -65,6 +65,7 @@ public class SelectedCoursesGUI extends JFrame {
         // 获得已选课程
         selectedCourses = getSelectedCourses();
 
+
         // 创建表格模型
         String[] columnNames = {"课程ID", "课程名称", "学分", "容量", "上课时间", "上课地点"};
         Object[][] data = new Object[selectedCourses.size()][columnNames.length];
@@ -88,9 +89,11 @@ public class SelectedCoursesGUI extends JFrame {
             }
             else {
             	JOptionPane.showMessageDialog(null, "信息拉取失败", "错误", JOptionPane.ERROR_MESSAGE);
+            	SwingUtilities.invokeLater(() -> SelectedCoursesGUI.this.dispose());
             	return;
             }
         }
+
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {

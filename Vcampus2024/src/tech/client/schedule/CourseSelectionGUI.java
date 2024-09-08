@@ -192,6 +192,9 @@ public class CourseSelectionGUI extends JFrame {
     private void showAllCourses() {
         // 实现显示全部课程的逻辑
         System.out.println("Displaying all courses...");
+        //获取全部课程列表
+        List<CourseEntity> list=courseOperation.getCourselist("");
+        //将课程添加到模块中
     }
 
     private List<CourseSelection> getCourseList() {
