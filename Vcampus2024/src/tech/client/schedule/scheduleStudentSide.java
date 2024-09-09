@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
@@ -112,10 +113,10 @@ public class scheduleStudentSide extends JFrame {
         table = new ScheduleTable();
         panel.add(table);
         table.setBounds(0, 0, 719, 455);
-        /*List<CourseEntity> list=table.getCourseList();
+        List<CourseEntity> list=table.getCourseList();
         table.addCourse(list);
-        */
-        table.addCourse();
+        
+        //table.addCourse();
     	System.out.print("time");
 
         // 添加背景标签
@@ -249,14 +250,14 @@ private void adjustRowHeights() {
         // 获取每一个课程的排课时间
         List<ScheduleEntity> schedulelist = new ArrayList<>();
         // 添加一些示例数据
-        schedulelist.add(new ScheduleEntity(1, "CS101", 0, 1, "A101")); // Monday, Period 1-2, Classroom A101
-        schedulelist.add(new ScheduleEntity(2, "MA201", 2, 3, "B202")); // Wednesday, Period 5-6, Classroom B202
-        schedulelist.add(new ScheduleEntity(3, "PH303", 3, 0, "C303")); 
+        schedulelist.add(new ScheduleEntity(1, "CS101", 0, ScheduleEntity.TimePeriod.PERIOD_1_2, "A101"));
+        schedulelist.add(new ScheduleEntity(2, "MA201", 2, ScheduleEntity.TimePeriod.PERIOD_5_6, "B202"));
+        schedulelist.add(new ScheduleEntity(3, "PH303",3, ScheduleEntity.TimePeriod.PERIOD_1_2, "C303"));
         for (ScheduleEntity schedule : schedulelist) {
             // 访问 ScheduleEntity 对象的属性或调用方法
             //获取星期和节次
             int week = schedule.getsDayofWeek();
-            int time = schedule.getsTimePeriod();
+            int time = schedule.getsTimePeriod().getValue();
             System.out.print("week" + week);
             System.out.print("time" + time);
             int columnIndex = week + 1; // "+1" 因为第一个列是空的
@@ -266,6 +267,47 @@ private void adjustRowHeights() {
             , rowIndex, columnIndex);
         }
         System.out.print("测试");
+    }
+    
+    //获取当前学生所有已选课程
+    public  List<CourseEntity> getCourseList(){
+    	//获取当前学生
+    	UserEntity user = UserSession.getInstance().getUser();
+    	System.out.println("获取课程列表");
+    	List<CourseEntity> courselist=courseOperation.checkselectedcourse();
+    	if(courselist==null) {
+    		JOptionPane.showMessageDialog(null, "信息拉取失败", "错误", JOptionPane.ERROR_MESSAGE);
+    	}
+    	return courselist;
+    }
+    
+    //把已选课程添加到表格中
+    public boolean addCourse(List<CourseEntity> list) {
+        for (CourseEntity course : list) {
+            // 获取每一个课程的排课时间
+        	List<ScheduleEntity> schedulelist=courseOperation.getSchedule(course);
+        	System.out.println("获取附加信息");
+        	if(course!=null&&schedulelist!=null) {
+        	for (ScheduleEntity schedule : schedulelist) {
+        	    // 访问 ScheduleEntity 对象的属性或调用方法
+        		//获取星期和节次
+            	int week=schedule.getsDayofWeek();
+            	int time=schedule.getsTimePeriod().getValue();
+            	System.out.print("week"+week);
+            	System.out.print("time"+time);
+            	int columnIndex = week + 1; // "+1" 因为第一个列是空的
+                int rowIndex = time	;
+                
+                model.setValueAt(course.getuName()+"\n"+schedule.getsClassroom(),rowIndex, columnIndex);
+        	    System.out.println(schedule);
+        		}
+        	}
+        	else {
+        		JOptionPane.showMessageDialog(null, "信息拉取失败", "错误", JOptionPane.ERROR_MESSAGE);
+        	}
+        }
+        return true;
+    	
     }
 }
 

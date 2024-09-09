@@ -16,7 +16,7 @@ public class ScheduleEntity implements Serializable {
     private int sID; // 0bSID: int unsigned
     private String cCourseID; // A-Z sCourseID: varchar(10)
     private int sDayofWeek; // 0-6 sDayofWeek: int
-    private int sTimePeriod;
+    private TimePeriod sTimePeriod;
     private String sClassroom; // A-Z sClassroom: varchar(10)
     private String uNumber; // A-Z uNumber: varchar(10)
 
@@ -24,21 +24,42 @@ public class ScheduleEntity implements Serializable {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     }
 
-    public enum sTimePeriod {
-        PERIOD_1_2("1-2节"),
-        PERIOD_3_4("3-4节"),
-        PERIOD_5_6("5-6节"),
-        PERIOD_7_8("7-8节");
+    public enum TimePeriod {
+        PERIOD_1_2("1-2",0),
+        PERIOD_3_4("3-4",1),
+        PERIOD_5_6("5-6",2),
+        PERIOD_7_8("7-8",3),
+        DEFAULT("",-1);
 
-        private final String displayName;
-
-        sTimePeriod(String displayName) {
+        private String displayName;
+        private int Value;
+        
+        TimePeriod(String displayName,int Value) {
             this.displayName = displayName;
         }
+
+        TimePeriod ValueOf(String value) {
+            if(value.equals("1-2"))return PERIOD_1_2;
+            if(value.equals("3-4"))return PERIOD_3_4;
+            if(value.equals("5-6"))return PERIOD_5_6;
+            if(value.equals("7-8"))return PERIOD_7_8;
+            return DEFAULT;
+        }
+        TimePeriod ValueOf(int value) {
+            if(value==0)return PERIOD_1_2;
+            if(value==1)return PERIOD_3_4;
+            if(value==2)return PERIOD_5_6;
+            if(value==3)return PERIOD_7_8;
+            return DEFAULT;
+        }        
 
         public String getDisplayName() {
             return displayName;
         }
+
+        public int getValue() {
+            return Value;
+        }        
     }
 
     public ScheduleEntity() {
@@ -48,7 +69,7 @@ public class ScheduleEntity implements Serializable {
         return List.copyOf(this.availableClassrooms);
     }
 
-    public ScheduleEntity(int sID, String cCourseID, int sDayofWeek, int sTimePeriod, String sClassroom) {
+    public ScheduleEntity(int sID, String cCourseID, int sDayofWeek, TimePeriod sTimePeriod, String sClassroom) {
         this.sID = sID;
         this.cCourseID = cCourseID;
         this.sDayofWeek = sDayofWeek;
@@ -80,11 +101,11 @@ public class ScheduleEntity implements Serializable {
         this.sDayofWeek = sDayofWeek;
     }
 
-    public int getsTimePeriod() {
+    public TimePeriod getsTimePeriod() {
         return this.sTimePeriod;
     }
 
-    public void setsTimePeriod(int sTimePeriod) {
+    public void setsTimePeriod(TimePeriod sTimePeriod) {
         this.sTimePeriod = sTimePeriod;
     }
 
@@ -103,6 +124,27 @@ public class ScheduleEntity implements Serializable {
     public void setuNumber(String uNumber) {
         this.uNumber = uNumber;
     }
+    public String dispalyWeek() {
+        switch (sDayofWeek) {
+            case 0:
+                return "周一";
+            case 1:
+                return "周二";
+            case 2:
+                return "周三";
+            case 3:
+                return "周四";
+            case 4:
+                return "周五";
+            case 5:
+                return "周六";
+            case 6:
+                return "周日";
+            default:
+                return "无效的日期"; // 处理无效的日期值
+        }
+    }
+    
 
     @Override
     public String toString() {

@@ -116,7 +116,6 @@ public class scheduleManagerSide extends JFrame {
 	                        break;
 	                    }
 	                }
-	                
 	                if (!windowOpen) {
 	                	MainManager window = new MainManager();
 	                	dispose();

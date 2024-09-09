@@ -94,8 +94,10 @@ public class CourseSelectionBlock extends JPanel {
         add(btnSelectCourse);
     }
 
+    //选择当前课程
     private void selectCourse() {
         System.out.println("Selected course: " + courseName);
+        
     }
 
     @Override
