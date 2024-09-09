@@ -24,8 +24,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Entity.UserEntity;
+import tech.client.bank.BankUserGUI;
 import tech.client.library.LibraryUserGUI;
 import tech.client.login.LoginGUI;
+import tech.client.schedule.scheduleStudentSide;
 import tech.client.schedule.scheduleTeacherSide;
 import tech.client.shopping.ShopUserGUI;
 
@@ -234,6 +236,30 @@ public class MainTeacher extends JFrame {
 
 		//功能模块的点击事件监听
 		//课表
+		btnSchedule.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 点击按钮时执行的代码
+                System.out.println("Class was clicked!");
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof scheduleStudentSide &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	scheduleStudentSide studentWindow = new scheduleStudentSide();
+                    studentWindow.setVisible(true);
+                } else {
+                    System.out.println("Student window is already open.");
+                }
+            }
+        });
+		//课程管理
 		btnClass.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -299,6 +325,29 @@ public class MainTeacher extends JFrame {
                 
                 if (!windowOpen) {
                 	ShopUserGUI window = new ShopUserGUI();
+                    window.setVisible(true);
+                } else {
+                    System.out.println("Shopping is already open.");
+                }
+            }
+        });
+		btnBank.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 点击按钮时执行的代码
+                System.out.println("Bank was clicked!");
+                boolean windowOpen = false;
+                Window[] windows = JFrame.getWindows();//获取所有打开窗口
+                for (Window window : JFrame.getWindows()) {
+                    if (window instanceof BankUserGUI &&window.isVisible()) {
+                        windowOpen = true;
+                        window.toFront(); // 将窗口带到最前面
+                        break;
+                    }
+                }
+                
+                if (!windowOpen) {
+                	BankUserGUI window = new BankUserGUI();
                     window.setVisible(true);
                 } else {
                     System.out.println("Shopping is already open.");

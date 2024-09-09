@@ -215,12 +215,11 @@ public class courseOperation {
 	    }
 	    return message.getdata();
 	 }
-
-	 public static List<CourseEntity> checkselectedcourse(UserEntity stu)//查看当前学生的已选课程
+	 //查看当前学生的已选课程
+	 public static List<CourseEntity> checkselectedcourse()
 	 {
 	    Message message=new Message(Message.MessageType.COURSE);
-	    message.setdata("CHECKSELECTEDCOURSE");
-	    message.setuserentity(stu);
+	    message.setdata("CHECK_SELECTED_COURSE");
 	    SocketClientWorker connection = SocketClientWorker.getInstance();
 	    connection.SetMessage(message);
 	    if (connection.Connect()) {

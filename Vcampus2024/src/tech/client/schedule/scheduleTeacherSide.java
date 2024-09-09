@@ -14,13 +14,19 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import tech.client.library.LibraryUserGUI;
 import tech.client.main.MainStudent;
+import tech.client.main.UserSession;
+
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import java.awt.Color;
 
 import javax.swing.table.DefaultTableModel;
+
+import Entity.CourseEntity;
+import Entity.UserEntity;
 
 /**
  *  老师课表，可查看选课名单
@@ -82,7 +88,11 @@ public class scheduleTeacherSide extends JFrame {
 		btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		btnBack.setContentAreaFilled(false);
 		contentPane.add(btnBack);
-		
+        btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		// 左侧按钮
 		JButton btnSchedule = new JButton("排课信息");// 显示课表
 		btnSchedule.setBounds(0, 87, 172, 74);
@@ -90,6 +100,7 @@ public class scheduleTeacherSide extends JFrame {
 		btnSchedule.setFont(new Font("微软雅黑", Font.PLAIN, 17));
         btnSchedule.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         	}
         });
         contentPane.add(btnSchedule);  
@@ -139,7 +150,13 @@ public class scheduleTeacherSide extends JFrame {
 		comboBoxClass.setBounds(627, 99, 125, 33);
 		contentPane.add(comboBoxClass);
 		
-		
+		List<CourseEntity> CourseList=getCourseList();
+		if(CourseList!=null) {
+		addCombo(comboBoxClass,CourseList);
+		}
+		else {
+			
+		}
         // 表格标题
 		JLabel lblTitle = new JLabel("<dynamic>");
 		lblTitle.setBounds(214, 87, 183, 38);
@@ -157,4 +174,17 @@ public class scheduleTeacherSide extends JFrame {
 	}
 	
 	//表格操作
+	//获取当前教师所有课程
+	public List<CourseEntity> getCourseList(){
+		//获取当前学生
+    	UserEntity user = UserSession.getInstance().getUser();
+    	List<CourseEntity> courselist=courseOperation.checkusercourse(user);
+    	return courselist;
+	}
+	 public void addCombo(JComboBox comboBoxClass,List<CourseEntity> list) {
+		 for (CourseEntity course : list) {
+			 comboBoxClass.addItem(course.getuName());
+		 }
+	 }
+	 
 }

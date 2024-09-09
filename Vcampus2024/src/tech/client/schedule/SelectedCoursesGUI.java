@@ -67,24 +67,36 @@ public class SelectedCoursesGUI extends JFrame {
 
 
         // 创建表格模型
-        String[] columnNames = {"课程ID", "课程名称", "学分", "容量", "上课时间", "上课地点"};
+        String[] columnNames = {"课程ID", "课程名称", "学分", "容量", "课程信息"};
         Object[][] data = new Object[selectedCourses.size()][columnNames.length];
         for (int i = 0; i < selectedCourses.size(); i++) {
             CourseEntity course = selectedCourses.get(i);
-            ScheduleEntity schedule=courseOperation.getSchedule(course);
+            //List<ScheduleEntity> schedule=courseOperation.getSchedule(course);
+            // 获取每一个课程的排课时间
+            List<ScheduleEntity> schedule = new ArrayList<>();
+            // 添加一些示例数据
+            schedule.add(new ScheduleEntity(1, "CS101", 0, 1, "A101")); // Monday, Period 1-2, Classroom A101
+            schedule.add(new ScheduleEntity(2, "MA201", 2, 3, "A101")); // Wednesday, Period 5-6, Classroom B202
+            schedule.add(new ScheduleEntity(3, "PH303", 3, 0, "A101")); 
             if(course!=null&&schedule!=null) {
+                StringBuilder courseInfo = new StringBuilder();
+
+                for (ScheduleEntity s : schedule) {
+                    if (courseInfo.length() > 0) {
+                    	courseInfo.append("; "); // 用分号分隔不同的时间和地点组合
+                    }
+                    courseInfo.append(String.format("%s, %s, %s", 
+                            s.getsDayofWeek(), 
+                            s.getsTimePeriod(), 
+                            s.getsClassroom()));
+                }
             // ScheduleEntity schedule = selectedCourses.get(i);
             data[i] = new Object[]{
                 course.getcCourseID(),
                 course.getcCourseName(),
                 course.getcCredits(),
                 course.getcCapacity(),
-                schedule.getsDayofWeek(),
-                schedule.getsTimePeriod(),
-                schedule.getsClassroom(),
-                " ",
-                " ",
-                ""
+                courseInfo.toString()
             };
             }
             else {
@@ -153,7 +165,7 @@ public class SelectedCoursesGUI extends JFrame {
     //获取当前学生的选课列表
     private List<CourseEntity> getSelectedCourses() {
     	UserEntity stu = UserSession.getInstance().getUser();
-        List<CourseEntity> courses = courseOperation.checkselectedcourse(stu);
+        List<CourseEntity> courses = courseOperation.checkselectedcourse();
         courses.add(new CourseEntity("1", 2024, "高等数学", 4, 1, 1, 60, 50, true, "张三", "1001"));
         courses.add(new CourseEntity("2", 2024, "线性代数", 3, 2, 1, 50, 40, false, "李四", "1002"));
         
