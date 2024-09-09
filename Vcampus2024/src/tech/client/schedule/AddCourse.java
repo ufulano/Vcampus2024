@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -33,7 +34,7 @@ public class AddCourse extends JDialog {
 
         JPanel panel = new JPanel();
         panel.setBackground(new Color(255, 255, 255));
-        panel.setBounds(315, 21, 404, 483);
+        panel.setBounds(318, 0, 490, 483);
         contentPane.add(panel);
         panel.setOpaque(false);
         panel.setLayout(null);
@@ -46,7 +47,7 @@ public class AddCourse extends JDialog {
 
         JButton button = new JButton("确认");
         button.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        button.setBounds(587, 503, 132, 48);
+        button.setBounds(528, 483, 269, 48);
         button.setBackground(Color.white);
         contentPane.add(button);
 
@@ -76,33 +77,33 @@ public class AddCourse extends JDialog {
         panel.add(lblGrade);
 
         JTextField textFieldName = new JTextField();
-        textFieldName.setBounds(209, 71, 189, 37);
+        textFieldName.setBounds(209, 71, 271, 37);
         panel.add(textFieldName);
         textFieldName.setColumns(10);
 
         JTextField textFieldID = new JTextField();
         textFieldID.setColumns(10);
-        textFieldID.setBounds(209, 114, 189, 37);
+        textFieldID.setBounds(209, 114, 271, 37);
         panel.add(textFieldID);
 
-        JTextField textFieldAge = new JTextField();
-        textFieldAge.setColumns(10);
-        textFieldAge.setBounds(209, 158, 189, 37);
-        panel.add(textFieldAge);
+        JTextField textFieldCredits = new JTextField();
+        textFieldCredits.setColumns(10);
+        textFieldCredits.setBounds(209, 158, 271, 37);
+        panel.add(textFieldCredits);
 
-        JTextField textFieldBirthplace = new JTextField();
-        textFieldBirthplace.setColumns(10);
-        textFieldBirthplace.setBounds(209, 242, 189, 37);
-        panel.add(textFieldBirthplace);
+        JTextField textFieldGrade = new JTextField();
+        textFieldGrade.setColumns(10);
+        textFieldGrade.setBounds(209, 242, 271, 37);
+        panel.add(textFieldGrade);
 
         JTextField textFieldProfession = new JTextField();
         textFieldProfession.setColumns(10);
-        textFieldProfession.setBounds(209, 200, 189, 37);
+        textFieldProfession.setBounds(209, 200, 271, 37);
         panel.add(textFieldProfession);
 
         JTextField textFieldCapacity = new JTextField();
         textFieldCapacity.setColumns(10);
-        textFieldCapacity.setBounds(209, 285, 189, 37);
+        textFieldCapacity.setBounds(209, 285, 271, 37);
         panel.add(textFieldCapacity);
 
         JLabel lblCapacity = new JLabel("课容量：");
@@ -113,7 +114,7 @@ public class AddCourse extends JDialog {
         JButton buttonAddTime = new JButton("添加");
         buttonAddTime.setBackground(new Color(255, 255, 255));
         buttonAddTime.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        buttonAddTime.setBounds(204, 439, 83, 34);
+        buttonAddTime.setBounds(260, 439, 83, 34);
         panel.add(buttonAddTime);
         buttonAddTime.addActionListener(new ActionListener() {
             @Override
@@ -124,20 +125,20 @@ public class AddCourse extends JDialog {
         });
 
         // 初始化表格模型
-        String[] columnNames = {"星期", "时间"};
+        String[] columnNames = {"星期", "时间","教室"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         tableAddedTimes = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(tableAddedTimes);
-        scrollPane.setBounds(209, 332, 189, 97);
+        scrollPane.setBounds(209, 332, 271, 97);
         panel.add(scrollPane);
 
         JButton buttonDeleteTime = new JButton("删除");
         buttonDeleteTime.setBackground(new Color(255, 255, 255));
         buttonDeleteTime.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        buttonDeleteTime.setBounds(315, 439, 83, 34);
+        buttonDeleteTime.setBounds(368, 439, 83, 34);
         panel.add(buttonDeleteTime);
         
-        JLabel lblCapacity_1 = new JLabel("排课时间：");
+        JLabel lblCapacity_1 = new JLabel("排课信息：");
         lblCapacity_1.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         lblCapacity_1.setBounds(116, 332, 208, 37);
         panel.add(lblCapacity_1);
@@ -162,27 +163,33 @@ public class AddCourse extends JDialog {
         DefaultTableModel model = (DefaultTableModel) tableAddedTimes.getModel();
         model.setRowCount(0); // 清空表格
         for (String[] time : addedTimesList) {
-            model.addRow(time);
+            model.addRow(time); 
         }
     }
 
+    public List<String> availableClassrooms = Arrays.asList("A101", "A102", "A103", "A104", "A105", "A106", "A107",
+            "A108", "A109", "B101", "B102", "B103", "B104", "B105", "B106", "B107", "B108", "B109", "C101", "C102",
+            "C103", "C104", "C105", "C106", "C107", "C108", "C109", "D101", "D102", "D103", "D104", "D105", "D106",
+            "D107", "D108", "D109");
+    
     public enum sDayOfWeek {
         星期一, 星期二, 星期三, 星期四, 星期五, 星期六, 星期日
     }
 
     class AddTimeDialog extends JDialog {
         /**
-		 * 添加课程时间的弹窗
+		 * 添加排课信息的弹窗
 		 */
 		private static final long serialVersionUID = 1L;
 		private JComboBox<sDayOfWeek> comboBoxDayOfWeek;
         private JComboBox<String> comboBoxTimePeriod;
+        private JComboBox<String> comboBoxClassRoom;
 
         public AddTimeDialog() {
         	setResizable(false) ;
         	setLocationRelativeTo(null);
             getContentPane().setBackground(Color.WHITE);
-            setSize(300,150);
+            setSize(300,220);
             getContentPane().setLayout(null);
 
             comboBoxDayOfWeek = new JComboBox<>(sDayOfWeek.values());
@@ -198,16 +205,23 @@ public class AddCourse extends JDialog {
             comboBoxTimePeriod.addItem("3-4节");
             comboBoxTimePeriod.addItem("5-6节");
             comboBoxTimePeriod.addItem("7-8节");
+            
+            comboBoxClassRoom = new JComboBox<>(availableClassrooms.toArray(new String[0]));
+            comboBoxClassRoom.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+            comboBoxClassRoom.setBounds(100, 70, 100, 30);
+            getContentPane().add(comboBoxClassRoom);
+            
 
             JButton buttonConfirm = new JButton("确认");
-            buttonConfirm.setBounds(100, 70, 100, 30);
+            buttonConfirm.setBounds(100, 110, 100, 30);
             getContentPane().add(buttonConfirm);
             buttonConfirm.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String selectedDay = comboBoxDayOfWeek.getSelectedItem().toString();
                     String selectedTime = (String) comboBoxTimePeriod.getSelectedItem();
-                    String[] newRow = {selectedDay, selectedTime};
+                    String selectedClassroom = (String) comboBoxClassRoom.getSelectedItem();
+                    String[] newRow = {selectedDay, selectedTime,selectedClassroom};
                     addedTimesList.add(newRow);
                     updateTable();
                     AddTimeDialog.this.dispose();

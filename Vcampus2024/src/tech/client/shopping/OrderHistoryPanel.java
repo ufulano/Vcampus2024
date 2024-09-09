@@ -72,7 +72,7 @@ public class OrderHistoryPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // 添加返回逻辑
                 System.out.println("返回按钮被点击");
-                // 这里可以添加代码来关闭当前窗口或者切换到其他视图
+                
             }
         });
         btnBack.setFont(new Font("微软雅黑", Font.PLAIN, 20));

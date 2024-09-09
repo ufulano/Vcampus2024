@@ -78,20 +78,20 @@ public class CourseDetails extends JDialog {
 		lblName.setBounds(116, 117, 208, 45);
 		panel.add(lblName);
 		
-		JLabel lblGender = new JLabel("课程ID：");
-		lblGender.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblGender.setBounds(116, 160, 208, 45);
-		panel.add(lblGender);
+		JLabel lblID = new JLabel("课程ID：");
+		lblID.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		lblID.setBounds(116, 160, 208, 45);
+		panel.add(lblID);
 		
 		JLabel lblCredits = new JLabel("学分：");
 		lblCredits.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		lblCredits.setBounds(116, 204, 208, 45);
 		panel.add(lblCredits);
 		
-		JLabel lblAvailable = new JLabel("排课时间：");
-		lblAvailable.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblAvailable.setBounds(116, 386, 208, 37);
-		panel.add(lblAvailable);
+		JLabel lblSchedule = new JLabel("排课时间：");
+		lblSchedule.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		lblSchedule.setBounds(116, 386, 208, 37);
+		panel.add(lblSchedule);
 		
 		JLabel lblProfession = new JLabel("专业：");
 		lblProfession.setFont(new Font("微软雅黑", Font.PLAIN, 20));
@@ -117,19 +117,19 @@ public class CourseDetails extends JDialog {
 		textFieldID.setBounds(209, 168, 189, 37);
 		panel.add(textFieldID);
 		
-		JTextField textFieldAge = new JTextField();
-		textFieldAge.setEnabled(false);
-		textFieldAge.setEditable(false);
-		textFieldAge.setColumns(10);
-		textFieldAge.setBounds(209, 212, 189, 37);
-		panel.add(textFieldAge);
+		JTextField textFieldCredits = new JTextField();
+		textFieldCredits.setEnabled(false);
+		textFieldCredits.setEditable(false);
+		textFieldCredits.setColumns(10);
+		textFieldCredits.setBounds(209, 212, 189, 37);
+		panel.add(textFieldCredits);
 		
-		JTextField textFieldBirthplace = new JTextField();
-		textFieldBirthplace.setEnabled(false);
-		textFieldBirthplace.setEditable(false);
-		textFieldBirthplace.setColumns(10);
-		textFieldBirthplace.setBounds(209, 296, 189, 37);
-		panel.add(textFieldBirthplace);
+		JTextField textFieldGrade = new JTextField();
+		textFieldGrade.setEnabled(false);
+		textFieldGrade.setEditable(false);
+		textFieldGrade.setColumns(10);
+		textFieldGrade.setBounds(209, 296, 189, 37);
+		panel.add(textFieldGrade);
 		
 		JTextField textFieldProfession = new JTextField();
 		textFieldProfession.setEnabled(false);
@@ -138,12 +138,12 @@ public class CourseDetails extends JDialog {
 		textFieldProfession.setBounds(209, 254, 189, 37);
 		panel.add(textFieldProfession);
 		
-		JTextField textFieldAvailable = new JTextField();
-		textFieldAvailable.setEnabled(false);
-		textFieldAvailable.setEditable(false);
-		textFieldAvailable.setColumns(10);
-		textFieldAvailable.setBounds(209, 386, 189, 76);
-		panel.add(textFieldAvailable);
+		JTextField textFieldSchedule = new JTextField();
+		textFieldSchedule.setEnabled(false);
+		textFieldSchedule.setEditable(false);
+		textFieldSchedule.setColumns(10);
+		textFieldSchedule.setBounds(209, 386, 189, 76);
+		panel.add(textFieldSchedule);
 		
 		textFieldCapacity = new JTextField();
 		textFieldCapacity.setEnabled(false);
